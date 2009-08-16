@@ -15,7 +15,7 @@ public class HL7Parser {
 	public static HL7Message parseMessage(String hl7String,
 			boolean escapesInSubcomponents) {
 		HL7Message message = new HL7Message();
-		String delimiters = hl7String.substring(3, 5);
+		String delimiters = hl7String.substring(3, 8);
 		message.setDelimiters(delimiters);
 		EscapedStringTokenizer tokenizer = new EscapedStringTokenizer(
 				hl7String, HL7Message.segmentTerminator,

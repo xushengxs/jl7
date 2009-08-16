@@ -14,6 +14,7 @@ public class AllTests {
 		suite.addTestSuite(TestHL7FieldRepetition.class);
 		suite.addTestSuite(TestHL7Field.class);
 		suite.addTestSuite(TestHL7Segment.class);
+		suite.addTestSuite(TestHL7MSHSegment.class);
 		//$JUnit-END$
 		return suite;
 	}
