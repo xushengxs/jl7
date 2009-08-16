@@ -84,7 +84,8 @@ public class TestHL7Segment extends TestCase {
 		ArrayList<HL7Field> values = segment.getFields();
 		assertNotNull(values);
 		assertEquals(2, values.size());
-		assertEquals("abc" + HL7Message.segmentTerminator, values.get(0).getValue());
+		assertEquals("abc" + HL7Message.segmentTerminator, values.get(0)
+				.getValue());
 		assertEquals("\\|~^&def", values.get(1).getValue());
 	}
 
@@ -125,7 +126,9 @@ public class TestHL7Segment extends TestCase {
 	 * Test method for {@link org.jl7.hl7.HL7Segment#getSegmentType()}.
 	 */
 	public void testGetSegmentType() {
-		fail("Not yet implemented");
+		String[] fields = { "PID", "1" };
+		segment.setFields(fields, "|^~\\&", true);
+		assertEquals("PID", segment.getSegmentType());
 	}
 
 	/**
