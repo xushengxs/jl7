@@ -175,9 +175,9 @@ public class EscapedStringTokenizer implements Enumeration<String> {
 			}
 			lastChar = c;
 		}
-		if (builder.length() > 0) {
+//		if (builder.length() > 0) {
 			array.add(builder.toString());
-		}
+//		}
 	}
 
 	/**

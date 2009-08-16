@@ -137,4 +137,15 @@ public class TestEscapedStringTokenizer extends TestCase {
 		String value = builder.toString();
 		assertEquals("a==b\\c==d|e==f/g==", value);
 	}
+	
+	/**
+	 * When the input string is empty, a single empty token should be returned
+	 */
+	public void testEmptyInputString() {
+		EscapedStringTokenizer tokenizer = new EscapedStringTokenizer(
+				"", "", '\\');
+		String[] tokens = tokenizer.getTokens();
+		assertEquals(1, tokens.length);
+		assertEquals("", tokens[0]);
+	}
 }

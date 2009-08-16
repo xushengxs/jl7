@@ -3,6 +3,8 @@
  */
 package org.jl7.test;
 
+import java.util.ArrayList;
+
 import junit.framework.TestCase;
 
 import org.jl7.hl7.HL7Field;
@@ -77,7 +79,13 @@ public class TestHL7Segment extends TestCase {
 	 * Test method for {@link org.jl7.hl7.HL7Segment#getFields()}.
 	 */
 	public void testGetFields() {
-		fail("Not yet implemented");
+		String[] fields = { "abc" + HL7Message.segmentTerminator, "\\|~^&def" };
+		segment.setFields(fields, "|^~\\&", false);
+		ArrayList<HL7Field> values = segment.getFields();
+		assertNotNull(values);
+		assertEquals(2, values.size());
+		assertEquals("abc" + HL7Message.segmentTerminator, values.get(0).getValue());
+		assertEquals("\\|~^&def", values.get(1).getValue());
 	}
 
 	/**
@@ -95,8 +103,7 @@ public class TestHL7Segment extends TestCase {
 		String[] fields = { "abc" + HL7Message.segmentTerminator, "\\|~^&def" };
 		segment.setFields(fields, "|^~\\&", false);
 		HL7Field field = segment.get(0);
-		assertEquals("abc" + HL7Message.segmentTerminator, field
-				.getValue());
+		assertEquals("abc" + HL7Message.segmentTerminator, field.getValue());
 		field = segment.get(1);
 		assertEquals("\\|~^&def", field.getValue());
 		field = segment.get(2);

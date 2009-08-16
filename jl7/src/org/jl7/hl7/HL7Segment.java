@@ -134,7 +134,7 @@ public class HL7Segment {
 	 * 
 	 * @since 0.1
 	 */
-	public ArrayList<?> getFields() {
+	public ArrayList<HL7Field> getFields() {
 		return fields;
 	}
 
