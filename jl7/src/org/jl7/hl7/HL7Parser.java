@@ -165,4 +165,8 @@ public class HL7Parser {
 		subcomponent.setValue(hl7String);
 		return subcomponent;
 	}
+
+	public static HL7Field parseField(String string) {
+		return parseField(string, "|^~\\&", true);
+	}
 }

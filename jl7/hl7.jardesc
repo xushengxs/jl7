@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="/Users/henribenoit/Downloads/jl7.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/jl7/hl7.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <javaElement handleIdentifier="=jl7/src"/>
+        <file path="/jl7/.classpath"/>
+        <file path="/jl7/.DS_Store"/>
+        <file path="/jl7/.project"/>
+        <folder path="/jl7/doc"/>
+        <file path="/jl7/coverage_report.html"/>
+        <file path="/jl7/hl7.jardesc"/>
+        <folder path="/jl7/_files"/>
+        <javaElement handleIdentifier="=jl7/test"/>
+    </selectedElements>
+</jardesc>

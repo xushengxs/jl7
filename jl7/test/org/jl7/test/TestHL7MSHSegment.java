@@ -3,6 +3,7 @@
  */
 package org.jl7.test;
 
+import org.jl7.hl7.HL7Field;
 import org.jl7.hl7.HL7MSHSegment;
 import org.jl7.hl7.HL7Message;
 import org.jl7.hl7.HL7Parser;
@@ -14,9 +15,8 @@ import junit.framework.TestCase;
  * 
  */
 public class TestHL7MSHSegment extends TestCase {
-	private static String MSHSTRING = "MSH|^~\\&|APP1|GA0000|APP2|VAERS PROCESSOR|20010331605||ORU^RO1|20010422GA03|T|2.3.1|||AL|";
-
-	private HL7MSHSegment msh;
+	private static String MSHSTRING = "MSH|^~\\&|APP1|GA0000|APP2|VAERS PROCESSOR|20010331605||ORU^RO1|20010422GA03|T|2.5|5|CP|AL|ER|DEU|8859/1|de|profile1";
+	private static final String DELIMITERS = "|^~\\&";
 
 	/*
 	 * (non-Javadoc)
@@ -25,7 +25,6 @@ public class TestHL7MSHSegment extends TestCase {
 	 */
 	protected void setUp() throws Exception {
 		super.setUp();
-		msh = new HL7MSHSegment();
 	}
 
 	/*
@@ -44,6 +43,20 @@ public class TestHL7MSHSegment extends TestCase {
 	 */
 	public void testSetFieldsStringArrayStringBoolean() {
 		fail("Not yet implemented");
+		HL7MSHSegment header = new HL7MSHSegment();
+		String[] fields = { "MSH",
+				"^~\\&", "APP1",
+				"GA0000", "APP2",
+				"VAERS PROCESSOR",
+				"20010331605", "",
+				"ORU^RO1",
+				"20010422GA03",
+				"T", "2.5",
+				"5", "CP",
+				"AL", "ER",
+				"DEU", "8859/1",
+				"de", "profile1" };
+		header.setFields(fields, DELIMITERS, true);
 	}
 
 	/**
@@ -92,42 +105,60 @@ public class TestHL7MSHSegment extends TestCase {
 	 * Test method for {@link org.jl7.hl7.HL7MSHSegment#getMessageDateTime()}.
 	 */
 	public void testGetMessageDateTime() {
-		fail("Not yet implemented");
+		HL7Message msg = HL7Parser.parseMessage(MSHSTRING, true);
+		HL7MSHSegment header = msg.getHeader();
+		assertNotNull(header);
+		assertEquals("20010331605", header.getMessageDateTime());
 	}
 
 	/**
 	 * Test method for {@link org.jl7.hl7.HL7MSHSegment#getMessageType()}.
 	 */
 	public void testGetMessageType() {
-		fail("Not yet implemented");
+		HL7Message msg = HL7Parser.parseMessage(MSHSTRING, true);
+		HL7MSHSegment header = msg.getHeader();
+		assertNotNull(header);
+		assertEquals("ORU^RO1", header.getMessageType());
 	}
 
 	/**
 	 * Test method for {@link org.jl7.hl7.HL7MSHSegment#getMessageControlId()}.
 	 */
 	public void testGetMessageControlId() {
-		fail("Not yet implemented");
+		HL7Message msg = HL7Parser.parseMessage(MSHSTRING, true);
+		HL7MSHSegment header = msg.getHeader();
+		assertNotNull(header);
+		assertEquals("20010422GA03", header.getMessageControlId());
 	}
 
 	/**
 	 * Test method for {@link org.jl7.hl7.HL7MSHSegment#getProcessingId()}.
 	 */
 	public void testGetProcessingId() {
-		fail("Not yet implemented");
+		HL7Message msg = HL7Parser.parseMessage(MSHSTRING, true);
+		HL7MSHSegment header = msg.getHeader();
+		assertNotNull(header);
+		assertEquals("T", header.getProcessingId());
 	}
 
 	/**
-	 * Test method for {@link org.jl7.hl7.HL7MSHSegment#getGetVersionId()}.
+	 * Test method for {@link org.jl7.hl7.HL7MSHSegment#getVersionId()}.
 	 */
-	public void testGetGetVersionId() {
-		fail("Not yet implemented");
+	public void testGetVersionId() {
+		HL7Message msg = HL7Parser.parseMessage(MSHSTRING, true);
+		HL7MSHSegment header = msg.getHeader();
+		assertNotNull(header);
+		assertEquals("2.5", header.getVersionId());
 	}
 
 	/**
 	 * Test method for {@link org.jl7.hl7.HL7MSHSegment#getSequenceNumber()}.
 	 */
 	public void testGetSequenceNumber() {
-		fail("Not yet implemented");
+		HL7Message msg = HL7Parser.parseMessage(MSHSTRING, true);
+		HL7MSHSegment header = msg.getHeader();
+		assertNotNull(header);
+		assertEquals(5, header.getSequenceNumber());
 	}
 
 	/**
@@ -135,7 +166,10 @@ public class TestHL7MSHSegment extends TestCase {
 	 * {@link org.jl7.hl7.HL7MSHSegment#getContinuationPointer()}.
 	 */
 	public void testGetContinuationPointer() {
-		fail("Not yet implemented");
+		HL7Message msg = HL7Parser.parseMessage(MSHSTRING, true);
+		HL7MSHSegment header = msg.getHeader();
+		assertNotNull(header);
+		assertEquals("CP", header.getContinuationPointer());
 	}
 
 	/**
@@ -143,7 +177,10 @@ public class TestHL7MSHSegment extends TestCase {
 	 * {@link org.jl7.hl7.HL7MSHSegment#getAcceptAcknowledgementType()}.
 	 */
 	public void testGetAcceptAcknowledgementType() {
-		fail("Not yet implemented");
+		HL7Message msg = HL7Parser.parseMessage(MSHSTRING, true);
+		HL7MSHSegment header = msg.getHeader();
+		assertNotNull(header);
+		assertEquals("AL", header.getAcceptAcknowledgementType());
 	}
 
 	/**
@@ -151,28 +188,40 @@ public class TestHL7MSHSegment extends TestCase {
 	 * {@link org.jl7.hl7.HL7MSHSegment#getApplicationAcknowledgementType()}.
 	 */
 	public void testGetApplicationAcknowledgementType() {
-		fail("Not yet implemented");
+		HL7Message msg = HL7Parser.parseMessage(MSHSTRING, true);
+		HL7MSHSegment header = msg.getHeader();
+		assertNotNull(header);
+		assertEquals("ER", header.getApplicationAcknowledgementType());
 	}
 
 	/**
 	 * Test method for {@link org.jl7.hl7.HL7MSHSegment#getCountryCode()}.
 	 */
 	public void testGetCountryCode() {
-		fail("Not yet implemented");
+		HL7Message msg = HL7Parser.parseMessage(MSHSTRING, true);
+		HL7MSHSegment header = msg.getHeader();
+		assertNotNull(header);
+		assertEquals("DEU", header.getCountryCode());
 	}
 
 	/**
 	 * Test method for {@link org.jl7.hl7.HL7MSHSegment#getCharacterSet()}.
 	 */
 	public void testGetCharacterSet() {
-		fail("Not yet implemented");
+		HL7Message msg = HL7Parser.parseMessage(MSHSTRING, true);
+		HL7MSHSegment header = msg.getHeader();
+		assertNotNull(header);
+		assertEquals("8859/1", header.getCharacterSet());
 	}
 
 	/**
 	 * Test method for {@link org.jl7.hl7.HL7MSHSegment#getPrincipalLanguage()}.
 	 */
 	public void testGetPrincipalLanguage() {
-		fail("Not yet implemented");
+		HL7Message msg = HL7Parser.parseMessage(MSHSTRING, true);
+		HL7MSHSegment header = msg.getHeader();
+		assertNotNull(header);
+		assertEquals("de", header.getPrincipalLanguage());
 	}
 
 }
