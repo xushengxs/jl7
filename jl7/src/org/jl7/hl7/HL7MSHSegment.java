@@ -58,7 +58,7 @@ public class HL7MSHSegment extends HL7Segment {
 		return get(10).toString();
 	}
 
-	public String getGetVersionId() {
+	public String getVersionId() {
 		return get(11).toString();
 	}
 
