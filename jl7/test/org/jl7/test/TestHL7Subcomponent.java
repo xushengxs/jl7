@@ -3,10 +3,10 @@
  */
 package org.jl7.test;
 
+import junit.framework.TestCase;
+
 import org.jl7.hl7.HL7Message;
 import org.jl7.hl7.HL7Subcomponent;
-
-import junit.framework.TestCase;
 
 /**
  * @author henribenoit
@@ -53,7 +53,7 @@ public class TestHL7Subcomponent extends TestCase {
 		String value = "\\" + HL7Message.segmentTerminator;
 		subcomponent.setEscapedValue(value, "|^~\\&");
 		value = subcomponent.getValue();
-		assertEquals(""+HL7Message.segmentTerminator, value);
+		assertEquals("" + HL7Message.segmentTerminator, value);
 	}
 
 	/**
@@ -159,9 +159,11 @@ public class TestHL7Subcomponent extends TestCase {
 	 * Test method for {@link org.jl7.hl7.HL7Subcomponent#toString()}.
 	 */
 	public void testToString() {
-		subcomponent.setValue("abc"+HL7Message.segmentTerminator+"\\|~^&def");
+		subcomponent.setValue("abc" + HL7Message.segmentTerminator
+				+ "\\|~^&def");
 		String value = subcomponent.toString();
-		assertEquals("abc\\"+HL7Message.segmentTerminator+"\\E\\\\F\\\\R\\\\S\\\\T\\def", value);
+		assertEquals("abc\\" + HL7Message.segmentTerminator
+				+ "\\E\\\\F\\\\R\\\\S\\\\T\\def", value);
 	}
 
 }

@@ -3,11 +3,11 @@
  */
 package org.jl7.test;
 
+import junit.framework.TestCase;
+
 import org.jl7.hl7.HL7Component;
 import org.jl7.hl7.HL7Message;
 import org.jl7.hl7.HL7Subcomponent;
-
-import junit.framework.TestCase;
 
 /**
  * @author henribenoit

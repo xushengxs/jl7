@@ -55,8 +55,8 @@ public class HL7FieldRepetition {
 	}
 
 	/**
-	 * Removes all components from this field repetition and adds the given components to
-	 * it.
+	 * Removes all components from this field repetition and adds the given
+	 * components to it.
 	 * 
 	 * @param fields
 	 *            array of string representations of components to be added.
@@ -95,7 +95,8 @@ public class HL7FieldRepetition {
 	 * Returns the component at the given position.
 	 * 
 	 * @param index
-	 *            position in the field repetition of the component to be returned
+	 *            position in the field repetition of the component to be
+	 *            returned
 	 * 
 	 * @return the component at the given position
 	 * 

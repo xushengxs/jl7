@@ -160,8 +160,7 @@ public class EscapedStringTokenizer implements Enumeration<String> {
 		for (char c = it.first(); c != CharacterIterator.DONE; c = it.next()) {
 			if (!isSeparator(c)) {
 				builder.append(c);
-			}
-			else if (lastChar == escape) {
+			} else if (lastChar == escape) {
 				builder.deleteCharAt(builder.toString().length() - 1);
 				builder.append(c);
 			} else {
@@ -175,9 +174,9 @@ public class EscapedStringTokenizer implements Enumeration<String> {
 			}
 			lastChar = c;
 		}
-//		if (builder.length() > 0) {
-			array.add(builder.toString());
-//		}
+		// if (builder.length() > 0) {
+		array.add(builder.toString());
+		// }
 	}
 
 	/**

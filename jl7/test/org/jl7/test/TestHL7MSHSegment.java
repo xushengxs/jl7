@@ -3,12 +3,11 @@
  */
 package org.jl7.test;
 
-import org.jl7.hl7.HL7Field;
+import junit.framework.TestCase;
+
 import org.jl7.hl7.HL7MSHSegment;
 import org.jl7.hl7.HL7Message;
 import org.jl7.hl7.HL7Parser;
-
-import junit.framework.TestCase;
 
 /**
  * @author henribenoit
@@ -41,22 +40,34 @@ public class TestHL7MSHSegment extends TestCase {
 	 * {@link org.jl7.hl7.HL7MSHSegment#setFields(java.lang.String[], java.lang.String, boolean)}
 	 * .
 	 */
-	public void testSetFieldsStringArrayStringBoolean() {
-		fail("Not yet implemented");
+	public void testSetFieldsStringArrayStringTrue() {
 		HL7MSHSegment header = new HL7MSHSegment();
-		String[] fields = { "MSH",
-				"^~\\&", "APP1",
-				"GA0000", "APP2",
-				"VAERS PROCESSOR",
-				"20010331605", "",
-				"ORU^RO1",
-				"20010422GA03",
-				"T", "2.5",
-				"5", "CP",
-				"AL", "ER",
-				"DEU", "8859/1",
-				"de", "profile1" };
+		String[] fields = { "MSH", "^~\\&", "APP1", "GA0000", "APP2",
+				"VAERS PROCESSOR", "20010331605", "", "ORU^RO1",
+				"20010422GA03", "T", "2.5", "5", "CP", "AL", "ER", "DEU",
+				"8859/1", "de", "profile1\\F\\" };
 		header.setFields(fields, DELIMITERS, true);
+		for (int i = 0; i < fields.length - 1; i++) {
+			assertEquals(fields[i], header.get(i).getValue());
+		}
+		assertEquals("profile1|", header.get(fields.length - 1).getValue());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.jl7.hl7.HL7MSHSegment#setFields(java.lang.String[], java.lang.String, boolean)}
+	 * .
+	 */
+	public void testSetFieldsStringArrayStringFalse() {
+		HL7MSHSegment header = new HL7MSHSegment();
+		String[] fields = { "MSH", "^~\\&", "APP1", "GA0000", "APP2",
+				"VAERS PROCESSOR", "20010331605", "", "ORU^RO1",
+				"20010422GA03", "T", "2.5", "5", "CP", "AL", "ER", "DEU",
+				"8859/1", "de", "profile1\\F\\" };
+		header.setFields(fields, DELIMITERS, false);
+		for (int i = 0; i < fields.length; i++) {
+			assertEquals(fields[i], header.get(i).getValue());
+		}
 	}
 
 	/**

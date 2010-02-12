@@ -7,7 +7,7 @@ public class AllTests {
 
 	public static Test suite() {
 		TestSuite suite = new TestSuite("Test suite for org.jl7");
-		//$JUnit-BEGIN$
+		// $JUnit-BEGIN$
 		suite.addTestSuite(TestEscapedStringTokenizer.class);
 		suite.addTestSuite(TestHL7Subcomponent.class);
 		suite.addTestSuite(TestHL7Component.class);
@@ -15,7 +15,7 @@ public class AllTests {
 		suite.addTestSuite(TestHL7Field.class);
 		suite.addTestSuite(TestHL7Segment.class);
 		suite.addTestSuite(TestHL7MSHSegment.class);
-		//$JUnit-END$
+		// $JUnit-END$
 		return suite;
 	}
 }

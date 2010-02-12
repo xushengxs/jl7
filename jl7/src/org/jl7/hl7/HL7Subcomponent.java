@@ -120,7 +120,8 @@ public class HL7Subcomponent {
 	}
 
 	/**
-	 * Returns the string representation of this component (with escape characters).
+	 * Returns the string representation of this component (with escape
+	 * characters).
 	 * 
 	 * @see java.lang.Object#toString()
 	 * 
