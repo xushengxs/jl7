@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary How to send an HL7 message using jL7
 #labels Phase-Implementation
 
 = Introduction =
