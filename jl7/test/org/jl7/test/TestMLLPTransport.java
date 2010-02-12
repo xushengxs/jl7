@@ -145,7 +145,7 @@ public class TestMLLPTransport extends TestCase {
 		System.out.println(transportable.Message);
 	}
 
-	public void testSendMessage() {
+	public void testSendMessageNoWait() {
 		HL7Message msg = HL7Parser.parseMessage(MESSAGE, true);
 		MLLPTransportable transportable = new MLLPTransportable();
 		transportable.Message = msg;
@@ -164,7 +164,22 @@ public class TestMLLPTransport extends TestCase {
 		}
 	}
 
-	public void testReceiveResponse() {
-		fail("Not yet implemented");
+	public void testSendMessageWait() {
+		HL7Message msg = HL7Parser.parseMessage(MESSAGE, true);
+		MLLPTransportable transportable = new MLLPTransportable();
+		transportable.Message = msg;
+		transportable.MetaData = metaDataSend;
+		MLLPTransport transport = new MLLPTransport();
+		try {
+			transport.sendMessage(transportable, true);
+		} catch (IOException e) {
+			fail("IOException: " + e);
+		}
+		try {
+			transport.disconnect();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

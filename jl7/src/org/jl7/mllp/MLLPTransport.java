@@ -90,6 +90,11 @@ public class MLLPTransport {
 	}
 
 	public void sendMessage(MLLPTransportable transportable) throws IOException {
+		sendMessage(transportable, false);
+	}
+
+	public MLLPTransportable sendMessage(MLLPTransportable transportable,
+			boolean waitForResponse) throws IOException {
 		connect(transportable.MetaData);
 		OutputStream networkStream = client.getOutputStream();
 		try {
@@ -106,12 +111,36 @@ public class MLLPTransport {
 			networkStream.write(metaData.endByte);
 			networkStream.write((byte) HL7Message.segmentTerminator);
 			networkStream.flush();
+			if (waitForResponse) {
+				return receiveResponse(metaData);
+			}
 		} finally {
 			networkStream.close();
 		}
+		return null;
 	}
 
-	public MLLPTransportable receiveResponse() {
-		throw new RuntimeException("Not yet implemented");
+	public MLLPTransportable receiveResponse(MLLPMetaData metaData)
+			throws IOException {
+		InputStream networkStream = client.getInputStream();
+		int i;
+		StringBuilder builder = new StringBuilder();
+		boolean started = false;
+		while ((i = networkStream.read()) != -1) {
+			if (!started) {
+				if (i == metaData.startByte) {
+					started = true;
+				}
+			} else if (i == metaData.endByte) {
+				MLLPTransportable transportable = new MLLPTransportable();
+				transportable.MetaData = metaData;
+				transportable.Message = HL7Parser.parseMessage(builder
+						.toString(), true);
+				return transportable;
+			} else {
+				builder.append((char) i);
+			}
+		}
+		return null;
 	}
 }
