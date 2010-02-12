@@ -15,6 +15,7 @@ public class AllTests {
 		suite.addTestSuite(TestHL7Field.class);
 		suite.addTestSuite(TestHL7Segment.class);
 		suite.addTestSuite(TestHL7MSHSegment.class);
+		suite.addTestSuite(TestMLLPTransport.class);
 		// $JUnit-END$
 		return suite;
 	}
