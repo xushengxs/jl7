@@ -1,4 +1,5 @@
-#summary How to send an HL7 message using jL7
+#summary How to receive an HL7 message using jL7
+#labels Phase-Implementation
 
 = Introduction =
 
