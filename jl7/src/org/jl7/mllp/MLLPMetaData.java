@@ -2,8 +2,6 @@ package org.jl7.mllp;
 
 public class MLLPMetaData {
 	public MLLPMetaData() {
-		startByte = 0x0B;
-		endByte = 0x1C;
 	}
 
 	public MLLPMetaData(String host, int port) {
@@ -22,6 +20,6 @@ public class MLLPMetaData {
 
 	public String host;
 	public int port;
-	public byte startByte;
-	public byte endByte;
+	public byte startByte = 0x0B;
+	public byte endByte = 0x1C;
 }

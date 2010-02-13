@@ -46,8 +46,16 @@ public class HL7MSHSegment extends HL7Segment {
 		return get(6).toString();
 	}
 
-	public String getMessageType() {
+	public String getMessageEventType() {
 		return get(8).toString();
+	}
+
+	public String getMessageType() {
+		return get(8).get(0).get(0).toString();
+	}
+
+	public String getEventType() {
+		return get(8).get(0).get(1).toString();
 	}
 
 	public String getMessageControlId() {
