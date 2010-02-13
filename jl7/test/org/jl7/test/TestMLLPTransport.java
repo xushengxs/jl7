@@ -43,6 +43,12 @@ public class TestMLLPTransport extends TestCase {
 							listener = new ServerSocket(PORT_SEND);
 						}
 						client = listener.accept();
+						OutputStream outputStream = client.getOutputStream();
+						outputStream.write(metaDataReceive.startByte);
+						outputStream.write(MESSAGE.getBytes());
+						outputStream.write(metaDataReceive.endByte);
+						outputStream.write('\n');
+						outputStream.flush();
 					}
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
