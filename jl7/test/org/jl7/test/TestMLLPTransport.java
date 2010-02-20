@@ -83,7 +83,9 @@ public class TestMLLPTransport extends TestCase {
 	protected void tearDown() throws Exception {
 		super.tearDown();
 		stop = true;
-		listener.close();
+		if (listener != null) {
+			listener.close();
+		}
 	}
 
 	public void testIsConnected() {

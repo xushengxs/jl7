@@ -14,7 +14,7 @@ import org.jl7.hl7.HL7Parser;
  * 
  */
 public class TestHL7MSHSegment extends TestCase {
-	private static String MSHSTRING = "MSH|^~\\&|APP1|GA0000|APP2|VAERS PROCESSOR|20010331605||ORU^RO1|20010422GA03|T|2.5|5|CP|AL|ER|DEU|8859/1|de|profile1";
+	private static String MSHSTRING = "MSH|^~\\&|APP1|GA0000|APP2|VAERS PROCESSOR|20010331605||ORU^R01|20010422GA03|T|2.5|5|CP|AL|ER|DEU|8859/1|de|profile1";
 	private static final String DELIMITERS = "|^~\\&";
 
 	/*
@@ -43,7 +43,7 @@ public class TestHL7MSHSegment extends TestCase {
 	public void testSetFieldsStringArrayStringTrue() {
 		HL7MSHSegment header = new HL7MSHSegment();
 		String[] fields = { "MSH", "^~\\&", "APP1", "GA0000", "APP2",
-				"VAERS PROCESSOR", "20010331605", "", "ORU^RO1",
+				"VAERS PROCESSOR", "20010331605", "", "ORU^R01",
 				"20010422GA03", "T", "2.5", "5", "CP", "AL", "ER", "DEU",
 				"8859/1", "de", "profile1\\F\\" };
 		header.setFields(fields, DELIMITERS, true);
@@ -123,13 +123,33 @@ public class TestHL7MSHSegment extends TestCase {
 	}
 
 	/**
+	 * Test method for {@link org.jl7.hl7.HL7MSHSegment#getMessageEventType()}.
+	 */
+	public void testGetMessageEventType() {
+		HL7Message msg = HL7Parser.parseMessage(MSHSTRING, true);
+		HL7MSHSegment header = msg.getHeader();
+		assertNotNull(header);
+		assertEquals("ORU^R01", header.getMessageEventType());
+	}
+
+	/**
 	 * Test method for {@link org.jl7.hl7.HL7MSHSegment#getMessageType()}.
 	 */
 	public void testGetMessageType() {
 		HL7Message msg = HL7Parser.parseMessage(MSHSTRING, true);
 		HL7MSHSegment header = msg.getHeader();
 		assertNotNull(header);
-		assertEquals("ORU^RO1", header.getMessageType());
+		assertEquals("ORU", header.getMessageType());
+	}
+
+	/**
+	 * Test method for {@link org.jl7.hl7.HL7MSHSegment#getEventType()}.
+	 */
+	public void testGetEventType() {
+		HL7Message msg = HL7Parser.parseMessage(MSHSTRING, true);
+		HL7MSHSegment header = msg.getHeader();
+		assertNotNull(header);
+		assertEquals("R01", header.getEventType());
 	}
 
 	/**

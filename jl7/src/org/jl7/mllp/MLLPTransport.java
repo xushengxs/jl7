@@ -61,6 +61,7 @@ public class MLLPTransport {
 
 	public void listen(MLLPMetaData metaData) throws IOException {
 		ServerSocket listener = new ServerSocket(metaData.port);
+		disconnect();
 		client = listener.accept();
 	}
 
