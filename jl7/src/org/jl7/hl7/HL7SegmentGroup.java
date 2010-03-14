@@ -291,12 +291,12 @@ public class HL7SegmentGroup implements Iterable<HL7Segment> {
 	}
 
 	/**
-	 * Returns a list of all segments of the given type
+	 * Returns a list of all segments of the given types (pipe separated)
 	 * 
 	 * @param segmentType
-	 *            type of segments to be returned.
+	 *            types of segments to be returned (pipe separated).
 	 * 
-	 * @return a list of all segments of the given type
+	 * @return a list of all segments of the given types
 	 * 
 	 * @since 0.1
 	 */
@@ -305,24 +305,28 @@ public class HL7SegmentGroup implements Iterable<HL7Segment> {
 	}
 
 	/**
-	 * Returns a list of all segments of the given type
+	 * Returns a list of all segments of the given types (pipe separated)
 	 * 
 	 * @param segmentType
-	 *            type of segments to be returned.
+	 *            types of segments to be returned (pipe separated).
 	 * 
 	 * @param segmentList
 	 *            list of segments to be processed
 	 * 
-	 * @return a list of all segments of the given type
+	 * @return a list of all segments of the given types
 	 * 
 	 * @since 0.1
 	 */
 	public static List<HL7Segment> GetSegments(String segmentType,
 			List<HL7Segment> segmentList) {
+		String[] segmentTypes = segmentType.split("\\|");
 		List<HL7Segment> filteredSegments = new ArrayList<HL7Segment>();
 		for (HL7Segment segment : segmentList) {
-			if (segment.getSegmentType().equals(segmentType)) {
-				filteredSegments.add(segment);
+			for(String type:segmentTypes) {
+				if (type.equals(segment.getSegmentType())) {
+					filteredSegments.add(segment);
+					break;
+				}
 			}
 		}
 		return filteredSegments;
