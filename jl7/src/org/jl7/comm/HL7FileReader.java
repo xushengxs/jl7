@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import org.jl7.hl7.HL7Message;
+import org.jl7.hl7.HL7Parser;
 
 /**
  * @author henribenoit
@@ -54,8 +55,15 @@ public class HL7FileReader implements HL7Reader {
 	 * @see org.jl7.comm.HL7Reader#getMessage()
 	 */
 	public HL7Message getMessage() throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuffer sb = new StringBuffer();
+		for (;;) {
+			int read = reader.read();
+			if (read == -1) {
+				break;
+			}
+			sb.append((char) read);
+		}
+		return HL7Parser.parseMessage(sb.toString(), true);
 	}
 
 	/*
@@ -77,6 +85,15 @@ public class HL7FileReader implements HL7Reader {
 
 		inputStream = new FileInputStream(file);
 		reader = new BufferedReader(new InputStreamReader(inputStream));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.jl7.comm.HL7Reader#getParameters()
+	 */
+	public Object[] getParameters() {
+		return new Object[] { file.getAbsolutePath() };
 	}
 
 }

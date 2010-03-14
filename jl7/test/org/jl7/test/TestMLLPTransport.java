@@ -135,10 +135,6 @@ public class TestMLLPTransport extends TestCase {
 		assertEquals(false, transport.isConnected());
 	}
 
-	public void testListen() {
-		fail("Not yet implemented");
-	}
-
 	public void testReceiveMessage() {
 		MLLPTransport transport = new MLLPTransport();
 		MLLPTransportable transportable = null;

@@ -70,4 +70,11 @@ public class HL7SocketReader implements HL7Reader {
 		transport.connect(metaData);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.jl7.comm.HL7Reader#getParameters()
+	 */
+	public Object[] getParameters() {
+		return new Object[] { metaData.host, metaData.port };
+	}
+
 }

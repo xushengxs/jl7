@@ -42,4 +42,9 @@ public interface HL7Reader {
 	 * @throws IOException
 	 */
 	public boolean isOpen() throws IOException;
+	
+	/**
+	 * @return
+	 */
+	public Object[] getParameters();
 }

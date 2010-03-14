@@ -12,11 +12,23 @@ import java.util.List;
  * 
  * @author henribenoit
  */
+/**
+ * @author henribenoit
+ *
+ */
 public class HL7SegmentGroup implements Iterable<HL7Segment> {
 	/**
 	 * List of segments in this segment group.
 	 */
 	private List<HL7Segment> segments = new ArrayList<HL7Segment>();
+
+	/**
+	 * Character used to mark the end of a segment and the beginning of the next
+	 * segment (i.e. segment delimiter). Default: ASCII 10
+	 * 
+	 * @since 0.1
+	 */
+	public char segmentTerminator = 0x0D;
 
 	/**
 	 * Creates an empty segment group.
@@ -210,7 +222,7 @@ public class HL7SegmentGroup implements Iterable<HL7Segment> {
 	 */
 	public static List<HL7SegmentGroup> getSegmentGroups(String segmentType,
 			List<HL7Segment> segmentList) {
-		String[] segmentTypes = segmentType.split("|");
+		String[] segmentTypes = segmentType.split("\\|");
 		List<HL7SegmentGroup> segmentGroups = new ArrayList<HL7SegmentGroup>();
 		HL7SegmentGroup segmentGroup = null;
 		for (HL7Segment seg : segmentList) {
@@ -317,6 +329,27 @@ public class HL7SegmentGroup implements Iterable<HL7Segment> {
 	}
 
 	/**
+	 * Returns the string representation of this segment group where all escape
+	 * sequences have been replaced by their values.
+	 * 
+	 * @return the string representation of this segment group where all escape
+	 *         sequences have been replaced by their values
+	 * 
+	 * @since 0.1
+	 */
+	public String getValue() {
+		String s = null;
+		for (HL7Segment seg : segments) {
+			if (s == null) {
+				s = seg.getValue();
+			} else {
+				s = s + segmentTerminator + seg.getValue();
+			}
+		}
+		return s;
+	}
+
+	/**
 	 * Returns a newline separated string representing all segments in this
 	 * segment group.
 	 * 
@@ -344,5 +377,19 @@ public class HL7SegmentGroup implements Iterable<HL7Segment> {
 	 */
 	public Iterator<HL7Segment> iterator() {
 		return segments.iterator();
+	}
+
+	/**
+	 * @return
+	 */
+	public char getSegmentTerminator() {
+		return segmentTerminator;
+	}
+
+	/**
+	 * @param segmentTerminator
+	 */
+	public void setSegmentTerminator(char segmentTerminator) {
+		this.segmentTerminator = segmentTerminator;
 	}
 }

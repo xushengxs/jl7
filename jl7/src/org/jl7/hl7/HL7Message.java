@@ -93,6 +93,10 @@ public class HL7Message {
 		subcomponentSeparator = value.charAt(4);
 	}
 
+	public String getMessageEventType() {
+		return getHeader().getMessageEventType();
+	}
+
 	/**
 	 * Returns the message type.
 	 * 
@@ -102,6 +106,10 @@ public class HL7Message {
 	 */
 	public String getMessageType() {
 		return getHeader().getMessageType();
+	}
+
+	public String getEventType() {
+		return getHeader().getEventType();
 	}
 
 	/**
