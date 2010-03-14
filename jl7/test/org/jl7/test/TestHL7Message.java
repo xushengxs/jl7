@@ -31,6 +31,7 @@ public class TestHL7Message extends TestCase {
 			"PV2|||||||1||||||||||||||||^^^^^^^^^103",
 			"ROL|1|AD|SAHCP|XXXXXXXXXX^^^^^^S|||||6|1", "PR1|1||1||20060705|1",
 			"GT1|1||||||||||||||||||||NOT APPLICABLE" };
+	private static final String PID_PV1_ROL = "PID|1||0000112234^^^100^A||XXXXXXXXXX^^^^^^S||10131113|1||4|^^RICHMOND^^3121||||1201||||||||1100|||||||||AAA\rPV1|1|O|^^^^^1|||||||2|||||1||||654345509^^^100^A|1|||||||||||||||||||||||||200607050000||||||V\rROL|1|AD|SAHCP|XXXXXXXXXX^^^^^^S|||||6|1";
 	private static final String DELIMITERS = "|^~\\&";
 
 	/*
@@ -196,21 +197,28 @@ public class TestHL7Message extends TestCase {
 	 * Test method for {@link org.jl7.hl7.HL7Message#get(java.lang.String)}.
 	 */
 	public void testGetString() {
-		fail("Not yet implemented");
+		HL7Message msg = HL7Parser.parseMessage(MESSAGE, true);
+		assertNotNull(msg);
+		List<HL7Segment> segments = msg.get("PID|PV1|ROL");
+		HL7SegmentGroup group = new HL7SegmentGroup(segments);
+		assertEquals(PID_PV1_ROL, group.getValue());
 	}
 
 	/**
 	 * Test method for {@link org.jl7.hl7.HL7Message#toString()}.
 	 */
 	public void testToString() {
-		fail("Not yet implemented");
+		HL7Message msg = HL7Parser.parseMessage(MESSAGE, true);
+		assertEquals(MESSAGE.replace("^~\\&", "\\S\\\\R\\\\E\\\\T\\"), msg
+				.toString());
 	}
 
 	/**
 	 * Test method for {@link org.jl7.hl7.HL7Message#getStructure()}.
 	 */
 	public void testGetStructure() {
-		fail("Not yet implemented");
+		HL7Message msg = HL7Parser.parseMessage(MESSAGE, true);
+		assertEquals("MSH EVN PID PV1 PV2 ROL PR1 GT1", msg.getStructure());
 	}
 
 	/**
