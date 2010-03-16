@@ -70,10 +70,8 @@ public class TestEscapedStringTokenizer extends TestCase {
 				"a|b\\c|d\\|e/f\\/g", '|', '\\', true);
 		String[] tokens = tokenizer.getTokens();
 		assertEquals("a", tokens[0]);
-		assertEquals("|", tokens[1]);
-		assertEquals("b\\c", tokens[2]);
-		assertEquals("|", tokens[3]);
-		assertEquals("d|e/f\\/g", tokens[4]);
+		assertEquals("|b\\c", tokens[1]);
+		assertEquals("|d|e/f\\/g", tokens[2]);
 	}
 
 	/**
@@ -100,12 +98,9 @@ public class TestEscapedStringTokenizer extends TestCase {
 				"a|b\\c|d\\|e/f\\/g", "|/", '\\', true);
 		String[] tokens = tokenizer.getTokens();
 		assertEquals("a", tokens[0]);
-		assertEquals("|", tokens[1]);
-		assertEquals("b\\c", tokens[2]);
-		assertEquals("|", tokens[3]);
-		assertEquals("d|e", tokens[4]);
-		assertEquals("/", tokens[5]);
-		assertEquals("f/g", tokens[6]);
+		assertEquals("|b\\c", tokens[1]);
+		assertEquals("|d|e", tokens[2]);
+		assertEquals("/f/g", tokens[3]);
 	}
 
 	/**

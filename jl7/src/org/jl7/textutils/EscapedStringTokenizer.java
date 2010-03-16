@@ -49,7 +49,7 @@ public class EscapedStringTokenizer implements Enumeration<String> {
 	 */
 	private ArrayList<String> array;
 	/**
-	 * whether the separators found in the string should be returned as tokens
+	 * whether the separators found in the string should be returned
 	 */
 	private boolean returnSeparators;
 	/**
@@ -59,7 +59,7 @@ public class EscapedStringTokenizer implements Enumeration<String> {
 
 	/**
 	 * Creates an EscapedStringTokenizer witch can handle multiple separators
-	 * and doesn't return the separator as tokens.
+	 * and doesn't return the separator.
 	 * 
 	 * @param input
 	 *            String to tokenize
@@ -79,7 +79,7 @@ public class EscapedStringTokenizer implements Enumeration<String> {
 
 	/**
 	 * Creates an EscapedStringTokenizer witch can only handle a single
-	 * separator and doesn't return the separator as tokens.
+	 * separator and doesn't return the separator.
 	 * 
 	 * @param input
 	 *            String to tokenize
@@ -98,7 +98,7 @@ public class EscapedStringTokenizer implements Enumeration<String> {
 
 	/**
 	 * Creates an EscapedStringTokenizer witch can only handle a single
-	 * separator and can return the separator as tokens.
+	 * separator and can return the tokens with or without separator.
 	 * 
 	 * @param input
 	 *            String to tokenize
@@ -110,7 +110,6 @@ public class EscapedStringTokenizer implements Enumeration<String> {
 	 *            separator
 	 * @param returnSeparators
 	 *            whether the separators found in the string should be returned
-	 *            as tokens
 	 * 
 	 * @since 0.1
 	 */
@@ -121,7 +120,7 @@ public class EscapedStringTokenizer implements Enumeration<String> {
 
 	/**
 	 * Creates an EscapedStringTokenizer witch can handle multiple separators
-	 * and return separators as tokens.
+	 * and can return the tokens with or without separator.
 	 * 
 	 * @param input
 	 *            String to tokenize
@@ -134,7 +133,6 @@ public class EscapedStringTokenizer implements Enumeration<String> {
 	 *            as a separator
 	 * @param returnSeparators
 	 *            whether the separators found in the string should be returned
-	 *            as tokens
 	 * 
 	 * @since 0.1
 	 */
@@ -149,7 +147,7 @@ public class EscapedStringTokenizer implements Enumeration<String> {
 
 	/**
 	 * Splits the input string according to the list of separators, escape
-	 * character and whether separators should be returned as tokens
+	 * character and whether separators should be returned
 	 */
 	private void split() {
 		char lastChar = ' ';
@@ -168,8 +166,8 @@ public class EscapedStringTokenizer implements Enumeration<String> {
 				builder = new StringBuilder();
 				if (returnSeparators) {
 					builder.append(c);
-					array.add(builder.toString());
-					builder = new StringBuilder();
+//					array.add(builder.toString());
+//					builder = new StringBuilder();
 				}
 			}
 			lastChar = c;

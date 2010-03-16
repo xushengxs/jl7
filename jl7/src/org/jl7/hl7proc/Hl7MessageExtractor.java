@@ -67,7 +67,9 @@ public class Hl7MessageExtractor {
 						.get(Integer.parseInt(s.substring(1)) - 1);
 			} else if (msg != null) {
 				List<HL7Segment> segments = msg.get(s);
-				segment = segments.get(0);
+				if (segments.size() != 0) {
+					segment = segments.get(0);
+				}
 			} else if (group != null) {
 				List<HL7Segment> segments = group.get(s);
 				segment = segments.get(0);
