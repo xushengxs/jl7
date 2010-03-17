@@ -14,7 +14,7 @@ import java.util.List;
  */
 /**
  * @author henribenoit
- *
+ * 
  */
 public class HL7SegmentGroup implements Iterable<HL7Segment> {
 	/**
@@ -120,21 +120,21 @@ public class HL7SegmentGroup implements Iterable<HL7Segment> {
 	 * @since 0.1
 	 */
 	public void removeAllSegmentsAfter(String types) {
-		String[] segmentTypes = types.split("|");
-		boolean found = false;
+		String[] segmentTypes = types.split("\\|");
+		ArrayList<HL7Segment> newList = new ArrayList<HL7Segment>();
 		for (HL7Segment segment : segments) {
-			if (!found) {
-				for (String segmentType : segmentTypes) {
-					if (segment.getSegmentType().equals(segmentType)) {
-						found = true;
-						break;
-					}
+			boolean found = false;
+			for (String segmentType : segmentTypes) {
+				if (segment.getSegmentType().equals(segmentType)) {
+					found = true;
+					break;
 				}
 			}
-			if (found) {
-				getSegments().remove(segment);
+			if (!found) {
+				newList.add(segment);
 			}
 		}
+		segments = newList;
 	}
 
 	/**
@@ -322,7 +322,7 @@ public class HL7SegmentGroup implements Iterable<HL7Segment> {
 		String[] segmentTypes = segmentType.split("\\|");
 		List<HL7Segment> filteredSegments = new ArrayList<HL7Segment>();
 		for (HL7Segment segment : segmentList) {
-			for(String type:segmentTypes) {
+			for (String type : segmentTypes) {
 				if (type.equals(segment.getSegmentType())) {
 					filteredSegments.add(segment);
 					break;
@@ -395,5 +395,23 @@ public class HL7SegmentGroup implements Iterable<HL7Segment> {
 	 */
 	public void setSegmentTerminator(char segmentTerminator) {
 		this.segmentTerminator = segmentTerminator;
+	}
+
+	/**
+	 * Returns a string representing the segment structure of this message.
+	 * 
+	 * @return a string representing the segment structure of this message.
+	 * 
+	 * @since 0.3
+	 */
+	public String getStructure() {
+		String s = "";
+		for (HL7Segment segment : segments) {
+			if (!s.equals("")) {
+				s += " ";
+			}
+			s += segment.getSegmentType();
+		}
+		return s;
 	}
 }

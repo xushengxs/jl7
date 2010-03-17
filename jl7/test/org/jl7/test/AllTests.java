@@ -18,6 +18,7 @@ public class AllTests {
 		suite.addTestSuite(TestHL7Message.class);
 		suite.addTestSuite(TestMLLPTransport.class);
 		suite.addTestSuite(TestHl7MessageExtractor.class);
+		suite.addTestSuite(TestHL7MessageSplitter.class);
 		// $JUnit-END$
 		return suite;
 	}
