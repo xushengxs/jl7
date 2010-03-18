@@ -22,7 +22,8 @@ public class TestHL7MessageSplitter extends TestCase {
 	String A01 = "MSH|^~\\&|AccMgr|1|||20050110045504||ADT^A01|599102|P|2.3|||\rEVN|A01|20050110045502|||||\rPID|1||10006579^^^1^MRN^1||DUCK^DONALD^D||19241010|M||1|111 DUCK ST^^FOWL^CA^999990000^^M|1|8885551212|8885551212|1|2||40007716^^^AccMgr^VN^1|123121234|||||||||||NO\rNK1|1|DUCK^HUEY|SO|3583 DUCK RD^^FOWL^CA^999990000|8885552222||Y||||||||||||||\rPV1|1|I|PREOP^101^1^1^^^S|3|||37^DISNEY^WALT^^^^^^AccMgr^^^^CI|||01||||1|||37^DISNEY^WALT^^^^^^AccMgr^^^^CI|2|40007716^^^AccMgr^VN|4|||||||||||||||||||1||G|||20050110045253||||||\rGT1|1|8291|DUCK^DONALD^D||111^DUCK ST^^FOWL^CA^999990000|8885551212||19241010|M||1|123121234||||#Cartoon Ducks Inc|111^DUCK ST^^FOWL^CA^999990000|8885551212||PT|\rDG1|1|I9|71596^OSTEOARTHROS NOS-L/LEG ^I9|OSTEOARTHROS NOS-L/LEG ||A|\rIN1|1|MEDICARE|3|MEDICARE|||||||Cartoon Ducks Inc|19891001|||4|DUCK^DONALD^D|1|19241010|111^DUCK ST^^FOWL^CA^999990000|||||||||||||||||123121234A||||||PT|M|111 DUCK ST^^FOWL^CA^999990000|||||8291\rIN2|1||123121234|Cartoon Ducks Inc|||123121234A|||||||||||||||||||||||||||||||||||||||||||||||||||||||||8885551212\rIN1|2|NON-PRIMARY|9|MEDICAL MUTUAL CALIF.|PO BOX 94776^^HOLLYWOOD^CA^441414776||8003621279|PUBSUMB|||Cartoon Ducks Inc||||7|DUCK^DONALD^D|1|19241010|111 DUCK ST^^FOWL^CA^999990000|||||||||||||||||056269770||||||PT|M|111^DUCK ST^^FOWL^CA^999990000|||||8291\rIN2|2||123121234|Cartoon Ducks Inc||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||8885551212\rIN1|3|SELF PAY|1|SELF PAY|||||||||||5||1";
 	String P01 = "MSH|^~\\&|ENDOBASE IV^ ENDOBASE IV^GUID||AHC_HIS_Port^AHC_HIS_Port^GUID||20000908064603||BAR^P01|L1BD-JB-1C-B4-022AE4|P|2.3|AL|NE\rEVN|P03|20000908084603\rPID|1||1235||JONES^SARAH^A|WILLIAMS|19610615000000|F||AMERICAN|1200 N ELM STREET^^GREENSBORO^^27401-1020||(919)379-1212|(919)271-3434|||||123456789||||GREENSBORO|||||^AMERICAN|20011231063000\rPV1|1|||||||001^Miller^Gary^^^Dr.|||||||||002^Webster^Daniel^^^Dr.||20310\rDG1|1|EBM|1^Ordinationsgebühr je Beh.sfall (0)|Ordinationsgebühr je Beh.sfall (0)|20000726000000\rDG1|2|EBM|741^Gastroskopie (1400)|Gastroskopie (1400)|20000726000000\rDG1|3|EBM|7026^3-D-Technik Zuschlag (600)|3-D-Technik Zuschlag (600)|20000726000000\rPR1|1|GoÄ|1^Beratung [auch telefonisch]||20000726000000||10\rPR1|2|GoÄ|253^Injektion, i.v.||20000726000000||2\rPR1|3|GoÄ|683^Gastro- + Ösophagoskopie [vollflexible Instr.]||20000726000000||20\rPR1|4|GoÄ|4071^5-HIES||20000726000000||10";
 	String P03 = "MSH|^~\\&|EB^ EB^GUID||DPS^DPS^GUID||20000908064603||DFT^P03|L1BD-JB-1C-B4-022AE4|P|2.3|AL|NE\rEVN|P03|20000908084603\rPID|1||1235||JONES^BETTY^A|SMITH|19610615000000|F||American|1200 N ELM STREET^^GREENSBORO^^27401-1020||(919)379-1212|(919)271-3434|||||123456789||||New York|||||^American|20010131\rPV1|1|||||||003^Lance^William^^^Dr.|||||||||004^Smith^Willma^^^Dr.||1234532\rFT1|1|1234545||20010116000000||Billing|Bill^Test Biling Code|||1.00||123.00|ENDOBASE IV|||004||||U200^Ima^Rin^^^Dr.|112233^Hausarzt^Paul^^^Dr.^^^Privat\rFT1|2|1234545||20010116000000||Billing|B123^Billing 2|||2.00||23.23|ENDOBASE IV|||004||||U200^Ima^Rin^^^Dr.|112233^Hausarzt^Paul^^^Dr.^^^Privat\rFT1|3||||| |||||||ENDOBASE IV|||004||||U200^Ima^Rin^^^Dr.|112233^Hausarzt^Paul^^^Dr.^^^Privat\rPR1|1|GoÄ|1^Beratung [auch telefonisch]||20000726000000||1.00\rPR1|2|GoÄ|253^Injektion, i.v.||20000726000000||1.00\rPR1|3|GoÄ|683^Gastro- + Ösophagoskopie [vollflexible Instr.]||20000726000000||1.00\rPR1|4|GoÄ|4071^5-HIES||20000726000000||1.00\rDG1|1|EBM|1^Ordinationsgebühr je Beh.sfall (0)|Ordinationsgebühr je Beh.sfall00(0)|20000726000000\rDG1|2|EBM|741^Gastroskopie (1400)|Gastroskopie (1400)|20000726000000\rDG1|3|EBM|7026^3-D-Technik Zuschlag (600)|3-D-Technik Zuschlag (600)|20000726000000\rIN1|1||1234|AnyInsurance||||||||||||||||||||||||||||||||456667878";
-	
+	String O01 = "MSH|^~\\&|SPC|M||M|20040503223716||ORM^O01|176201653|P|2.2|\rPID|1||0000307656^^^M&FEE&&FIE&&FOO&&FUM^MR~0000858462^^^P&FOO&BAR^MR\rOBR|1||3844834|2035^NM HEPATOBILIARY DUCT^MRD|||200405030939||\rOBR|2||44834|21493^RADIATION THERAPY PLANNING|||200406020800||";
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -124,7 +125,15 @@ public class TestHL7MessageSplitter extends TestCase {
 	 * .
 	 */
 	public void testGetOrders() {
-		fail("Not yet implemented");
+		HL7Message msg = HL7Parser.parseMessage(O01, true);
+		List<HL7SegmentGroup> orders = HL7MessageSplitter.GetOrders(msg);
+		assertEquals(2, orders.size());
+		assertEquals(
+				"PID|1||0000307656^^^M&FEE&&FIE&&FOO&&FUM^MR~0000858462^^^P&FOO&BAR^MR\rOBR|1||3844834|2035^NM HEPATOBILIARY DUCT^MRD|||200405030939||",
+				orders.get(0).getValue());
+		assertEquals(
+				"PID|1||0000307656^^^M&FEE&&FIE&&FOO&&FUM^MR~0000858462^^^P&FOO&BAR^MR\rOBR|2||44834|21493^RADIATION THERAPY PLANNING|||200406020800||",
+				orders.get(1).getValue());
 	}
 
 }
