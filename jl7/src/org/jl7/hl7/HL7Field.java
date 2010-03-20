@@ -116,6 +116,10 @@ public class HL7Field {
 		}
 	}
 
+	public HL7FieldRepetition getAt(int index) {
+		return get(index - 1);
+	}
+	
 	/**
 	 * Returns the string representation of this field.
 	 * 

@@ -235,6 +235,20 @@ public class HL7Message {
 	}
 
 	/**
+	 * Returns the segment at the specified position in this message.
+	 * 
+	 * @param index
+	 *            position of the segment to be returned in this message
+	 * 
+	 * @return the segment at the specified position in this message.
+	 * 
+	 * @since 0.1
+	 */
+	public HL7Segment getAt(int index) {
+		return get(index - 1);
+	}
+
+	/**
 	 * Returns a list containing all segments in this message of the specified
 	 * types.
 	 * 
@@ -318,5 +332,15 @@ public class HL7Message {
 	 */
 	public Enumeration<HL7Segment> getEnumerator() {
 		return Collections.enumeration(segments);
+	}
+
+	/**
+	 * @param index
+	 * @param segmentString
+	 */
+	public void putAt(int index, String segmentString) {
+		HL7Segment segment = HL7Parser.parseSegment(segmentString,
+				getDelimiters(), true);
+		segments.set(index - 1, segment);
 	}
 }

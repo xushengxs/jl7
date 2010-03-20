@@ -170,6 +170,20 @@ public class HL7Segment {
 	}
 
 	/**
+	 * Returns the field at the given position.
+	 * 
+	 * @param index
+	 *            position in the segment of the field to be returned
+	 * 
+	 * @return the field at the given position
+	 * 
+	 * @since 0.1
+	 */
+	public HL7Field getAt(int index) {
+		return get(index);
+	}
+
+	/**
 	 * Returns the number of fields in this segment.
 	 * 
 	 * @return the number of fields in this segment
@@ -241,5 +255,15 @@ public class HL7Segment {
 			}
 		}
 		return s;
+	}
+
+	/**
+	 * @param index
+	 * @param fieldString
+	 */
+	public void putAt(int index, String fieldString) {
+		HL7Field field = HL7Parser.parseField(fieldString,
+				getDelimiters(), true);
+		fields.set(index, field);
 	}
 }
