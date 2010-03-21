@@ -19,12 +19,13 @@ public class HL7GroovyField{
 	def String toString() {
 		return field.toString();
 	}
-	
+
 	def getAt(int index) {
-		return field[index]
+		return new HL7GroovyFieldRepetition(field[index])
 	}
 
-//	def HL7GroovyFieldRepetition getAt(int index) {
-//		return new HL7GroovyFieldRepetition(field[index])
-//	}
+	def call(index) {
+		def repetition = new HL7GroovyFieldRepetition(field[1])
+		return repetition[index];
+	}
 }

@@ -134,4 +134,8 @@ public class HL7Component {
 		}
 		return s;
 	}
+
+	public HL7Subcomponent getAt(int index) {
+		return get(index - 1);
+	}
 }

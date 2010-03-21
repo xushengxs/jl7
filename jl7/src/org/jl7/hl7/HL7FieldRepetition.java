@@ -150,4 +150,8 @@ public class HL7FieldRepetition {
 		}
 		return s;
 	}
+
+	public HL7Component getAt(int index) {
+		return get(index - 1);
+	}
 }

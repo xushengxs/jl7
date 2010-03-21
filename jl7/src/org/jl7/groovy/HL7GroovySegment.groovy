@@ -23,4 +23,8 @@ public class HL7GroovySegment{
 	def HL7GroovyField getAt(int index) {
 		return new HL7GroovyField(segment[index])
 	}
+
+	def call(index) {
+			return new HL7GroovyField(segment[index]);
+	}
 }

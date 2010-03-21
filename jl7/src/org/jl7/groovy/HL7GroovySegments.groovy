@@ -24,4 +24,8 @@ public class HL7GroovySegments{
 		return new HL7GroovySegment(segments.get(index - 1))
 	}
 	
+	def call(index) {
+		def segment = new HL7GroovySegment(segments[0])
+		return new HL7GroovyField(segment[index]);
+	}
 }

@@ -160,4 +160,8 @@ public class HL7Field {
 		}
 		return s;
 	}
+	
+	public int getCount() {
+		return repetitions.size();
+	}
 }

@@ -19,7 +19,11 @@ public class TestGroovy{
 		def groovyMsg = HL7.message(msg)
 		println "2:\n"+groovyMsg
 		println "3:\n"+groovyMsg.PID
-		println "4:\n"+groovyMsg.PID_5
-		println "5:\n"+groovyMsg.PID_5[2]
+		println "4:\n"+groovyMsg.PID(5)
+		println "5:\n"+groovyMsg.PID[1](5)
+		println "6:\n"+groovyMsg.PID[1](5)(1)
+		println "7:\n"+groovyMsg.PID(5)[2]
+		println "8:\n"+groovyMsg.PID(5)[2](3)
+		println "9:\n"+groovyMsg.PID(5)[2](3)(2)
 	}
 }
