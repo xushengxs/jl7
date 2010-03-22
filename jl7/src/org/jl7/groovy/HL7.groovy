@@ -11,13 +11,12 @@ import org.jl7.hl7.*;
  */
 public class HL7{
 
-	def static message(HL7Message msg) {
+	def static message(msg) {
 		return new HL7GroovyMessage(msg)
 	}
 
-	def static message(HL7Message msg, args) {
+	def static message(msg, args) {
 		def groovyMessage = new HL7GroovyMessage(msg)
 		args();
 	}
-	
 }

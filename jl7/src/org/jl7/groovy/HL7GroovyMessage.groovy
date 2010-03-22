@@ -16,6 +16,10 @@ public class HL7GroovyMessage{
 		this.msg = msg
 	}
 	
+	def HL7GroovyMessage(String msg) {
+		this.msg = HL7Parser.parseMessage(msg, true)
+	}
+	
 	def HL7GroovyMessage(HL7Message msg, Closure args) {
 		this(msg)
 		args()
