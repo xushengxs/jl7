@@ -25,17 +25,20 @@ public class HL7GroovyMessage{
 		args()
 	}
 	
-	def invokeMethod(String name, args) {
+	def methodMissing(String name, args) {
 		def segments = new HL7GroovySegments(msg[name])
 		if(args[0] instanceof Integer) {
+			HL7GroovyMessage.metaClass."$name" = { Object[] varArgs ->
+				def segment = segments[1];
+				return segment[varArgs[0]];
+	        }
 			def segment = segments[1];
 			return segment[args[0]];
 		}
 		println(args[0].getClass());
 	}
 
-	
-   def getProperty(String type) {
+   def propertyMissing(String type) {
 		def items = type.split("\\_");
 		if (items.size() > 0) {
 			def segments = new HL7GroovySegments(msg[items[0]])
