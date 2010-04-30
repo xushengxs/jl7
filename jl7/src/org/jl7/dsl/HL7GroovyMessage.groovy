@@ -4,12 +4,12 @@
 package org.jl7.dsl
 
 import org.jl7.hl7.*;
-
+import groovy.lang.GroovyObjectimport org.jl7.hl7.HL7MSHSegmentimport org.jl7.hl7.HL7Parserimport groovy.lang.MissingPropertyException
 /**
  * @author henribenoit
  *
  */
-public class HL7GroovyMessage{
+public class HL7GroovyMessage implements GroovyObject {
 	def HL7Message msg
 	
 	def HL7GroovyMessage(HL7Message msg) {
@@ -39,6 +39,7 @@ public class HL7GroovyMessage{
 	}
 
    def propertyMissing(String type) {
+	   println("### type="+type);
 		def items = type.split("\\_");
 		if (items.size() > 0) {
 			def segments = new HL7GroovySegments(msg[items[0]])
@@ -59,6 +60,20 @@ public class HL7GroovyMessage{
 		return null;
 	}	
 	
+    def void setProperty(String name, Object value) {
+		if (value instanceof String) {			
+			msg.addSegment((String)value, msg.delimiters, true);
+		}
+		else {
+			throw new MissingPropertyException(name, this.class, value);
+		}
+    }
+   
+    def HL7GroovyMessage leftShift(String segment) {
+		msg.addSegment(segment, msg.delimiters, true);
+		return this;
+    }
+   
 	def String toString() {
 		return msg.toString()
 	}
