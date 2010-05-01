@@ -16,7 +16,7 @@ import org.jl7.hl7.HL7Message;
 
 /**
  * @author henribenoit
- * 
+ *
  */
 public class HL7DSL {
 
@@ -25,20 +25,9 @@ public class HL7DSL {
      */
     public static void main(String[] args) {
         try {
-            Binding binding = new Binding();
-            binding.setVariable("message", new HL7GroovyMessage(new HL7Message()));
-            GroovyShell shell = new GroovyShell(binding);
-
             File dsl = new File(args[0]);
-            GroovyCodeSource code = new GroovyCodeSource(dsl);
-
-            StringBuilder builder = new StringBuilder();
-            builder.append("import static org.jl7.hl7.HL7Parser.*;\n");
-            builder.append("import org.jl7.dsl.*;\n");
-            builder.append(code.getScriptText());
-
-            Script dslScript = shell.parse(builder.toString());
-            dslScript.run();
+            HL7GroovyMessage message = new HL7GroovyMessage(new HL7Message());
+            processMessage(dsl, message);
         }
         catch (CompilationFailedException e) {
             // TODO Auto-generated catch block
@@ -49,6 +38,32 @@ public class HL7DSL {
             e.printStackTrace();
         }
 
+    }
+
+    public static void processMessage(File file, HL7GroovyMessage message) throws IOException {
+        Binding binding = new Binding();
+        binding.setVariable("message", message);
+        processDsl(file, binding);
+    }
+
+    public static HL7GroovyMessage convertMessage(File file, HL7GroovyMessage message) throws IOException {
+        Binding binding = new Binding();
+        binding.setVariable("message", message);
+        return (HL7GroovyMessage) processDsl(file, binding);
+    }
+
+    private static Object processDsl(File file, Binding binding) throws IOException {
+        GroovyShell shell = new GroovyShell(binding);
+
+        GroovyCodeSource code = new GroovyCodeSource(file);
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("import static org.jl7.hl7.HL7Parser.*;\n");
+        builder.append("import org.jl7.dsl.*;\n");
+        builder.append(code.getScriptText());
+
+        Script dslScript = shell.parse(builder.toString());
+        return dslScript.run();
     }
 
 }

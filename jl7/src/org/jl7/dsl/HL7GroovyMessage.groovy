@@ -3,7 +3,7 @@ package org.jl7.dsl
 import groovy.lang.Closure;
 import groovy.lang.GroovyObject;
 
-import org.jl7.hl7.HL7Message;
+import org.jl7.hl7.*;
 /**
  * @author henribenoit
  *
