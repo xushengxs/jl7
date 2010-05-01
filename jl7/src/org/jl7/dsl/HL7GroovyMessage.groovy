@@ -1,3 +1,5 @@
+package org.jl7.dsl
+
 import groovy.lang.Closure;
 import groovy.lang.GroovyObject;
 
@@ -8,20 +10,20 @@ import org.jl7.hl7.HL7Message;
  */
 public class HL7GroovyMessage implements GroovyObject {
 	def HL7Message msg
-	
+
 	def HL7GroovyMessage(HL7Message msg) {
 		this.msg = msg
 	}
-	
+
 	def HL7GroovyMessage(String msg) {
 		this.msg = HL7Parser.parseMessage(msg, true)
 	}
-	
+
 	def HL7GroovyMessage(HL7Message msg, Closure args) {
 		this(msg)
 		args()
 	}
-	
+
 	def methodMissing(String name, args) {
 		def segments = new HL7GroovySegments(msg[name])
 		if(args[0] instanceof Integer) {
@@ -44,7 +46,7 @@ public class HL7GroovyMessage implements GroovyObject {
 				def segment = segments[1];
 				int fieldIndex = Integer.parseInt(items[1]);
 				if (items.size() > 2) {
-					
+
 				}
 				else {
 					return segment[fieldIndex];
@@ -55,22 +57,22 @@ public class HL7GroovyMessage implements GroovyObject {
 			}
 		}
 		return null;
-	}	
-	
+	}
+
     def void setProperty(String name, Object value) {
-		if (value instanceof String) {			
+		if (value instanceof String) {
 			msg.addSegment((String)value, msg.delimiters, true);
 		}
 		else {
 			throw new MissingPropertyException(name, this.class, value);
 		}
     }
-   
+
     def HL7GroovyMessage leftShift(String segment) {
 		msg.addSegment(segment, msg.delimiters, true);
 		return this;
     }
-   
+
 	def String toString() {
 		return msg.toString()
 	}

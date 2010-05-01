@@ -1,4 +1,6 @@
-package org.jl7.dsl
+import java.util.List;
+
+import org.jl7.hl7.HL7Segment;
 
 import org.jl7.hl7.*;
 

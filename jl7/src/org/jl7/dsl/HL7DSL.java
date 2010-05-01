@@ -37,7 +37,7 @@ public class HL7DSL {
             builder.append("import org.jl7.dsl.*;\n");
             builder.append(code.getScriptText());
 
-            Script dslScript = shell.parse(dsl);
+            Script dslScript = shell.parse(builder.toString());
             dslScript.run();
         }
         catch (CompilationFailedException e) {
