@@ -1,10 +1,7 @@
-/**
- * 
- */
-package org.jl7.dsl
+import groovy.lang.Closure;
+import groovy.lang.GroovyObject;
 
-import org.jl7.hl7.*;
-import groovy.lang.GroovyObjectimport org.jl7.hl7.HL7MSHSegmentimport org.jl7.hl7.HL7Parserimport groovy.lang.MissingPropertyException
+import org.jl7.hl7.HL7Message;
 /**
  * @author henribenoit
  *

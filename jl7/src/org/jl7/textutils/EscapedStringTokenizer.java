@@ -30,200 +30,200 @@ import java.util.Enumeration;
  * 
  */
 public class EscapedStringTokenizer implements Enumeration<String> {
-	/**
-	 * String to tokenize
-	 */
-	private String input;
-	/**
-	 * String containing the list of separators (each character in the string
-	 * defines a separator)
-	 */
-	private String separator;
-	/**
-	 * Escape character (if one of the separator characters follows this
-	 * character in the input string, it will not be considered as a separator
-	 */
-	private char escape;
-	/**
-	 * List of all tokens
-	 */
-	private ArrayList<String> array;
-	/**
-	 * whether the separators found in the string should be returned
-	 */
-	private boolean returnSeparators;
-	/**
-	 * index of the next element to be returned by the enumeration
-	 */
-	private int nextIndex = 0;
+    /**
+     * String to tokenize
+     */
+    private String input;
+    /**
+     * String containing the list of separators (each character in the string
+     * defines a separator)
+     */
+    private String separator;
+    /**
+     * Escape character (if one of the separator characters follows this
+     * character in the input string, it will not be considered as a separator
+     */
+    private char escape;
+    /**
+     * List of all tokens
+     */
+    private ArrayList<String> array;
+    /**
+     * whether the separators found in the string should be returned
+     */
+    private boolean returnSeparators;
+    /**
+     * index of the next element to be returned by the enumeration
+     */
+    private int nextIndex = 0;
 
-	/**
-	 * Creates an EscapedStringTokenizer witch can handle multiple separators
-	 * and doesn't return the separator.
-	 * 
-	 * @param input
-	 *            String to tokenize
-	 * @param separator
-	 *            String containing the list of separators (each character in
-	 *            the string defines a separator)
-	 * @param escape
-	 *            Escape character (if one of the separator characters follows
-	 *            this character in the input string, it will not be considered
-	 *            as a separator
-	 * 
-	 * @since 0.1
-	 */
-	public EscapedStringTokenizer(String input, String separator, char escape) {
-		this(input, separator, escape, false);
-	}
+    /**
+     * Creates an EscapedStringTokenizer witch can only handle a single
+     * separator and doesn't return the separator.
+     * 
+     * @param input
+     *            String to tokenize
+     * @param separator
+     *            Character used as separator to tokenize the input string
+     * @param escape
+     *            Escape character (if the separator character follows this
+     *            character in the input string, it will not be considered as a
+     *            separator
+     * 
+     * @since 0.1
+     */
+    public EscapedStringTokenizer(String input, char separator, char escape) {
+        this(input, separator + "", escape, false);
+    }
 
-	/**
-	 * Creates an EscapedStringTokenizer witch can only handle a single
-	 * separator and doesn't return the separator.
-	 * 
-	 * @param input
-	 *            String to tokenize
-	 * @param separator
-	 *            Character used as separator to tokenize the input string
-	 * @param escape
-	 *            Escape character (if the separator character follows this
-	 *            character in the input string, it will not be considered as a
-	 *            separator
-	 * 
-	 * @since 0.1
-	 */
-	public EscapedStringTokenizer(String input, char separator, char escape) {
-		this(input, separator + "", escape, false);
-	}
+    /**
+     * Creates an EscapedStringTokenizer witch can only handle a single
+     * separator and can return the tokens with or without separator.
+     * 
+     * @param input
+     *            String to tokenize
+     * @param separator
+     *            Character used as separator to tokenize the input string
+     * @param escape
+     *            Escape character (if the separator character follows this
+     *            character in the input string, it will not be considered as a
+     *            separator
+     * @param returnSeparators
+     *            whether the separators found in the string should be returned
+     * 
+     * @since 0.1
+     */
+    public EscapedStringTokenizer(String input, char separator, char escape, boolean returnSeparators) {
+        this(input, separator + "", escape, returnSeparators);
+    }
 
-	/**
-	 * Creates an EscapedStringTokenizer witch can only handle a single
-	 * separator and can return the tokens with or without separator.
-	 * 
-	 * @param input
-	 *            String to tokenize
-	 * @param separator
-	 *            Character used as separator to tokenize the input string
-	 * @param escape
-	 *            Escape character (if the separator character follows this
-	 *            character in the input string, it will not be considered as a
-	 *            separator
-	 * @param returnSeparators
-	 *            whether the separators found in the string should be returned
-	 * 
-	 * @since 0.1
-	 */
-	public EscapedStringTokenizer(String input, char separator, char escape,
-			boolean returnSeparators) {
-		this(input, separator + "", escape, returnSeparators);
-	}
+    /**
+     * Creates an EscapedStringTokenizer witch can handle multiple separators
+     * and doesn't return the separator.
+     * 
+     * @param input
+     *            String to tokenize
+     * @param separator
+     *            String containing the list of separators (each character in
+     *            the string defines a separator)
+     * @param escape
+     *            Escape character (if one of the separator characters follows
+     *            this character in the input string, it will not be considered
+     *            as a separator
+     * 
+     * @since 0.1
+     */
+    public EscapedStringTokenizer(String input, String separator, char escape) {
+        this(input, separator, escape, false);
+    }
 
-	/**
-	 * Creates an EscapedStringTokenizer witch can handle multiple separators
-	 * and can return the tokens with or without separator.
-	 * 
-	 * @param input
-	 *            String to tokenize
-	 * @param separator
-	 *            String containing the list of separators (each character in
-	 *            the string defines a separator)
-	 * @param escape
-	 *            Escape character (if one of the separator characters follows
-	 *            this character in the input string, it will not be considered
-	 *            as a separator
-	 * @param returnSeparators
-	 *            whether the separators found in the string should be returned
-	 * 
-	 * @since 0.1
-	 */
-	public EscapedStringTokenizer(String input, String separator, char escape,
-			boolean returnSeparators) {
-		this.input = input;
-		this.separator = separator;
-		this.escape = escape;
-		this.returnSeparators = returnSeparators;
-		split();
-	}
+    /**
+     * Creates an EscapedStringTokenizer witch can handle multiple separators
+     * and can return the tokens with or without separator.
+     * 
+     * @param input
+     *            String to tokenize
+     * @param separator
+     *            String containing the list of separators (each character in
+     *            the string defines a separator)
+     * @param escape
+     *            Escape character (if one of the separator characters follows
+     *            this character in the input string, it will not be considered
+     *            as a separator
+     * @param returnSeparators
+     *            whether the separators found in the string should be returned
+     * 
+     * @since 0.1
+     */
+    public EscapedStringTokenizer(String input, String separator, char escape, boolean returnSeparators) {
+        this.input = input;
+        this.separator = separator;
+        this.escape = escape;
+        this.returnSeparators = returnSeparators;
+        split();
+    }
 
-	/**
-	 * Splits the input string according to the list of separators, escape
-	 * character and whether separators should be returned
-	 */
-	private void split() {
-		char lastChar = ' ';
-		StringBuilder builder = new StringBuilder();
-		array = new ArrayList<String>();
+    /**
+     * Returns the list of tokens as an array of strings
+     * 
+     * @return the list of tokens as an array of strings
+     * 
+     * @since 0.1
+     */
+    public String[] getTokens() {
+        return array.toArray(new String[array.size()]);
+    }
 
-		CharacterIterator it = new StringCharacterIterator(input);
-		for (char c = it.first(); c != CharacterIterator.DONE; c = it.next()) {
-			if (!isSeparator(c)) {
-				builder.append(c);
-			} else if (lastChar == escape) {
-				builder.deleteCharAt(builder.toString().length() - 1);
-				builder.append(c);
-			} else {
-				array.add(builder.toString());
-				builder = new StringBuilder();
-				if (returnSeparators) {
-					builder.append(c);
-//					array.add(builder.toString());
-//					builder = new StringBuilder();
-				}
-			}
-			lastChar = c;
-		}
-		// if (builder.length() > 0) {
-		array.add(builder.toString());
-		// }
-	}
+    /**
+     * 
+     * @see java.util.Enumeration#hasMoreElements()
+     * 
+     * @since 0.1
+     */
+    public boolean hasMoreElements() {
+        return (nextIndex < array.size());
+    }
 
-	/**
-	 * Returns whether the character is contained in the list of separators.
-	 * 
-	 * @param c
-	 *            character to check
-	 * @return whether the character is contained in the list of separators.
-	 */
-	private boolean isSeparator(char c) {
-		CharacterIterator it = new StringCharacterIterator(separator);
-		for (char c2 = it.first(); c2 != CharacterIterator.DONE; c2 = it.next()) {
-			if (c == c2) {
-				return true;
-			}
-		}
-		return false;
-	}
+    /**
+     * Returns whether the character is contained in the list of separators.
+     * 
+     * @param c
+     *            character to check
+     * @return whether the character is contained in the list of separators.
+     */
+    private boolean isSeparator(char c) {
+        CharacterIterator it = new StringCharacterIterator(separator);
+        for (char c2 = it.first(); c2 != CharacterIterator.DONE; c2 = it.next()) {
+            if (c == c2) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	/**
-	 * Returns the list of tokens as an array of strings
-	 * 
-	 * @return the list of tokens as an array of strings
-	 * 
-	 * @since 0.1
-	 */
-	public String[] getTokens() {
-		return array.toArray(new String[array.size()]);
-	}
+    /**
+     * 
+     * @see java.util.Enumeration#nextElement()
+     * 
+     * @since 0.1
+     */
+    public String nextElement() {
+        String nextElement = array.get(nextIndex);
+        nextIndex++;
+        return nextElement;
+    }
 
-	/**
-	 * 
-	 * @see java.util.Enumeration#hasMoreElements()
-	 * 
-	 * @since 0.1
-	 */
-	public boolean hasMoreElements() {
-		return (nextIndex < array.size());
-	}
+    /**
+     * Splits the input string according to the list of separators, escape
+     * character and whether separators should be returned
+     */
+    private void split() {
+        char lastChar = ' ';
+        StringBuilder builder = new StringBuilder();
+        array = new ArrayList<String>();
 
-	/**
-	 * 
-	 * @see java.util.Enumeration#nextElement()
-	 * 
-	 * @since 0.1
-	 */
-	public String nextElement() {
-		String nextElement = array.get(nextIndex);
-		nextIndex++;
-		return nextElement;
-	}
+        CharacterIterator it = new StringCharacterIterator(input);
+        for (char c = it.first(); c != CharacterIterator.DONE; c = it.next()) {
+            if (!isSeparator(c)) {
+                builder.append(c);
+            }
+            else if (lastChar == escape) {
+                builder.deleteCharAt(builder.toString().length() - 1);
+                builder.append(c);
+            }
+            else {
+                array.add(builder.toString());
+                builder = new StringBuilder();
+                if (returnSeparators) {
+                    builder.append(c);
+                    // array.add(builder.toString());
+                    // builder = new StringBuilder();
+                }
+            }
+            lastChar = c;
+        }
+        // if (builder.length() > 0) {
+        array.add(builder.toString());
+        // }
+    }
 }

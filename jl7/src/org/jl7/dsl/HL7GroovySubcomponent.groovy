@@ -1,10 +1,4 @@
-/**
- * 
- */
-package org.jl7.dsl
-
-import org.jl7.hl7.*;
-import org.jl7.hl7.HL7Subcomponent
+import org.jl7.hl7.HL7Subcomponent;
 /**
  * @author henribenoit
  *
