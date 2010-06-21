@@ -1,4 +1,5 @@
 
+import org.jl7.dsl.*;
 import org.jl7.hl7.*;
 
 /**
@@ -13,7 +14,7 @@ public class TestGroovy{
 		def javaMsg = HL7Parser.parseMessage(MESSAGE, true)
 		javaMsg['PID'][0][2] = 'blabla'
 		println "1:\n"+javaMsg
-		
+
 		def groovyMsg = HL7.message(MESSAGE)
 		println "2:\n"+groovyMsg
 		println "3:\n"+groovyMsg.PID

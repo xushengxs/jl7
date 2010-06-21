@@ -1,4 +1,4 @@
-package org.jl7.dsl
+package org.jl7.dsl;
 
 import groovy.lang.Closure;
 import groovy.lang.GroovyObject;
