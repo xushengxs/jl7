@@ -28,6 +28,7 @@ public class HL7DSL {
             File dsl = new File(args[0]);
             HL7GroovyMessage message = new HL7GroovyMessage(new HL7Message());
             processMessage(dsl, message);
+//            System.out.println(convertMessage(dsl, message));
         }
         catch (CompilationFailedException e) {
             // TODO Auto-generated catch block
@@ -48,8 +49,11 @@ public class HL7DSL {
 
     public static HL7GroovyMessage convertMessage(File file, HL7GroovyMessage message) throws IOException {
         Binding binding = new Binding();
-        binding.setVariable("message", message);
-        return (HL7GroovyMessage) processDsl(file, binding);
+        binding.setVariable("message_in", message);
+        HL7GroovyMessage messageOut = new HL7GroovyMessage(new HL7Message());
+        binding.setVariable("message_out", messageOut);
+        processDsl(file, binding);
+        return messageOut;
     }
 
     private static Object processDsl(File file, Binding binding) throws IOException {
