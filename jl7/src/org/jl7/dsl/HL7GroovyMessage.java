@@ -3,8 +3,6 @@
  */
 package org.jl7.dsl;
 
-import java.util.Iterator;
-
 import groovy.lang.Closure;
 import groovy.lang.MissingPropertyException;
 

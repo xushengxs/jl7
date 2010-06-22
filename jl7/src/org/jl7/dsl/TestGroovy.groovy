@@ -1,5 +1,3 @@
-
-import org.jl7.dsl.*;
 import org.jl7.hl7.*;
 
 /**

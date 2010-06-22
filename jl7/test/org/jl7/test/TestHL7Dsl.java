@@ -6,11 +6,11 @@ package org.jl7.test;
 import java.io.File;
 import java.io.IOException;
 
+import junit.framework.TestCase;
+
 import org.jl7.dsl.HL7DSL;
 import org.jl7.dsl.HL7GroovyMessage;
 import org.jl7.hl7.HL7Message;
-
-import junit.framework.TestCase;
 
 /**
  * @author henribenoit

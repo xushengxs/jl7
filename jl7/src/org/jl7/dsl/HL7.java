@@ -1,7 +1,8 @@
 package org.jl7.dsl;
 
-import org.jl7.hl7.*;
 import groovy.lang.Closure;
+
+import org.jl7.hl7.HL7Message;
 
 public class HL7 {
     public static HL7GroovyMessage message(HL7Message msg) {
