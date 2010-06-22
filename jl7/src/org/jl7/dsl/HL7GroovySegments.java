@@ -14,6 +14,10 @@ import org.jl7.hl7.HL7Segment;
 public class HL7GroovySegments {
     private List<HL7Segment> segments;
 
+    public List<HL7Segment> getSegments() {
+        return segments;
+    }
+
     public HL7GroovySegments(List<HL7Segment> segments) {
         this.segments=segments;
     }

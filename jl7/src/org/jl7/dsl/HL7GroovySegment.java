@@ -12,6 +12,10 @@ import org.jl7.hl7.HL7Segment;
 public class HL7GroovySegment {
     private HL7Segment segment;
 
+    public HL7Segment getSegment() {
+        return segment;
+    }
+
     public HL7GroovySegment(HL7Segment segment) {
         this.segment = segment;
     }

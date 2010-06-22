@@ -3,11 +3,14 @@
  */
 package org.jl7.dsl;
 
+import java.util.Iterator;
+
 import groovy.lang.Closure;
 import groovy.lang.MissingPropertyException;
 
 import org.jl7.hl7.HL7Message;
 import org.jl7.hl7.HL7Parser;
+import org.jl7.hl7.HL7Segment;
 
 /**
  * @author henribenoit
@@ -76,6 +79,18 @@ public class HL7GroovyMessage {
 
     public HL7GroovyMessage leftShift(String segment) {
         msg.addSegment(segment, msg.getDelimiters(), true);
+        return this;
+    }
+
+    public HL7GroovyMessage leftShift(HL7GroovySegment segment) {
+        HL7Message.addSegment(msg, segment.getSegment());
+        return this;
+    }
+
+    public HL7GroovyMessage leftShift(HL7GroovySegments segments) {
+        for (HL7Segment segment : segments.getSegments()) {
+            HL7Message.addSegment(msg, segment);
+        }
         return this;
     }
 
