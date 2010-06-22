@@ -7,14 +7,14 @@ message << "ROL|1|AD|SAHCP|XXXXXXXXXX^^^^^^S|||||6|1"
 message << "PR1|1||1||20060705|1"
 message << "GT1|1||||||||||||||||||||NOT APPLICABLE"
 
-println "1:\n"+message
-println "2:\n"+message.PID
-println "3:\n"+message.PID(5)
-println "4:\n"+message.PID[1](5)
-println "5:\n"+message.PID[1](5)(1)
-println "6:\n"+message.PID(5)[2]
+println "message:\n"+message
+println "message.PID:\n"+message.PID
+println "message.PID(5):\n"+message.PID(5)
+println "message.PID[1](5):\n"+message.PID[1](5)
+println "message.PID[1](5)(1):\n"+message.PID[1](5)(1)
+println "message.PID(5)[2]:\n"+message.PID(5)[2]
 assert(message.PID(5)[2].toString().equals("YYYY^^A&B&C^^^^F"))
-println "7:\n"+message.PID(5)[2](3)
+println "message.PID(5)[2](3):\n"+message.PID(5)[2](3)
 assert(message.PID(5)[2](3).toString().equals("A&B&C"))
-println "8:\n"+message.PID(5)[2](3)(2)
+println "message.PID(5)[2](3)(2):\n"+message.PID(5)[2](3)(2)
 assert(message.PID(5)[2](3)(2).toString().equals("B"))
