@@ -3,6 +3,8 @@
  */
 package org.jl7.dsl;
 
+import java.util.List;
+
 import groovy.lang.Closure;
 import groovy.lang.MissingPropertyException;
 
@@ -79,14 +81,26 @@ public class HL7GroovyMessage {
         return this;
     }
 
-    public HL7GroovyMessage leftShift(HL7GroovySegment segment) {
-        HL7Message.addSegment(msg, segment.getSegment());
+    public HL7GroovyMessage leftShift(HL7GroovySegment seg) {
+        return leftShift(seg.getSegment());
+    }
+
+    private HL7GroovyMessage leftShift(HL7Segment segment) {
+        HL7Message.addSegment(msg, segment);
         return this;
     }
 
-    public HL7GroovyMessage leftShift(HL7GroovySegments segments) {
-        for (HL7Segment segment : segments.getSegments()) {
-            HL7Message.addSegment(msg, segment);
+    public HL7GroovyMessage leftShift(HL7GroovySegments segs) {
+        return leftShift(segs.getSegments());
+    }
+
+    public HL7GroovyMessage leftShift(HL7GroovyMessage message) {
+        return leftShift(message.getMsg().getSegments());
+    }
+
+    private HL7GroovyMessage leftShift(List<HL7Segment> segments) {
+        for (HL7Segment segment : segments) {
+            leftShift(segment);
         }
         return this;
     }
