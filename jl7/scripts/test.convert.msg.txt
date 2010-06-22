@@ -7,4 +7,4 @@ message_in << "ROL|1|AD|SAHCP|XXXXXXXXXX^^^^^^S|||||6|1"
 message_in << "PR1|1||1||20060705|1"
 message_in << "GT1|1||||||||||||||||||||NOT APPLICABLE"
 
-message_out << "MSH|^~\\&||ABCHS||AUSDHSV|20070103112951||ADT^A08^ADT_A01|12334456778893|P|2.5|||NE|NE|AU|ASCII"
+message_out << message_in.PID

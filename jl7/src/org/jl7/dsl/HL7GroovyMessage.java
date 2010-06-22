@@ -3,15 +3,9 @@
  */
 package org.jl7.dsl;
 
-import java.lang.reflect.Method;
-
 import groovy.lang.Closure;
-import groovy.lang.ExpandoMetaClass;
-import groovy.lang.MetaMethod;
 import groovy.lang.MissingPropertyException;
 
-import org.codehaus.groovy.reflection.CachedClass;
-import org.codehaus.groovy.runtime.InvokerHelper;
 import org.jl7.hl7.HL7Message;
 import org.jl7.hl7.HL7Parser;
 
@@ -21,6 +15,10 @@ import org.jl7.hl7.HL7Parser;
  */
 public class HL7GroovyMessage {
     private HL7Message msg;
+
+    public HL7Message getMsg() {
+        return msg;
+    }
 
     public HL7GroovyMessage(HL7Message msg) {
         this.msg = msg;
@@ -39,14 +37,14 @@ public class HL7GroovyMessage {
         final Object[] varArgs = (Object[]) args;
         final String varName = name;
         final HL7GroovySegments segments = new HL7GroovySegments(msg.get(name));
-        if(varArgs[0] instanceof Integer) {
+        if (varArgs[0] instanceof Integer) {
             HL7GroovySegment segment = segments.getAt(1);
             return segment.getAt((Integer) varArgs[0]);
         }
         return null;
     }
 
-   public Object propertyMissing(String type) {
+    public Object propertyMissing(String type) {
         String[] items = type.split("\\_");
         if (items.length > 0) {
             HL7GroovySegments segments = new HL7GroovySegments(msg.get(items[0]));
@@ -67,21 +65,21 @@ public class HL7GroovyMessage {
         return null;
     }
 
-   public void setProperty(String name, Object value) {
+    public void setProperty(String name, Object value) {
         if (value instanceof String) {
-            msg.addSegment((String)value, msg.getDelimiters(), true);
+            msg.addSegment((String) value, msg.getDelimiters(), true);
         }
         else {
-            throw new MissingPropertyException(name, (String)value, this.getClass());
+            throw new MissingPropertyException(name, (String) value, this.getClass());
         }
     }
 
-   public HL7GroovyMessage leftShift(String segment) {
+    public HL7GroovyMessage leftShift(String segment) {
         msg.addSegment(segment, msg.getDelimiters(), true);
         return this;
     }
 
-   public String toString() {
+    public String toString() {
         return msg.toString();
     }
 

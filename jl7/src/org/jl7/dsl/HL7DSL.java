@@ -27,8 +27,8 @@ public class HL7DSL {
         try {
             File dsl = new File(args[0]);
             HL7GroovyMessage message = new HL7GroovyMessage(new HL7Message());
-            processMessage(dsl, message);
-//            System.out.println(convertMessage(dsl, message));
+//            processMessage(dsl, message);
+            System.out.println(convertMessage(dsl, message).getMsg().getValue());
         }
         catch (CompilationFailedException e) {
             // TODO Auto-generated catch block
