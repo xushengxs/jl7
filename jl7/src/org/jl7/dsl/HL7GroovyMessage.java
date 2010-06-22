@@ -38,7 +38,6 @@ public class HL7GroovyMessage {
 
     public Object methodMissing(String name, Object args) {
         final Object[] varArgs = (Object[]) args;
-        final String varName = name;
         final HL7GroovySegments segments = new HL7GroovySegments(msg.get(name));
         if (varArgs[0] instanceof Integer) {
             HL7GroovySegment segment = segments.getAt(1);
