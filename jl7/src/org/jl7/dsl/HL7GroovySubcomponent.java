@@ -20,4 +20,23 @@ public class HL7GroovySubcomponent {
         return subcomponent.toString();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof HL7Subcomponent)
+        {
+            return subcomponent.equals(obj);
+        }
+        else if (obj instanceof HL7GroovySubcomponent) {
+            return subcomponent.equals(((HL7Subcomponent)obj));
+        }
+        else if (obj instanceof String) {
+            return subcomponent.getValue().equals(obj);
+        }
+        return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return subcomponent.getValue().hashCode();
+    }
 }

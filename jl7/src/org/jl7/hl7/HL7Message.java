@@ -7,32 +7,32 @@ import java.util.List;
 
 /**
  * Represents an HL7 message
- * 
+ *
  * @since 0.1
- * 
+ *
  * @author henribenoit
- * 
+ *
  */
 public class HL7Message {
     /**
      * Character used to mark the end of a segment and the beginning of the next
      * segment (i.e. segment delimiter). Default: ASCII 10
-     * 
+     *
      * @since 0.1
      */
     public static char segmentTerminator = 0x0D;
 
     /**
      * Adds a segment at the end of the message.
-     * 
+     *
      * @param message
      *            message to which the segment should be added
-     * 
+     *
      * @param segment
      *            segment to be added
-     * 
+     *
      * @return the input message (with the additional segment)
-     * 
+     *
      * @since 0.1
      */
     public static HL7Message addSegment(HL7Message message, HL7Segment segment) {
@@ -43,35 +43,35 @@ public class HL7Message {
     /**
      * Character used to mark the end of a field and the beginning of the next
      * // * field (i.e. field delimiter). Default: |
-     * 
+     *
      * @since 0.1
      */
     public char fieldSeparator = '|';
     /**
      * Character used to mark the end of a component and the beginning of the
      * next component (i.e. component delimiter). Default: ^
-     * 
+     *
      * @since 0.1
      */
     public char componentSeparator = '^';
     /**
      * Character used to mark the end of a subcomponent and the beginning of the
      * next subcomponent (i.e. subcomponent delimiter). Default: &
-     * 
+     *
      * @since 0.1
      */
     public char subcomponentSeparator = '&';
     /**
      * Character used to mark the end of a field repetition and the beginning of
      * the next field repetition (i.e. field repetition delimiter). Default: ~
-     * 
+     *
      * @since 0.1
      */
     public char repetitionSeparator = '~';
     /**
      * Character used to escape characters which would otherwise be interpreted.
      * Default: \
-     * 
+     *
      * @since 0.1
      */
     public char escapeCharacter = '\\';
@@ -83,18 +83,18 @@ public class HL7Message {
 
     /**
      * Adds a segment at the end of this message.
-     * 
+     *
      * @param segment
      *            string representing the segment to be added
-     * 
+     *
      * @param delimiters
      *            a string containing all delimiters defined for this message:
      *            fieldSeparator + componentSeparator + repetitionSeparator +
      *            escapeCharacter + subcomponentSeparator
-     * 
+     *
      * @param escapesInSubcomponents
      *            whether escape characters are used or not
-     * 
+     *
      * @since 0.1
      */
     public void addSegment(String segment, String delimiters, boolean escapesInSubcomponents) {
@@ -103,12 +103,12 @@ public class HL7Message {
 
     /**
      * Returns the segment at the specified position in this message.
-     * 
+     *
      * @param index
      *            position of the segment to be returned in this message
-     * 
+     *
      * @return the segment at the specified position in this message.
-     * 
+     *
      * @since 0.1
      */
     public HL7Segment get(int index) {
@@ -123,13 +123,13 @@ public class HL7Message {
     /**
      * Returns a list containing all segments in this message of the specified
      * types.
-     * 
+     *
      * @param segmentTypes
      *            pipe separated list of segment types to be returned
-     * 
+     *
      * @return a list containing all segments in this message of the specified
      *         types
-     * 
+     *
      * @since 0.1
      */
     public List<HL7Segment> get(String segmentTypes) {
@@ -138,12 +138,12 @@ public class HL7Message {
 
     /**
      * Returns the segment at the specified position in this message.
-     * 
+     *
      * @param index
      *            position of the segment to be returned in this message
-     * 
+     *
      * @return the segment at the specified position in this message.
-     * 
+     *
      * @since 0.1
      */
     public HL7Segment getAt(int index) {
@@ -152,9 +152,9 @@ public class HL7Message {
 
     /**
      * Returns the number of segment in this message.
-     * 
+     *
      * @return the number of segment in this message
-     * 
+     *
      * @since 0.1
      */
     public int getCount() {
@@ -163,11 +163,11 @@ public class HL7Message {
 
     /**
      * Returns a string containing all delimiters defined for this message
-     * 
+     *
      * @return a string containing all delimiters defined for this message:
      *         fieldSeparator + componentSeparator + repetitionSeparator +
      *         escapeCharacter + subcomponentSeparator
-     * 
+     *
      * @since 0.1
      */
     public String getDelimiters() {
@@ -176,9 +176,9 @@ public class HL7Message {
 
     /**
      * Returns an enumerator through the segments in this message.
-     * 
+     *
      * @return an enumerator through the segments in this message
-     * 
+     *
      * @since 0.1
      */
     public Enumeration<HL7Segment> getEnumerator() {
@@ -191,9 +191,9 @@ public class HL7Message {
 
     /**
      * Returns the MSH segment of this message.
-     * 
+     *
      * @return the MSH segment of this message
-     * 
+     *
      * @since 0.1
      */
     public HL7MSHSegment getHeader() {
@@ -211,9 +211,9 @@ public class HL7Message {
 
     /**
      * Returns the message type.
-     * 
+     *
      * @return the message type
-     * 
+     *
      * @since 0.1
      */
     public String getMessageType() {
@@ -231,15 +231,15 @@ public class HL7Message {
      * <li>PID PV1</li>
      * <li>PID PV1 PV2</li>
      * </ul>
-     * 
+     *
      * @param segmentType
      *            segment types (separated by pipes) to be searched for
-     * 
+     *
      * @param segmentList
      *            list of segments to be processed.
-     * 
+     *
      * @return a list of segment groups
-     * 
+     *
      * @since 0.1
      */
     public List<HL7SegmentGroup> getSegmentGroups(String segmentTypes) {
@@ -248,9 +248,9 @@ public class HL7Message {
 
     /**
      * Returns the list of segments in this message
-     * 
+     *
      * @return the list of segments in this message
-     * 
+     *
      * @since 0.1
      */
     public List<HL7Segment> getSegments() {
@@ -259,9 +259,9 @@ public class HL7Message {
 
     /**
      * Returns a string representing the segment structure of this message.
-     * 
+     *
      * @return a string representing the segment structure of this message.
-     * 
+     *
      * @since 0.1
      */
     public String getStructure() {
@@ -278,10 +278,10 @@ public class HL7Message {
     /**
      * Returns the string representation of this message where all escape
      * sequences have been replaced by their values.
-     * 
+     *
      * @return the string representation of this message where all escape
      *         sequences have been replaced by their values
-     * 
+     *
      * @since 0.1
      */
     public String getValue() {
@@ -308,12 +308,12 @@ public class HL7Message {
 
     /**
      * Sets all delimiters defined for this message.
-     * 
+     *
      * @param value
      *            a string containing all delimiters defined for this message:
      *            fieldSeparator + componentSeparator + repetitionSeparator +
      *            escapeCharacter + subcomponentSeparator
-     * 
+     *
      * @since 0.1
      */
     public void setDelimiters(String value) {
@@ -326,9 +326,9 @@ public class HL7Message {
 
     /**
      * Returns the string representation of this message.
-     * 
+     *
      * @see java.lang.Object#toString()
-     * 
+     *
      * @since 0.1
      */
     @Override
@@ -343,5 +343,21 @@ public class HL7Message {
             }
         }
         return s;
+    }
+
+    public void removeSegments(String segmentType) {
+        List<HL7Segment> segs = this.get(segmentType);
+        for (HL7Segment hl7Segment : segs) {
+            segments.remove(hl7Segment);
+        }
+    }
+
+    public int getIndex(String segmentType) {
+        for (int i = 1;i<=segments.size();i++) {
+            if (getAt(i).getSegmentType().equals(segmentType)) {
+                return i;
+            }
+        }
+        return -1;
     }
 }

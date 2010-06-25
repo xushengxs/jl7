@@ -6,8 +6,16 @@ package org.jl7.dsl;
 import java.util.List;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatingMetaClass;
+import groovy.lang.GroovyInterceptable;
+import groovy.lang.GroovyObject;
+import groovy.lang.GroovySystem;
+import groovy.lang.MetaClass;
+import groovy.lang.MetaMethod;
+import groovy.lang.MetaProperty;
 import groovy.lang.MissingPropertyException;
 
+import org.codehaus.groovy.ast.ClassNode;
 import org.jl7.hl7.HL7Message;
 import org.jl7.hl7.HL7Parser;
 import org.jl7.hl7.HL7Segment;
@@ -16,7 +24,7 @@ import org.jl7.hl7.HL7Segment;
  * @author henribenoit
  *
  */
-public class HL7GroovyMessage {
+public class HL7GroovyMessage implements GroovyObject {
     private HL7Message msg;
 
     public HL7Message getMsg() {
@@ -36,43 +44,29 @@ public class HL7GroovyMessage {
         args.call();
     }
 
-    public Object methodMissing(String name, Object args) {
-        final Object[] varArgs = (Object[]) args;
-        final HL7GroovySegments segments = new HL7GroovySegments(msg.get(name));
-        if (varArgs[0] instanceof Integer) {
-            HL7GroovySegment segment = segments.getAt(1);
-            return segment.getAt((Integer) varArgs[0]);
+    public void setProperty(String property, Object value) {
+        if (value instanceof String) {
+            HL7Segment seg = HL7Parser.parseSegment((String) value, msg.getDelimiters(), true);
+            setProperty(property, seg);
         }
-        return null;
-    }
-
-    public Object propertyMissing(String type) {
-        String[] items = type.split("\\_");
-        if (items.length > 0) {
-            HL7GroovySegments segments = new HL7GroovySegments(msg.get(items[0]));
-            if (items.length > 1) {
-                HL7GroovySegment segment = segments.getAt(1);
-                int fieldIndex = Integer.parseInt(items[1]);
-                if (items.length > 2) {
-
-                }
-                else {
-                    return segment.getAt(fieldIndex);
-                }
+        else if (value instanceof HL7Segment) {
+            HL7Segment segment = (HL7Segment)value;
+            int index = msg.getIndex(segment.getSegmentType());
+            if (index != -1) {
+                msg.putAt(index, segment.getValue());
             }
             else {
-                return segments;
+                leftShift(segment);
             }
         }
-        return null;
-    }
-
-    public void setProperty(String name, Object value) {
-        if (value instanceof String) {
-            msg.addSegment((String) value, msg.getDelimiters(), true);
+        else if (value instanceof HL7GroovySegment) {
+            setProperty(property, ((HL7GroovySegment)value).segment);
+        }
+        else if (value instanceof HL7GroovySegments) {
+            leftShift((HL7GroovySegments)value);
         }
         else {
-            throw new MissingPropertyException(name, (String) value, this.getClass());
+            throw new MissingPropertyException(property, value.toString(), this.getClass());
         }
     }
 
@@ -106,7 +100,48 @@ public class HL7GroovyMessage {
     }
 
     public String toString() {
-        return msg.toString();
+        return msg.getValue();
     }
 
+
+    public MetaClass getMetaClass() {
+        return GroovySystem.getMetaClassRegistry().getMetaClass(this.getClass());
+//        return new DelegatingMetaClass(HL7GroovyMessage.class);
+    }
+
+    public Object getProperty(String propertyName) {
+        String[] items = propertyName.split("\\_");
+        if (items.length > 0) {
+            HL7GroovySegments segments = new HL7GroovySegments(msg.get(items[0]));
+            if (items.length > 1) {
+                HL7GroovySegment segment = segments.getAt(1);
+                int fieldIndex = Integer.parseInt(items[1]);
+                if (items.length > 2) {
+
+                }
+                else {
+                    return segment.getAt(fieldIndex);
+                }
+            }
+            else {
+                return segments;
+            }
+        }
+        return null;
+    }
+
+    public Object invokeMethod(String name, Object args) {
+        final Object[] varArgs = (Object[]) args;
+        final HL7GroovySegments segments = new HL7GroovySegments(msg.get(name));
+        if (varArgs[0] instanceof Integer) {
+            HL7GroovySegment segment = segments.getAt(1);
+            return segment.getAt((Integer) varArgs[0]);
+        }
+        return null;
+    }
+
+    public void setMetaClass(MetaClass metaClass) {
+        // TODO Auto-generated method stub
+
+    }
 }

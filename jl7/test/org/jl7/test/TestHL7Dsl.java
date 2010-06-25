@@ -38,8 +38,7 @@ public class TestHL7Dsl extends TestCase {
      */
     public void testProcessMessage() throws IOException {
         File dsl = new File("scripts/test.parse.msg.txt");
-        HL7GroovyMessage message = new HL7GroovyMessage(new HL7Message());
-        HL7DSL.processMessage(dsl, message);
+        HL7DSL.processMessage(dsl, new HL7Message());
     }
 
     /**

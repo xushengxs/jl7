@@ -27,4 +27,24 @@ public class HL7GroovyFieldRepetition {
     public HL7GroovyComponent call(int index) {
         return getAt(index);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof HL7FieldRepetition)
+        {
+            return repetition.equals(obj);
+        }
+        else if (obj instanceof HL7GroovyFieldRepetition) {
+            return repetition.equals(((HL7FieldRepetition)obj));
+        }
+        else if (obj instanceof String) {
+            return repetition.getValue().equals(obj);
+        }
+        return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return repetition.getValue().hashCode();
+    }
 }
