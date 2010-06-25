@@ -7,8 +7,8 @@ The jl7 DSL (Domain Specific Language) is a scripting language which can be used
 = Details =
 
 The DSL is implemented in the package org.jl7.dsl. The entry point to the DSL capabilities is the HL7DSL class. It provides two static methods to work with HL7 messages:
-* processMessage
-* convertMessage
+ * processMessage
+ * convertMessage
 
 The only difference between these two methods is that convertMessage additionally creates an output message which is returned after the processing.
 
@@ -59,14 +59,14 @@ println "message.PID(5)[2](3)(2):\n"+message.PID(5)[2](3)(2)
 }}}
 
 So in the DSL a message has the following structure:
-# Message 
-# Segment
-# Field
-# Component
-# Subcomponent
+ # Message 
+ # Segment
+ # Field
+ # Component
+ # Subcomponent
 
-To go from one level to the next one, round brackets are used: `xxx(n)`.
-To access a repetition of a segment or a field, square brackets are used: `xxx[n]`.
+To go from one level to the next one, round brackets are used: `xxx(n)`.<br>
+To access a repetition of a segment or a field, square brackets are used: `xxx[n]`.<br>
 In both cases, the first index is 1.
 
 == Modifying message content ==
