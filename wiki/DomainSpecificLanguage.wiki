@@ -59,14 +59,14 @@ println "message.PID(5)[2](3)(2):\n"+message.PID(5)[2](3)(2)
 }}}
 
 So in the DSL a message has the following structure:
-#Message 
-#Segment
-#Field
-#Component
-#Subcomponent
+# Message 
+# Segment
+# Field
+# Component
+# Subcomponent
 
-To go from one level to the next one, round brackets are used: xxx(n).
-To access a repetition of a segment or a field, square brackets are used: xxx[n].
+To go from one level to the next one, round brackets are used: `xxx(n)`.
+To access a repetition of a segment or a field, square brackets are used: `xxx[n]`.
 In both cases, the first index is 1.
 
 == Modifying message content ==
