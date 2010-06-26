@@ -48,7 +48,7 @@ public class HL7SocketReader implements HL7Reader {
      * @see org.jl7.comm.HL7Reader#getMessage()
      */
     public HL7Message getMessage() throws IOException {
-        return transport.receiveMessage(metaData).Message;
+        return transport.receiveMessage(metaData).message;
     }
 
     /*

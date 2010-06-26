@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.jl7.test;
 
@@ -46,7 +46,7 @@ public class TestHL7MessageSplitter extends TestCase {
 
     /**
      * Test method for
-     * {@link org.jl7.hl7proc.HL7MessageSplitter#GetGuarantors(org.jl7.hl7.HL7Message)}
+     * {@link org.jl7.hl7proc.HL7MessageSplitter#getGuarantors(org.jl7.hl7.HL7Message)}
      * .
      */
     public void testGetGuarantors() {
@@ -55,30 +55,30 @@ public class TestHL7MessageSplitter extends TestCase {
 
     /**
      * Test method for
-     * {@link org.jl7.hl7proc.HL7MessageSplitter#GetInsurances(org.jl7.hl7.HL7Message)}
+     * {@link org.jl7.hl7proc.HL7MessageSplitter#getInsurances(org.jl7.hl7.HL7Message)}
      * .
      */
     public void testGetInsurances() {
         HL7Message msg = HL7Parser.parseMessage(A01, true);
-        List<HL7SegmentGroup> insurances = HL7MessageSplitter.GetInsurances(msg);
+        List<HL7SegmentGroup> insurances = HL7MessageSplitter.getInsurances(msg);
         assertNotNull(insurances);
         assertEquals(3, insurances.size());
         assertEquals("PID NK1 PV1 GT1 DG1 IN1 IN2", insurances.get(0).getStructure());
         assertEquals("PID NK1 PV1 GT1 DG1 IN1 IN2", insurances.get(1).getStructure());
         assertEquals("PID NK1 PV1 GT1 DG1 IN1", insurances.get(2).getStructure());
-        assertEquals("MEDICARE", Hl7MessageExtractor.ExtractString(insurances.get(0), "IN1|4"));
-        assertEquals("MEDICAL MUTUAL CALIF.", Hl7MessageExtractor.ExtractString(insurances.get(1), "IN1|4"));
-        assertEquals("SELF PAY", Hl7MessageExtractor.ExtractString(insurances.get(2), "IN1|4"));
+        assertEquals("MEDICARE", Hl7MessageExtractor.extractString(insurances.get(0), "IN1|4"));
+        assertEquals("MEDICAL MUTUAL CALIF.", Hl7MessageExtractor.extractString(insurances.get(1), "IN1|4"));
+        assertEquals("SELF PAY", Hl7MessageExtractor.extractString(insurances.get(2), "IN1|4"));
     }
 
     /**
      * Test method for
-     * {@link org.jl7.hl7proc.HL7MessageSplitter#GetOrders(org.jl7.hl7.HL7Message)}
+     * {@link org.jl7.hl7proc.HL7MessageSplitter#getOrders(org.jl7.hl7.HL7Message)}
      * .
      */
     public void testGetOrders() {
         HL7Message msg = HL7Parser.parseMessage(O01, true);
-        List<HL7SegmentGroup> orders = HL7MessageSplitter.GetOrders(msg);
+        List<HL7SegmentGroup> orders = HL7MessageSplitter.getOrders(msg);
         assertEquals(2, orders.size());
         assertEquals(
                 "PID|1||0000307656^^^M&FEE&&FIE&&FOO&&FUM^MR~0000858462^^^P&FOO&BAR^MR\rOBR|1||3844834|2035^NM HEPATOBILIARY DUCT^MRD|||200405030939||",
@@ -90,7 +90,7 @@ public class TestHL7MessageSplitter extends TestCase {
 
     /**
      * Test method for
-     * {@link org.jl7.hl7proc.HL7MessageSplitter#GetPatients(org.jl7.hl7.HL7Message)}
+     * {@link org.jl7.hl7proc.HL7MessageSplitter#getPatients(org.jl7.hl7.HL7Message)}
      * .
      */
     public void testGetPatients() {
@@ -99,25 +99,25 @@ public class TestHL7MessageSplitter extends TestCase {
 
     /**
      * Test method for
-     * {@link org.jl7.hl7proc.HL7MessageSplitter#GetProcedures(org.jl7.hl7.HL7Message)}
+     * {@link org.jl7.hl7proc.HL7MessageSplitter#getProcedures(org.jl7.hl7.HL7Message)}
      * .
      */
     public void testGetProcedures() {
         HL7Message msg = HL7Parser.parseMessage(A19, true);
-        List<HL7SegmentGroup> procedures = HL7MessageSplitter.GetProcedures(msg);
+        List<HL7SegmentGroup> procedures = HL7MessageSplitter.getProcedures(msg);
         assertNotNull(procedures);
         assertEquals(3, procedures.size());
         assertEquals("PID NK1 PV1 DG1 DG1 DG1 PR1", procedures.get(0).getStructure());
         assertEquals("PID NK1 PV1 DG1 DG1 DG1 PR1", procedures.get(1).getStructure());
         assertEquals("PID NK1 PV1 DG1 DG1 DG1 PR1", procedures.get(2).getStructure());
-        assertEquals("1-502.6", Hl7MessageExtractor.ExtractString(procedures.get(0), "PR1|3^1"));
-        assertEquals("5-940", Hl7MessageExtractor.ExtractString(procedures.get(1), "PR1|3^1"));
-        assertEquals("5-900", Hl7MessageExtractor.ExtractString(procedures.get(2), "PR1|3^1"));
+        assertEquals("1-502.6", Hl7MessageExtractor.extractString(procedures.get(0), "PR1|3^1"));
+        assertEquals("5-940", Hl7MessageExtractor.extractString(procedures.get(1), "PR1|3^1"));
+        assertEquals("5-900", Hl7MessageExtractor.extractString(procedures.get(2), "PR1|3^1"));
     }
 
     /**
      * Test method for
-     * {@link org.jl7.hl7proc.HL7MessageSplitter#GetVisits(org.jl7.hl7.HL7Message)}
+     * {@link org.jl7.hl7proc.HL7MessageSplitter#getVisits(org.jl7.hl7.HL7Message)}
      * .
      */
     public void testGetVisits() {

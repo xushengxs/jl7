@@ -81,7 +81,7 @@ public class HL7SegmentGroup implements Iterable<HL7Segment> {
      * 
      * @since 0.1
      */
-    public static List<HL7Segment> GetSegments(String segmentType, List<HL7Segment> segmentList) {
+    public static List<HL7Segment> getSegments(String segmentType, List<HL7Segment> segmentList) {
         String[] segmentTypes = segmentType.split("\\|");
         List<HL7Segment> filteredSegments = new ArrayList<HL7Segment>();
         for (HL7Segment segment : segmentList) {
@@ -181,7 +181,7 @@ public class HL7SegmentGroup implements Iterable<HL7Segment> {
      * @since 0.1
      */
     public List<HL7Segment> get(String segmentType) {
-        return GetSegments(segmentType, segments);
+        return getSegments(segmentType, segments);
     }
 
     /**

@@ -159,15 +159,15 @@ public class TestMLLPTransport extends TestCase {
             fail("IOException: " + e);
         }
         assertNotNull(transportable);
-        assertNotNull(transportable.Message);
-        System.out.println(transportable.Message);
+        assertNotNull(transportable.message);
+        System.out.println(transportable.message);
     }
 
     public void testSendMessageNoWait() {
         HL7Message msg = HL7Parser.parseMessage(MESSAGE, true);
         MLLPTransportable transportable = new MLLPTransportable();
-        transportable.Message = msg;
-        transportable.MetaData = metaDataSend;
+        transportable.message = msg;
+        transportable.metaData = metaDataSend;
         MLLPTransport transport = new MLLPTransport();
         try {
             transport.sendMessage(transportable);
@@ -187,8 +187,8 @@ public class TestMLLPTransport extends TestCase {
     public void testSendMessageWait() {
         HL7Message msg = HL7Parser.parseMessage(MESSAGE, true);
         MLLPTransportable transportable = new MLLPTransportable();
-        transportable.Message = msg;
-        transportable.MetaData = metaDataSend;
+        transportable.message = msg;
+        transportable.metaData = metaDataSend;
         MLLPTransport transport = new MLLPTransport();
         MLLPTransportable response = null;
         try {
@@ -198,7 +198,7 @@ public class TestMLLPTransport extends TestCase {
             fail("IOException: " + e);
         }
         assertNotNull(response);
-        HL7Message resMsg = response.Message;
+        HL7Message resMsg = response.message;
         assertNotNull(resMsg);
         String type = resMsg.getMessageType();
         assertEquals("ACK", type);

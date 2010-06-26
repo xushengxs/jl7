@@ -11,37 +11,37 @@ import org.jl7.hl7.HL7SegmentGroup;
 import org.jl7.hl7.HL7Subcomponent;
 
 public class Hl7MessageExtractor {
-    public static String ExtractString(HL7Component msg, String locator) {
+    public static String extractString(HL7Component msg, String locator) {
         String[] strings = new org.jl7.textutils.EscapedStringTokenizer(locator, "|~^&", '\\', true).getTokens();
-        return ExtractString(strings, null, null, null, null, null, msg, null);
+        return extractString(strings, null, null, null, null, null, msg, null);
     }
 
-    public static String ExtractString(HL7Field msg, String locator) {
+    public static String extractString(HL7Field msg, String locator) {
         String[] strings = new org.jl7.textutils.EscapedStringTokenizer(locator, "|~^&", '\\', true).getTokens();
-        return ExtractString(strings, null, null, null, msg, null, null, null);
+        return extractString(strings, null, null, null, msg, null, null, null);
     }
 
-    public static String ExtractString(HL7FieldRepetition msg, String locator) {
+    public static String extractString(HL7FieldRepetition msg, String locator) {
         String[] strings = new org.jl7.textutils.EscapedStringTokenizer(locator, "|~^&", '\\', true).getTokens();
-        return ExtractString(strings, null, null, null, null, msg, null, null);
+        return extractString(strings, null, null, null, null, msg, null, null);
     }
 
-    public static String ExtractString(HL7Message msg, String locator) {
+    public static String extractString(HL7Message msg, String locator) {
         String[] strings = new org.jl7.textutils.EscapedStringTokenizer(locator, "|~^&", '\\', true).getTokens();
-        return ExtractString(strings, null, msg, null, null, null, null, null);
+        return extractString(strings, null, msg, null, null, null, null, null);
     }
 
-    public static String ExtractString(HL7Segment msg, String locator) {
+    public static String extractString(HL7Segment msg, String locator) {
         String[] strings = new org.jl7.textutils.EscapedStringTokenizer(locator, "|~^&", '\\', true).getTokens();
-        return ExtractString(strings, null, null, msg, null, null, null, null);
+        return extractString(strings, null, null, msg, null, null, null, null);
     }
 
-    public static String ExtractString(HL7SegmentGroup group, String locator) {
+    public static String extractString(HL7SegmentGroup group, String locator) {
         String[] strings = new org.jl7.textutils.EscapedStringTokenizer(locator, "|~^&", '\\', true).getTokens();
-        return ExtractString(strings, group, null, null, null, null, null, null);
+        return extractString(strings, group, null, null, null, null, null, null);
     }
 
-    private static String ExtractString(String[] strings, HL7SegmentGroup group, HL7Message msg, HL7Segment segment,
+    private static String extractString(String[] strings, HL7SegmentGroup group, HL7Message msg, HL7Segment segment,
             HL7Field field, HL7FieldRepetition repetition, HL7Component component, HL7Subcomponent subcomponent) {
         for (String s : strings) {
             if (s.startsWith("|")) {

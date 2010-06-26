@@ -22,73 +22,73 @@ public class TestHl7MessageExtractor extends TestCase {
 
     public void testExtractComponent() {
         HL7Message message = HL7Parser.parseMessage(MESSAGE, true);
-        assertEquals("100", Hl7MessageExtractor.ExtractString(message, "PID|3^4"));
+        assertEquals("100", Hl7MessageExtractor.extractString(message, "PID|3^4"));
     }
 
     public void testExtractComponentInRepetition() {
         HL7Message message = HL7Parser.parseMessage(MESSAGE, true);
-        assertEquals("F", Hl7MessageExtractor.ExtractString(message, "PID|5~2^7"));
+        assertEquals("F", Hl7MessageExtractor.extractString(message, "PID|5~2^7"));
     }
 
     public void testExtractField() {
         HL7Message message = HL7Parser.parseMessage(MESSAGE, true);
-        assertEquals("0000112234^^1&2&3^100^A", Hl7MessageExtractor.ExtractString(message, "PID|3"));
+        assertEquals("0000112234^^1&2&3^100^A", Hl7MessageExtractor.extractString(message, "PID|3"));
     }
 
     public void testExtractMessage() {
         HL7Message message = HL7Parser.parseMessage(MESSAGE, true);
-        assertEquals(MESSAGE, Hl7MessageExtractor.ExtractString(message, ""));
+        assertEquals(MESSAGE, Hl7MessageExtractor.extractString(message, ""));
     }
 
     public void testExtractRepetition() {
         HL7Message message = HL7Parser.parseMessage(MESSAGE, true);
-        assertEquals("YYYY^^A&B&C^^^^F", Hl7MessageExtractor.ExtractString(message, "PID|5~2"));
+        assertEquals("YYYY^^A&B&C^^^^F", Hl7MessageExtractor.extractString(message, "PID|5~2"));
     }
 
     public void testExtractSegment() {
         HL7Message message = HL7Parser.parseMessage(MESSAGE, true);
         assertEquals(
                 "PID|1||0000112234^^1&2&3^100^A||XXXXXXXXXX^^^^^^S~YYYY^^A&B&C^^^^F||10131113|1||4|^^RICHMOND^^3121||||1201||||||||1100|||||||||AAA",
-                Hl7MessageExtractor.ExtractString(message, "PID"));
+                Hl7MessageExtractor.extractString(message, "PID"));
     }
 
     public void testExtractSubcomponent() {
         HL7Message message = HL7Parser.parseMessage(MESSAGE, true);
-        assertEquals("2", Hl7MessageExtractor.ExtractString(message, "PID|3^3&2"));
+        assertEquals("2", Hl7MessageExtractor.extractString(message, "PID|3^3&2"));
     }
 
     public void testExtractSubcomponentFromComponent() {
         HL7Message message = HL7Parser.parseMessage(MESSAGE, true);
-        assertEquals("C", Hl7MessageExtractor.ExtractString(message.get("PID").get(0).get(5).get(1).get(2), "&3"));
+        assertEquals("C", Hl7MessageExtractor.extractString(message.get("PID").get(0).get(5).get(1).get(2), "&3"));
     }
 
     public void testExtractSubcomponentFromRepetition() {
         HL7Message message = HL7Parser.parseMessage(MESSAGE, true);
-        assertEquals("C", Hl7MessageExtractor.ExtractString(message.get("PID").get(0).get(5).get(1), "^3&3"));
+        assertEquals("C", Hl7MessageExtractor.extractString(message.get("PID").get(0).get(5).get(1), "^3&3"));
     }
 
     public void testExtractSubcomponentInRepetition() {
         HL7Message message = HL7Parser.parseMessage(MESSAGE, true);
-        assertEquals("C", Hl7MessageExtractor.ExtractString(message, "PID|5~2^3&3"));
+        assertEquals("C", Hl7MessageExtractor.extractString(message, "PID|5~2^3&3"));
     }
 
     public void testExtractSubcomponentInRepetitionFromField() {
         HL7Message message = HL7Parser.parseMessage(MESSAGE, true);
-        assertEquals("C", Hl7MessageExtractor.ExtractString(message.get("PID").get(0).get(5), "~2^3&3"));
+        assertEquals("C", Hl7MessageExtractor.extractString(message.get("PID").get(0).get(5), "~2^3&3"));
     }
 
     public void testExtractSubcomponentInRepetitionFromGroup() {
         HL7Message message = HL7Parser.parseMessage(MESSAGE, true);
-        assertEquals("C", Hl7MessageExtractor.ExtractString(new HL7SegmentGroup(message.get("PID|PV1|PV2")),
+        assertEquals("C", Hl7MessageExtractor.extractString(new HL7SegmentGroup(message.get("PID|PV1|PV2")),
                 "PID|5~2^3&3"));
     }
 
     public void testExtractSubcomponentInRepetitionFromSegment() {
         HL7Message message = HL7Parser.parseMessage(MESSAGE, true);
-        assertEquals("C", Hl7MessageExtractor.ExtractString(message.get("PID").get(0), "|5~2^3&3"));
+        assertEquals("C", Hl7MessageExtractor.extractString(message.get("PID").get(0), "|5~2^3&3"));
     }
 
     public void testNullMessage() {
-        assertEquals(null, Hl7MessageExtractor.ExtractString((HL7Message) null, ""));
+        assertEquals(null, Hl7MessageExtractor.extractString((HL7Message) null, ""));
     }
 }

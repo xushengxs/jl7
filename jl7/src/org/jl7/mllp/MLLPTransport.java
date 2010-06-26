@@ -79,8 +79,8 @@ public class MLLPTransport {
             }
             else if (i == metaData.endByte) {
                 MLLPTransportable transportable = new MLLPTransportable();
-                transportable.MetaData = metaData;
-                transportable.Message = HL7Parser.parseMessage(builder.toString(), true);
+                transportable.metaData = metaData;
+                transportable.message = HL7Parser.parseMessage(builder.toString(), true);
                 return transportable;
             }
             else {
@@ -103,8 +103,8 @@ public class MLLPTransport {
             }
             else if (i == metaData.endByte) {
                 MLLPTransportable transportable = new MLLPTransportable();
-                transportable.MetaData = metaData;
-                transportable.Message = HL7Parser.parseMessage(builder.toString(), true);
+                transportable.metaData = metaData;
+                transportable.message = HL7Parser.parseMessage(builder.toString(), true);
                 return transportable;
             }
             else {
@@ -119,13 +119,13 @@ public class MLLPTransport {
     }
 
     public MLLPTransportable sendMessage(MLLPTransportable transportable, boolean waitForResponse) throws IOException {
-        connect(transportable.MetaData);
+        connect(transportable.metaData);
         OutputStream networkStream = client.getOutputStream();
         try {
-            MLLPMetaData metaData = transportable.MetaData;
+            MLLPMetaData metaData = transportable.metaData;
             networkStream.write(metaData.startByte);
             OutputStreamWriter streamWriter = new OutputStreamWriter(networkStream);
-            HL7Message message = transportable.Message;
+            HL7Message message = transportable.message;
             // String characterSet = Hl7MessageExtractor.ExtractString(message,
             // "MSH|18");
             // streamWriter.Encoding = ... characterSet

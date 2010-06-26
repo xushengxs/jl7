@@ -5,7 +5,7 @@ import org.jl7.hl7.HL7Segment;
 import org.jl7.hl7.HL7SegmentGroup;
 
 public class HL7PatientProcessor {
-    public static HL7Field GetAlternatePatientID(HL7Segment seg) {
+    public static HL7Field getAlternatePatientID(HL7Segment seg) {
         if (seg.getSegmentType().equals("PID")) {
             return seg.get(4);
         }
@@ -15,9 +15,9 @@ public class HL7PatientProcessor {
         return null;
     }
 
-    public static HL7Field GetAlternatePatientID(HL7SegmentGroup segs) {
+    public static HL7Field getAlternatePatientID(HL7SegmentGroup segs) {
         for (HL7Segment seg : segs) {
-            HL7Field value = GetAlternatePatientID(seg);
+            HL7Field value = getAlternatePatientID(seg);
             if (value != null) {
                 return value;
             }
@@ -45,7 +45,7 @@ public class HL7PatientProcessor {
         return null;
     }
 
-    public static HL7Field GetPatientID(HL7Segment seg) {
+    public static HL7Field getPatientID(HL7Segment seg) {
         if (seg.getSegmentType().equals("PID")) {
             return seg.get(3);
         }
@@ -55,9 +55,9 @@ public class HL7PatientProcessor {
         return null;
     }
 
-    public static HL7Field GetPatientID(HL7SegmentGroup segs) {
+    public static HL7Field getPatientID(HL7SegmentGroup segs) {
         for (HL7Segment seg : segs) {
-            HL7Field value = GetPatientID(seg);
+            HL7Field value = getPatientID(seg);
             if (value != null) {
                 return value;
             }
@@ -85,7 +85,7 @@ public class HL7PatientProcessor {
         return null;
     }
 
-    public static HL7Field GetPatientName(HL7Segment seg) {
+    public static HL7Field getPatientName(HL7Segment seg) {
         if (seg.getSegmentType().equals("PID")) {
             return seg.get(5);
         }
@@ -95,9 +95,9 @@ public class HL7PatientProcessor {
         return null;
     }
 
-    public static HL7Field GetPatientName(HL7SegmentGroup segs) {
+    public static HL7Field getPatientName(HL7SegmentGroup segs) {
         for (HL7Segment seg : segs) {
-            HL7Field value = GetPatientName(seg);
+            HL7Field value = getPatientName(seg);
             if (value != null) {
                 return value;
             }

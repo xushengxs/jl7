@@ -133,7 +133,7 @@ public class HL7Message {
      * @since 0.1
      */
     public List<HL7Segment> get(String segmentTypes) {
-        return HL7SegmentGroup.GetSegments(segmentTypes, segments);
+        return HL7SegmentGroup.getSegments(segmentTypes, segments);
     }
 
     /**

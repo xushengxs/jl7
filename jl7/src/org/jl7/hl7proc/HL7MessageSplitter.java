@@ -8,12 +8,12 @@ import org.jl7.hl7.HL7Segment;
 import org.jl7.hl7.HL7SegmentGroup;
 
 public class HL7MessageSplitter {
-    public static List<HL7SegmentGroup> GetGuarantors(HL7Message msg) {
+    public static List<HL7SegmentGroup> getGuarantors(HL7Message msg) {
         List<HL7SegmentGroup> guarantors = null;
-        List<HL7SegmentGroup> visits = GetVisits(msg);
+        List<HL7SegmentGroup> visits = getVisits(msg);
         // Handle messages without PV1 segment
         if (visits.size() == 0) {
-            visits = GetPatients(msg);
+            visits = getPatients(msg);
             // Handle messages with neither PV1 nor PID segment
             if (visits.size() == 0) {
                 visits = new ArrayList<HL7SegmentGroup>();
@@ -35,12 +35,12 @@ public class HL7MessageSplitter {
         return guarantors;
     }
 
-    public static List<HL7SegmentGroup> GetInsurances(HL7Message msg) {
+    public static List<HL7SegmentGroup> getInsurances(HL7Message msg) {
         List<HL7SegmentGroup> insurances = null;
-        List<HL7SegmentGroup> visits = GetVisits(msg);
+        List<HL7SegmentGroup> visits = getVisits(msg);
         // Handle messages without PV1 segment
         if (visits.size() == 0) {
-            visits = GetPatients(msg);
+            visits = getPatients(msg);
             // Handle messages with neither PV1 nor PID segment
             if (visits.size() == 0) {
                 visits = new ArrayList<HL7SegmentGroup>();
@@ -60,12 +60,12 @@ public class HL7MessageSplitter {
         return insurances;
     }
 
-    public static List<HL7SegmentGroup> GetOrders(HL7Message msg) {
+    public static List<HL7SegmentGroup> getOrders(HL7Message msg) {
         List<HL7SegmentGroup> orders = null;
-        List<HL7SegmentGroup> visits = GetVisits(msg);
+        List<HL7SegmentGroup> visits = getVisits(msg);
         // Handle messages without PV1 segment
         if (visits.size() == 0) {
-            visits = GetPatients(msg);
+            visits = getPatients(msg);
             // Handle messages with neither PV1 nor PID segment
             if (visits.size() == 0) {
                 visits = new ArrayList<HL7SegmentGroup>();
@@ -87,16 +87,16 @@ public class HL7MessageSplitter {
         return orders;
     }
 
-    public static List<HL7SegmentGroup> GetPatients(HL7Message msg) {
+    public static List<HL7SegmentGroup> getPatients(HL7Message msg) {
         return msg.getSegmentGroups("PID|MRG");
     }
 
-    public static List<HL7SegmentGroup> GetProcedures(HL7Message msg) {
+    public static List<HL7SegmentGroup> getProcedures(HL7Message msg) {
         List<HL7SegmentGroup> procedures = null;
-        List<HL7SegmentGroup> visits = GetVisits(msg);
+        List<HL7SegmentGroup> visits = getVisits(msg);
         // Handle messages without PV1 segment
         if (visits.size() == 0) {
-            visits = GetPatients(msg);
+            visits = getPatients(msg);
             // Handle messages with neither PV1 nor PID segment
             if (visits.size() == 0) {
                 visits = new ArrayList<HL7SegmentGroup>();
@@ -116,9 +116,9 @@ public class HL7MessageSplitter {
         return procedures;
     }
 
-    public static List<HL7SegmentGroup> GetVisits(HL7Message msg) {
+    public static List<HL7SegmentGroup> getVisits(HL7Message msg) {
         List<HL7SegmentGroup> visits = null;
-        List<HL7SegmentGroup> patients = GetPatients(msg);
+        List<HL7SegmentGroup> patients = getPatients(msg);
         // Handle messages without PID segment
         if (patients.size() == 0) {
             patients = new ArrayList<HL7SegmentGroup>();

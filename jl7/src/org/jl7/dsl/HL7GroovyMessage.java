@@ -30,7 +30,7 @@ public class HL7GroovyMessage implements GroovyObject {
         return null;
     }
 
-    private HL7Message msg;
+    private final HL7Message msg;
 
     public HL7GroovyMessage(HL7Message msg) {
         this.msg = msg;
@@ -62,22 +62,22 @@ public class HL7GroovyMessage implements GroovyObject {
         else {
             // It's a group
             if (name.equals("PATIENTS")) {
-                return HL7MessageSplitter.GetPatients(msg);
+                return HL7MessageSplitter.getPatients(msg);
             }
             else if (name.equals("VISITS")) {
-                return HL7MessageSplitter.GetVisits(msg);
+                return HL7MessageSplitter.getVisits(msg);
             }
             else if (name.equals("ORDERS")) {
-                return HL7MessageSplitter.GetOrders(msg);
+                return HL7MessageSplitter.getOrders(msg);
             }
             else if (name.equals("PROCEDURES")) {
-                return HL7MessageSplitter.GetProcedures(msg);
+                return HL7MessageSplitter.getProcedures(msg);
             }
             else if (name.equals("INSURANCES")) {
-                return HL7MessageSplitter.GetInsurances(msg);
+                return HL7MessageSplitter.getInsurances(msg);
             }
             else if (name.equals("GUARANTORS")) {
-                return HL7MessageSplitter.GetGuarantors(msg);
+                return HL7MessageSplitter.getGuarantors(msg);
             }
         }
         return null;
@@ -96,27 +96,27 @@ public class HL7GroovyMessage implements GroovyObject {
         else {
             // It's a group
             if (name.equals("PATIENTS")) {
-                List<HL7SegmentGroup> groups = HL7MessageSplitter.GetPatients(msg);
+                List<HL7SegmentGroup> groups = HL7MessageSplitter.getPatients(msg);
                 return getGroovySegmentGroup(varArgs, groups);
             }
             else if (name.equals("VISITS")) {
-                List<HL7SegmentGroup> groups = HL7MessageSplitter.GetVisits(msg);
+                List<HL7SegmentGroup> groups = HL7MessageSplitter.getVisits(msg);
                 return getGroovySegmentGroup(varArgs, groups);
             }
             else if (name.equals("ORDERS")) {
-                List<HL7SegmentGroup> groups = HL7MessageSplitter.GetOrders(msg);
+                List<HL7SegmentGroup> groups = HL7MessageSplitter.getOrders(msg);
                 return getGroovySegmentGroup(varArgs, groups);
             }
             else if (name.equals("PROCEDURES")) {
-                List<HL7SegmentGroup> groups = HL7MessageSplitter.GetProcedures(msg);
+                List<HL7SegmentGroup> groups = HL7MessageSplitter.getProcedures(msg);
                 return getGroovySegmentGroup(varArgs, groups);
             }
             else if (name.equals("INSURANCES")) {
-                List<HL7SegmentGroup> groups = HL7MessageSplitter.GetInsurances(msg);
+                List<HL7SegmentGroup> groups = HL7MessageSplitter.getInsurances(msg);
                 return getGroovySegmentGroup(varArgs, groups);
             }
             else if (name.equals("GUARANTORS")) {
-                List<HL7SegmentGroup> groups = HL7MessageSplitter.GetGuarantors(msg);
+                List<HL7SegmentGroup> groups = HL7MessageSplitter.getGuarantors(msg);
                 return getGroovySegmentGroup(varArgs, groups);
             }
         }
@@ -156,7 +156,6 @@ public class HL7GroovyMessage implements GroovyObject {
 
     public HL7GroovyMessage leftShift(List objects) {
         for (Object o : objects) {
-            System.out.println(o.getClass().getName());
             if (o instanceof HL7Segment) {
                 leftShift((HL7Segment) o);
             }
