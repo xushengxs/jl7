@@ -1,5 +1,5 @@
 #summary How to send an HL7 message using jL7
-#labels Phase-Implementation
+#labels Phase-Implementation,Featured,Phase-Support
 
 = Introduction =
 
