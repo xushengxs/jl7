@@ -13,7 +13,6 @@
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
         <javaElement handleIdentifier="=jl7/src"/>
         <file path="/jl7/.classpath"/>
-        <file path="/jl7/.DS_Store"/>
         <file path="/jl7/.project"/>
         <folder path="/jl7/doc"/>
         <file path="/jl7/coverage_report.html"/>

@@ -6,7 +6,6 @@ package org.jl7.dsl;
 import groovy.lang.Binding;
 import groovy.lang.GroovyCodeSource;
 import groovy.lang.GroovyShell;
-import groovy.lang.MissingPropertyException;
 import groovy.lang.Script;
 
 import java.io.File;

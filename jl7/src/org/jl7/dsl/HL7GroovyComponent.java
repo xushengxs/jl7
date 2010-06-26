@@ -4,7 +4,6 @@
 package org.jl7.dsl;
 
 import org.jl7.hl7.HL7Component;
-import org.jl7.hl7.HL7Field;
 
 /**
  * @author henribenoit

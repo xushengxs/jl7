@@ -6,16 +6,11 @@ package org.jl7.dsl;
 import java.util.List;
 
 import groovy.lang.Closure;
-import groovy.lang.DelegatingMetaClass;
-import groovy.lang.GroovyInterceptable;
 import groovy.lang.GroovyObject;
 import groovy.lang.GroovySystem;
 import groovy.lang.MetaClass;
-import groovy.lang.MetaMethod;
-import groovy.lang.MetaProperty;
 import groovy.lang.MissingPropertyException;
 
-import org.codehaus.groovy.ast.ClassNode;
 import org.jl7.hl7.HL7Message;
 import org.jl7.hl7.HL7Parser;
 import org.jl7.hl7.HL7Segment;
@@ -63,7 +58,10 @@ public class HL7GroovyMessage implements GroovyObject {
             setProperty(property, ((HL7GroovySegment)value).segment);
         }
         else if (value instanceof HL7GroovySegments) {
-            leftShift((HL7GroovySegments)value);
+            List<HL7Segment> segments = ((HL7GroovySegments)value).getSegments();
+            for (HL7Segment segment : segments) {
+                setProperty(property, segment);
+            }
         }
         else {
             throw new MissingPropertyException(property, value.toString(), this.getClass());
@@ -132,10 +130,16 @@ public class HL7GroovyMessage implements GroovyObject {
 
     public Object invokeMethod(String name, Object args) {
         final Object[] varArgs = (Object[]) args;
-        final HL7GroovySegments segments = new HL7GroovySegments(msg.get(name));
-        if (varArgs[0] instanceof Integer) {
-            HL7GroovySegment segment = segments.getAt(1);
-            return segment.getAt((Integer) varArgs[0]);
+        if (name.length() == 3) {
+            // It's a segment
+            final HL7GroovySegments segments = new HL7GroovySegments(msg.get(name));
+            if (varArgs[0] instanceof Integer) {
+                HL7GroovySegment segment = segments.getAt(1);
+                return segment.getAt((Integer) varArgs[0]);
+            }
+        }
+        else {
+            // It's a group
         }
         return null;
     }

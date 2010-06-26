@@ -9,7 +9,6 @@ import java.io.IOException;
 import junit.framework.TestCase;
 
 import org.jl7.dsl.HL7DSL;
-import org.jl7.dsl.HL7GroovyMessage;
 import org.jl7.hl7.HL7Message;
 
 /**
