@@ -7,7 +7,7 @@ import org.jl7.hl7.HL7Subcomponent;
 
 /**
  * @author henribenoit
- *
+ * 
  */
 public class HL7GroovySubcomponent {
     private HL7Subcomponent subcomponent;
@@ -16,18 +16,13 @@ public class HL7GroovySubcomponent {
         this.subcomponent = subcomponent;
     }
 
-    public String toString() {
-        return subcomponent.toString();
-    }
-
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof HL7Subcomponent)
-        {
+        if (obj instanceof HL7Subcomponent) {
             return subcomponent.equals(obj);
         }
         else if (obj instanceof HL7GroovySubcomponent) {
-            return subcomponent.equals(((HL7Subcomponent)obj));
+            return subcomponent.equals((obj));
         }
         else if (obj instanceof String) {
             return subcomponent.getValue().equals(obj);
@@ -38,5 +33,10 @@ public class HL7GroovySubcomponent {
     @Override
     public int hashCode() {
         return subcomponent.getValue().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return subcomponent.toString();
     }
 }

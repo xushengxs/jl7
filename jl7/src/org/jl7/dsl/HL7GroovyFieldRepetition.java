@@ -7,7 +7,7 @@ import org.jl7.hl7.HL7FieldRepetition;
 
 /**
  * @author henribenoit
- *
+ * 
  */
 public class HL7GroovyFieldRepetition {
     private HL7FieldRepetition repetition;
@@ -16,26 +16,17 @@ public class HL7GroovyFieldRepetition {
         this.repetition = repetition;
     }
 
-    public String toString() {
-        return repetition.toString();
-    }
-
-    public HL7GroovyComponent getAt(int index) {
-        return new HL7GroovyComponent(repetition.getAt(index));
-    }
-
     public HL7GroovyComponent call(int index) {
         return getAt(index);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof HL7FieldRepetition)
-        {
+        if (obj instanceof HL7FieldRepetition) {
             return repetition.equals(obj);
         }
         else if (obj instanceof HL7GroovyFieldRepetition) {
-            return repetition.equals(((HL7FieldRepetition)obj));
+            return repetition.equals((obj));
         }
         else if (obj instanceof String) {
             return repetition.getValue().equals(obj);
@@ -43,8 +34,17 @@ public class HL7GroovyFieldRepetition {
         return super.equals(obj);
     }
 
+    public HL7GroovyComponent getAt(int index) {
+        return new HL7GroovyComponent(repetition.getAt(index));
+    }
+
     @Override
     public int hashCode() {
         return repetition.getValue().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return repetition.toString();
     }
 }

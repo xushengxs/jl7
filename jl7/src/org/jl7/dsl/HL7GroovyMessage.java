@@ -3,13 +3,13 @@
  */
 package org.jl7.dsl;
 
-import java.util.List;
-
 import groovy.lang.Closure;
 import groovy.lang.GroovyObject;
 import groovy.lang.GroovySystem;
 import groovy.lang.MetaClass;
 import groovy.lang.MissingPropertyException;
+
+import java.util.List;
 
 import org.jl7.hl7.HL7Message;
 import org.jl7.hl7.HL7Parser;
@@ -19,21 +19,21 @@ import org.jl7.hl7proc.HL7MessageSplitter;
 
 /**
  * @author henribenoit
- *
+ * 
  */
 public class HL7GroovyMessage implements GroovyObject {
-    private HL7Message msg;
-
-    public HL7Message getMsg() {
-        return msg;
+    private static HL7GroovySegmentGroup getGroovySegmentGroup(final Object[] varArgs, List<HL7SegmentGroup> groups) {
+        if (varArgs[0] instanceof Integer) {
+            HL7SegmentGroup group = groups.get((Integer) varArgs[0] - 1);
+            return new HL7GroovySegmentGroup(group);
+        }
+        return null;
     }
+
+    private HL7Message msg;
 
     public HL7GroovyMessage(HL7Message msg) {
         this.msg = msg;
-    }
-
-    public HL7GroovyMessage(String msg) {
-        this.msg = HL7Parser.parseMessage(msg, true);
     }
 
     public HL7GroovyMessage(HL7Message msg, Closure args) {
@@ -41,102 +41,17 @@ public class HL7GroovyMessage implements GroovyObject {
         args.call();
     }
 
-    public void setProperty(String property, Object value) {
-        if (value instanceof String) {
-            HL7Segment seg = HL7Parser.parseSegment((String) value, msg.getDelimiters(), true);
-            setProperty(property, seg);
-        }
-        else if (value instanceof HL7SegmentGroup) {
-            for (HL7Segment segment : ((HL7SegmentGroup)value).getSegments()) {
-                setProperty(property, segment);
-            }
-        }
-        else if (value instanceof HL7GroovySegmentGroup) {
-            for (HL7Segment segment : ((HL7GroovySegmentGroup)value).getSegmentGroup().getSegments()) {
-                setProperty(property, segment);
-            }
-        }
-        else if (value instanceof HL7Segment) {
-            HL7Segment segment = (HL7Segment)value;
-            int index = msg.getIndex(segment.getSegmentType());
-            if (index != -1) {
-                msg.putAt(index, segment.getValue());
-            }
-            else {
-                leftShift(segment);
-            }
-        }
-        else if (value instanceof HL7GroovySegment) {
-            setProperty(property, ((HL7GroovySegment)value).segment);
-        }
-        else if (value instanceof HL7GroovySegments) {
-            List<HL7Segment> segments = ((HL7GroovySegments)value).getSegments();
-            for (HL7Segment segment : segments) {
-                setProperty(property, segment);
-            }
-        }
-        else {
-            throw new MissingPropertyException(property, value.toString(), this.getClass());
-        }
+    public HL7GroovyMessage(String msg) {
+        this.msg = HL7Parser.parseMessage(msg, true);
     }
-
-    public HL7GroovyMessage leftShift(String segment) {
-        msg.addSegment(segment, msg.getDelimiters(), true);
-        return this;
-    }
-
-    public HL7GroovyMessage leftShift(HL7GroovySegment seg) {
-        return leftShift(seg.getSegment());
-    }
-
-    public HL7GroovyMessage leftShift(HL7Segment segment) {
-        HL7Message.addSegment(msg, segment);
-        return this;
-    }
-
-    public HL7GroovyMessage leftShift(HL7GroovySegments segs) {
-        return leftShift(segs.getSegments());
-    }
-
-    public HL7GroovyMessage leftShift(HL7GroovyMessage message) {
-        return leftShift(message.getMsg().getSegments());
-    }
-
-    public HL7GroovyMessage leftShift(List objects) {
-        for (Object o : objects) {
-            System.out.println(o.getClass().getName());
-            if (o instanceof HL7Segment) {
-                leftShift((HL7Segment)o);
-            }
-            else if (o instanceof HL7SegmentGroup) {
-                leftShift((HL7SegmentGroup)o);
-            }
-        }
-        return this;
-    }
-
-    public HL7GroovyMessage leftShift(HL7SegmentGroup segments) {
-        for (HL7Segment segment : segments.getSegments()) {
-            leftShift(segment);
-        }
-        return this;
-    }
-
-    public HL7GroovyMessage leftShift(HL7GroovySegmentGroup segments) {
-        for (HL7Segment segment : segments.getSegmentGroup().getSegments()) {
-            leftShift(segment);
-        }
-        return this;
-    }
-
-    public String toString() {
-        return msg.getValue();
-    }
-
 
     public MetaClass getMetaClass() {
         return GroovySystem.getMetaClassRegistry().getMetaClass(this.getClass());
-//        return new DelegatingMetaClass(HL7GroovyMessage.class);
+        // return new DelegatingMetaClass(HL7GroovyMessage.class);
+    }
+
+    public HL7Message getMsg() {
+        return msg;
     }
 
     public Object getProperty(String name) {
@@ -208,16 +123,101 @@ public class HL7GroovyMessage implements GroovyObject {
         return null;
     }
 
-    private static HL7GroovySegmentGroup getGroovySegmentGroup(final Object[] varArgs, List<HL7SegmentGroup> groups) {
-        if (varArgs[0] instanceof Integer) {
-            HL7SegmentGroup group = groups.get((Integer) varArgs[0] - 1);
-            return new HL7GroovySegmentGroup(group);
+    public HL7GroovyMessage leftShift(HL7GroovyMessage message) {
+        return leftShift(message.getMsg().getSegments());
+    }
+
+    public HL7GroovyMessage leftShift(HL7GroovySegment seg) {
+        return leftShift(seg.getSegment());
+    }
+
+    public HL7GroovyMessage leftShift(HL7GroovySegmentGroup segments) {
+        for (HL7Segment segment : segments.getSegmentGroup().getSegments()) {
+            leftShift(segment);
         }
-        return null;
+        return this;
+    }
+
+    public HL7GroovyMessage leftShift(HL7GroovySegments segs) {
+        return leftShift(segs.getSegments());
+    }
+
+    public HL7GroovyMessage leftShift(HL7Segment segment) {
+        HL7Message.addSegment(msg, segment);
+        return this;
+    }
+
+    public HL7GroovyMessage leftShift(HL7SegmentGroup segments) {
+        for (HL7Segment segment : segments.getSegments()) {
+            leftShift(segment);
+        }
+        return this;
+    }
+
+    public HL7GroovyMessage leftShift(List objects) {
+        for (Object o : objects) {
+            System.out.println(o.getClass().getName());
+            if (o instanceof HL7Segment) {
+                leftShift((HL7Segment) o);
+            }
+            else if (o instanceof HL7SegmentGroup) {
+                leftShift((HL7SegmentGroup) o);
+            }
+        }
+        return this;
+    }
+
+    public HL7GroovyMessage leftShift(String segment) {
+        msg.addSegment(segment, msg.getDelimiters(), true);
+        return this;
     }
 
     public void setMetaClass(MetaClass metaClass) {
         // TODO Auto-generated method stub
 
+    }
+
+    public void setProperty(String property, Object value) {
+        if (value instanceof String) {
+            HL7Segment seg = HL7Parser.parseSegment((String) value, msg.getDelimiters(), true);
+            setProperty(property, seg);
+        }
+        else if (value instanceof HL7SegmentGroup) {
+            for (HL7Segment segment : ((HL7SegmentGroup) value).getSegments()) {
+                setProperty(property, segment);
+            }
+        }
+        else if (value instanceof HL7GroovySegmentGroup) {
+            for (HL7Segment segment : ((HL7GroovySegmentGroup) value).getSegmentGroup().getSegments()) {
+                setProperty(property, segment);
+            }
+        }
+        else if (value instanceof HL7Segment) {
+            HL7Segment segment = (HL7Segment) value;
+            int index = msg.getIndex(segment.getSegmentType());
+            if (index != -1) {
+                msg.putAt(index, segment.getValue());
+            }
+            else {
+                leftShift(segment);
+            }
+        }
+        else if (value instanceof HL7GroovySegment) {
+            setProperty(property, ((HL7GroovySegment) value).segment);
+        }
+        else if (value instanceof HL7GroovySegments) {
+            List<HL7Segment> segments = ((HL7GroovySegments) value).getSegments();
+            for (HL7Segment segment : segments) {
+                setProperty(property, segment);
+            }
+        }
+        else {
+            throw new MissingPropertyException(property, value.toString(), this.getClass());
+        }
+    }
+
+    @Override
+    public String toString() {
+        return msg.getValue();
     }
 }
