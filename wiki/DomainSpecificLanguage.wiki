@@ -84,3 +84,15 @@ A segment of one message can be added to another message. The following example 
 {{{
 message_out << message_in.MSH
 }}}
+
+The operator `=` can be used instead of `>>` in order to replace a segment rather than add it.
+
+{{{
+message_out.PV1 = "PV1|1|O"
+}}}
+
+The example above replaces the first PV1 segment in message_out by the new segment.
+
+{{{
+message_out.PV1 = message_in.PV1
+}}}
