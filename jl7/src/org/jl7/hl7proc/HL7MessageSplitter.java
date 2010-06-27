@@ -70,6 +70,16 @@ public class HL7MessageSplitter {
         return insurances;
     }
 
+    public static List<HL7SegmentGroup> getOrderGroups(HL7Message msg) {
+        List<HL7SegmentGroup> groups = msg.getSegmentGroups("ORC");
+        List<HL7SegmentGroup> result = new ArrayList<HL7SegmentGroup>();
+        for (HL7SegmentGroup group : groups) {
+            group.removeAllSegmentsAfter("PID|PV1|PR1|DG1|FT1|IN1");
+            result.add(new HL7SegmentGroup(group.get("ORC|OBR|NTE")));
+        }
+        return result;
+    }
+
     public static List<HL7SegmentGroup> getOrders(HL7Message msg) {
         List<HL7SegmentGroup> orders = null;
         List<HL7SegmentGroup> visits = getVisits(msg);
@@ -102,7 +112,7 @@ public class HL7MessageSplitter {
         List<HL7SegmentGroup> result = new ArrayList<HL7SegmentGroup>();
         for (HL7SegmentGroup group : groups) {
             group.removeAllSegmentsAfter("PV1|PR1|IN1|DG1|FT1|OBR|ORC");
-            result.add(new HL7SegmentGroup(group.get("PID|MRG|PD1|ARV|ROL|NK1")));
+            result.add(new HL7SegmentGroup(group.get("PID|MRG|PD1|ARV|ROL|NK1|NTE")));
         }
         return result;
     }

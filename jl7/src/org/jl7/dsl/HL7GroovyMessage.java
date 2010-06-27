@@ -104,7 +104,7 @@ public class HL7GroovyMessage implements GroovyObject {
                 return getGroovySegmentGroup(varArgs, groups);
             }
             else if (name.equals("ORDERS")) {
-                List<HL7SegmentGroup> groups = HL7MessageSplitter.getOrders(msg);
+                List<HL7SegmentGroup> groups = HL7MessageSplitter.getOrderGroups(msg);
                 return getGroovySegmentGroup(varArgs, groups);
             }
             else if (name.equals("PROCEDURES")) {
