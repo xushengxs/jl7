@@ -15,4 +15,5 @@ message_out.EVN = message_in.EVN
 //message_out.PV1 = "PV1|gggggg|jzhjhfj"
 //message_out.PV1 = message_in.PV1
 println("************")
+message_out << message_in.PATIENTS(1)
 message_out << message_in.VISITS(1)

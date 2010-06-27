@@ -35,6 +35,16 @@ public class HL7MessageSplitter {
         return guarantors;
     }
 
+    public static List<HL7SegmentGroup> getInsuranceGroups(HL7Message msg) {
+        List<HL7SegmentGroup> groups = msg.getSegmentGroups("IN1");
+        List<HL7SegmentGroup> result = new ArrayList<HL7SegmentGroup>();
+        for (HL7SegmentGroup group : groups) {
+            group.removeAllSegmentsAfter("PID|PV1|PR1|DG1|FT1|OBR|ORC");
+            result.add(new HL7SegmentGroup(group.get("IN1|IN2|IN3|ROL")));
+        }
+        return result;
+    }
+
     public static List<HL7SegmentGroup> getInsurances(HL7Message msg) {
         List<HL7SegmentGroup> insurances = null;
         List<HL7SegmentGroup> visits = getVisits(msg);
@@ -87,8 +97,28 @@ public class HL7MessageSplitter {
         return orders;
     }
 
+    public static List<HL7SegmentGroup> getPatientGroups(HL7Message msg) {
+        List<HL7SegmentGroup> groups = msg.getSegmentGroups("PID|MRG");
+        List<HL7SegmentGroup> result = new ArrayList<HL7SegmentGroup>();
+        for (HL7SegmentGroup group : groups) {
+            group.removeAllSegmentsAfter("PV1|PR1|IN1|DG1|FT1|OBR|ORC");
+            result.add(new HL7SegmentGroup(group.get("PID|MRG|PD1|ARV|ROL|NK1")));
+        }
+        return result;
+    }
+
     public static List<HL7SegmentGroup> getPatients(HL7Message msg) {
         return msg.getSegmentGroups("PID|MRG");
+    }
+
+    public static List<HL7SegmentGroup> getProcedureGroups(HL7Message msg) {
+        List<HL7SegmentGroup> groups = msg.getSegmentGroups("PR1");
+        List<HL7SegmentGroup> result = new ArrayList<HL7SegmentGroup>();
+        for (HL7SegmentGroup group : groups) {
+            group.removeAllSegmentsAfter("PID|PV1|IN1|DG1|FT1|OBR|ORC");
+            result.add(new HL7SegmentGroup(group.get("PR1|ROL")));
+        }
+        return result;
     }
 
     public static List<HL7SegmentGroup> getProcedures(HL7Message msg) {
@@ -114,6 +144,16 @@ public class HL7MessageSplitter {
             }
         }
         return procedures;
+    }
+
+    public static List<HL7SegmentGroup> getVisitGroups(HL7Message msg) {
+        List<HL7SegmentGroup> groups = msg.getSegmentGroups("PV1");
+        List<HL7SegmentGroup> result = new ArrayList<HL7SegmentGroup>();
+        for (HL7SegmentGroup group : groups) {
+            group.removeAllSegmentsAfter("PID|PR1|IN1|DG1|FT1|OBR|ORC");
+            result.add(new HL7SegmentGroup(group.get("PV1|PV2|ARV|ROL|DB1")));
+        }
+        return result;
     }
 
     public static List<HL7SegmentGroup> getVisits(HL7Message msg) {

@@ -7,9 +7,9 @@ import java.util.List;
 /**
  * Represents a group of HL7 segments (typically returned by processing
  * classes).
- * 
+ *
  * @since 0.1
- * 
+ *
  * @author henribenoit
  */
 /**
@@ -374,8 +374,8 @@ public class HL7SegmentGroup implements Iterable<HL7Segment> {
     public void removeAllSegmentsAfter(String types) {
         String[] segmentTypes = types.split("\\|");
         ArrayList<HL7Segment> newList = new ArrayList<HL7Segment>();
+        boolean found = false;
         for (HL7Segment segment : segments) {
-            boolean found = false;
             for (String segmentType : segmentTypes) {
                 if (segment.getSegmentType().equals(segmentType)) {
                     found = true;

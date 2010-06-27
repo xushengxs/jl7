@@ -96,11 +96,11 @@ public class HL7GroovyMessage implements GroovyObject {
         else {
             // It's a group
             if (name.equals("PATIENTS")) {
-                List<HL7SegmentGroup> groups = HL7MessageSplitter.getPatients(msg);
+                List<HL7SegmentGroup> groups = HL7MessageSplitter.getPatientGroups(msg);
                 return getGroovySegmentGroup(varArgs, groups);
             }
             else if (name.equals("VISITS")) {
-                List<HL7SegmentGroup> groups = HL7MessageSplitter.getVisits(msg);
+                List<HL7SegmentGroup> groups = HL7MessageSplitter.getVisitGroups(msg);
                 return getGroovySegmentGroup(varArgs, groups);
             }
             else if (name.equals("ORDERS")) {
@@ -108,11 +108,11 @@ public class HL7GroovyMessage implements GroovyObject {
                 return getGroovySegmentGroup(varArgs, groups);
             }
             else if (name.equals("PROCEDURES")) {
-                List<HL7SegmentGroup> groups = HL7MessageSplitter.getProcedures(msg);
+                List<HL7SegmentGroup> groups = HL7MessageSplitter.getProcedureGroups(msg);
                 return getGroovySegmentGroup(varArgs, groups);
             }
             else if (name.equals("INSURANCES")) {
-                List<HL7SegmentGroup> groups = HL7MessageSplitter.getInsurances(msg);
+                List<HL7SegmentGroup> groups = HL7MessageSplitter.getInsuranceGroups(msg);
                 return getGroovySegmentGroup(varArgs, groups);
             }
             else if (name.equals("GUARANTORS")) {
