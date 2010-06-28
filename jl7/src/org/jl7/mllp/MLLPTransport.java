@@ -11,12 +11,27 @@ import java.net.UnknownHostException;
 import org.jl7.hl7.HL7Message;
 import org.jl7.hl7.HL7Parser;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MLLPTransport.
+ */
 public class MLLPTransport {
 
+    /** The client. */
     private Socket client = null;
+    
+    /** The host. */
     private String host = null;
+    
+    /** The port. */
     private int port = -1;
 
+    /**
+     * Connect.
+     *
+     * @throws UnknownHostException the unknown host exception
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     private void connect() throws UnknownHostException, IOException {
         if (!isConnected()) {
             if ((host != null) && (port != -1)) {
@@ -25,6 +40,13 @@ public class MLLPTransport {
         }
     }
 
+    /**
+     * Connect.
+     *
+     * @param metaData the meta data
+     * @throws UnknownHostException the unknown host exception
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public void connect(MLLPMetaData metaData) throws UnknownHostException, IOException {
         if (metaData != null) {
             connect(metaData.host, metaData.port);
@@ -34,6 +56,14 @@ public class MLLPTransport {
         }
     }
 
+    /**
+     * Connect.
+     *
+     * @param host the host
+     * @param port the port
+     * @throws UnknownHostException the unknown host exception
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public void connect(String host, int port) throws UnknownHostException, IOException {
         if (!host.equals(this.host)) {
             this.host = host;
@@ -44,6 +74,11 @@ public class MLLPTransport {
         connect();
     }
 
+    /**
+     * Disconnect.
+     *
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public void disconnect() throws IOException {
         try {
             if (client != null) {
@@ -55,16 +90,34 @@ public class MLLPTransport {
         }
     }
 
+    /**
+     * Checks if is connected.
+     *
+     * @return true, if is connected
+     */
     public boolean isConnected() {
         return (client == null ? false : client.isConnected());
     }
 
+    /**
+     * Listen.
+     *
+     * @param metaData the meta data
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public void listen(MLLPMetaData metaData) throws IOException {
         ServerSocket listener = new ServerSocket(metaData.port);
         disconnect();
         client = listener.accept();
     }
 
+    /**
+     * Receive message.
+     *
+     * @param metaData the meta data
+     * @return the mLLP transportable
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public MLLPTransportable receiveMessage(MLLPMetaData metaData) throws IOException {
         listen(metaData);
         InputStream networkStream = client.getInputStream();
@@ -90,6 +143,13 @@ public class MLLPTransport {
         return null;
     }
 
+    /**
+     * Receive response.
+     *
+     * @param metaData the meta data
+     * @return the mLLP transportable
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public MLLPTransportable receiveResponse(MLLPMetaData metaData) throws IOException {
         InputStream networkStream = client.getInputStream();
         int i;
@@ -114,10 +174,24 @@ public class MLLPTransport {
         return null;
     }
 
+    /**
+     * Send message.
+     *
+     * @param transportable the transportable
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public void sendMessage(MLLPTransportable transportable) throws IOException {
         sendMessage(transportable, false);
     }
 
+    /**
+     * Send message.
+     *
+     * @param transportable the transportable
+     * @param waitForResponse the wait for response
+     * @return the mLLP transportable
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public MLLPTransportable sendMessage(MLLPTransportable transportable, boolean waitForResponse) throws IOException {
         connect(transportable.metaData);
         OutputStream networkStream = client.getOutputStream();

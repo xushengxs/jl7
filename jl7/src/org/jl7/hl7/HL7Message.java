@@ -5,13 +5,12 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
 /**
- * Represents an HL7 message
- * 
+ * Represents an HL7 message.
+ *
  * @since 0.1
- * 
  * @author henribenoit
- * 
  */
 public class HL7Message {
     /**
@@ -162,12 +161,11 @@ public class HL7Message {
     }
 
     /**
-     * Returns a string containing all delimiters defined for this message
-     * 
+     * Returns a string containing all delimiters defined for this message.
+     *
      * @return a string containing all delimiters defined for this message:
-     *         fieldSeparator + componentSeparator + repetitionSeparator +
-     *         escapeCharacter + subcomponentSeparator
-     * 
+     * fieldSeparator + componentSeparator + repetitionSeparator +
+     * escapeCharacter + subcomponentSeparator
      * @since 0.1
      */
     public String getDelimiters() {
@@ -185,6 +183,11 @@ public class HL7Message {
         return Collections.enumeration(segments);
     }
 
+    /**
+     * Gets the event type.
+     *
+     * @return the event type
+     */
     public String getEventType() {
         return getHeader().getEventType();
     }
@@ -205,6 +208,12 @@ public class HL7Message {
         return null;
     }
 
+    /**
+     * Gets the index.
+     *
+     * @param segmentType the segment type
+     * @return the index
+     */
     public int getIndex(String segmentType) {
         for (int i = 1; i <= segments.size(); i++) {
             if (getAt(i).getSegmentType().equals(segmentType)) {
@@ -214,6 +223,11 @@ public class HL7Message {
         return -1;
     }
 
+    /**
+     * Gets the message event type.
+     *
+     * @return the message event type
+     */
     public String getMessageEventType() {
         return getHeader().getMessageEventType();
     }
@@ -240,15 +254,9 @@ public class HL7Message {
      * <li>PID PV1</li>
      * <li>PID PV1 PV2</li>
      * </ul>
-     * 
-     * @param segmentType
-     *            segment types (separated by pipes) to be searched for
-     * 
-     * @param segmentList
-     *            list of segments to be processed.
-     * 
+     *
+     * @param segmentTypes the segment types
      * @return a list of segment groups
-     * 
      * @since 0.1
      */
     public List<HL7SegmentGroup> getSegmentGroups(String segmentTypes) {
@@ -256,10 +264,9 @@ public class HL7Message {
     }
 
     /**
-     * Returns the list of segments in this message
-     * 
+     * Returns the list of segments in this message.
+     *
      * @return the list of segments in this message
-     * 
      * @since 0.1
      */
     public List<HL7Segment> getSegments() {
@@ -307,14 +314,21 @@ public class HL7Message {
     }
 
     /**
-     * @param index
-     * @param segmentString
+     * Put at.
+     *
+     * @param index the index
+     * @param segmentString the segment string
      */
     public void putAt(int index, String segmentString) {
         HL7Segment segment = HL7Parser.parseSegment(segmentString, getDelimiters(), true);
         segments.set(index - 1, segment);
     }
 
+    /**
+     * Removes the segments.
+     *
+     * @param segmentType the segment type
+     */
     public void removeSegments(String segmentType) {
         List<HL7Segment> segs = this.get(segmentType);
         for (HL7Segment hl7Segment : segs) {
@@ -342,9 +356,9 @@ public class HL7Message {
 
     /**
      * Returns the string representation of this message.
-     * 
+     *
+     * @return the string
      * @see java.lang.Object#toString()
-     * 
      * @since 0.1
      */
     @Override

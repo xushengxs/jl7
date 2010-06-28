@@ -2,16 +2,35 @@ package org.jl7.hl7;
 
 import org.jl7.textutils.EscapedStringTokenizer;
 
+// TODO: Auto-generated Javadoc
 /**
- * @author henribenoit
+ * The Class HL7Parser.
  * 
+ * @author henribenoit
  */
 public class HL7Parser {
+
     /**
+     * Parses the component.
+     * 
+     * @param string
+     *            the string
+     * @return the h l7 component
+     */
+    public static HL7Component parseComponent(String string) {
+        return parseComponent(string, "|^~\\&", true);
+    }
+
+    /**
+     * Parses the component.
+     * 
      * @param hl7String
+     *            the hl7 string
      * @param delimiters
+     *            the delimiters
      * @param escapesInSubcomponents
-     * @return
+     *            the escapes in subcomponents
+     * @return the h l7 component
      */
     public static HL7Component parseComponent(String hl7String, String delimiters, boolean escapesInSubcomponents) {
         HL7Component component = new HL7Component();
@@ -24,8 +43,11 @@ public class HL7Parser {
     }
 
     /**
+     * Parses the component without delimiters.
+     * 
      * @param hl7String
-     * @return
+     *            the hl7 string
+     * @return the h l7 component
      */
     public static HL7Component parseComponentWithoutDelimiters(String hl7String) {
         HL7Component component = new HL7Component();
@@ -33,15 +55,27 @@ public class HL7Parser {
         return component;
     }
 
+    /**
+     * Parses the field.
+     * 
+     * @param string
+     *            the string
+     * @return the h l7 field
+     */
     public static HL7Field parseField(String string) {
         return parseField(string, "|^~\\&", true);
     }
 
     /**
+     * Parses the field.
+     * 
      * @param hl7String
+     *            the hl7 string
      * @param delimiters
+     *            the delimiters
      * @param escapesInSubcomponents
-     * @return
+     *            the escapes in subcomponents
+     * @return the h l7 field
      */
     public static HL7Field parseField(String hl7String, String delimiters, boolean escapesInSubcomponents) {
         HL7Field field = new HL7Field();
@@ -54,10 +88,26 @@ public class HL7Parser {
     }
 
     /**
+     * Parses the field repetition.
+     * 
+     * @param string
+     *            the string
+     * @return the h l7 field repetition
+     */
+    public static HL7FieldRepetition parseFieldRepetition(String string) {
+        return parseFieldRepetition(string, "|^~\\&", true);
+    }
+
+    /**
+     * Parses the field repetition.
+     * 
      * @param hl7String
+     *            the hl7 string
      * @param delimiters
+     *            the delimiters
      * @param escapesInSubcomponents
-     * @return
+     *            the escapes in subcomponents
+     * @return the h l7 field repetition
      */
     public static HL7FieldRepetition parseFieldRepetition(String hl7String, String delimiters,
             boolean escapesInSubcomponents) {
@@ -71,8 +121,11 @@ public class HL7Parser {
     }
 
     /**
+     * Parses the field repetition without delimiters.
+     * 
      * @param hl7String
-     * @return
+     *            the hl7 string
+     * @return the h l7 field repetition
      */
     public static HL7FieldRepetition parseFieldRepetitionWithoutDelimiters(String hl7String) {
         HL7FieldRepetition repetition = new HL7FieldRepetition();
@@ -81,9 +134,13 @@ public class HL7Parser {
     }
 
     /**
+     * Parses the message.
+     * 
      * @param hl7String
+     *            the hl7 string
      * @param escapesInSubcomponents
-     * @return
+     *            the escapes in subcomponents
+     * @return the h l7 message
      */
     public static HL7Message parseMessage(String hl7String, boolean escapesInSubcomponents) {
         HL7Message message = new HL7Message();
@@ -99,9 +156,13 @@ public class HL7Parser {
     }
 
     /**
+     * Parses the msh first field.
+     * 
      * @param hl7String
+     *            the hl7 string
      * @param delimiters
-     * @return
+     *            the delimiters
+     * @return the h l7 field
      */
     public static HL7Field parseMSHFirstField(String hl7String, String delimiters) {
         HL7Field field = new HL7Field();
@@ -111,10 +172,26 @@ public class HL7Parser {
     }
 
     /**
+     * Parses the segment.
+     * 
+     * @param string
+     *            the string
+     * @return the h l7 segment
+     */
+    public static HL7Segment parseSegment(String string) {
+        return parseSegment(string, "|^~\\&", true);
+    }
+
+    /**
+     * Parses the segment.
+     * 
      * @param hl7String
+     *            the hl7 string
      * @param delimiters
+     *            the delimiters
      * @param escapesInSubcomponents
-     * @return
+     *            the escapes in subcomponents
+     * @return the h l7 segment
      */
     public static HL7Segment parseSegment(String hl7String, String delimiters, boolean escapesInSubcomponents) {
         HL7Segment segment = null;
@@ -133,10 +210,26 @@ public class HL7Parser {
     }
 
     /**
+     * Parses the subcomponent.
+     * 
+     * @param string
+     *            the string
+     * @return the h l7 subcomponent
+     */
+    public static HL7Subcomponent parseSubcomponent(String string) {
+        return parseSubcomponent(string, "|^~\\&", true);
+    }
+
+    /**
+     * Parses the subcomponent.
+     * 
      * @param hl7String
+     *            the hl7 string
      * @param delimiters
+     *            the delimiters
      * @param escapesInSubcomponents
-     * @return
+     *            the escapes in subcomponents
+     * @return the h l7 subcomponent
      */
     public static HL7Subcomponent parseSubcomponent(String hl7String, String delimiters, boolean escapesInSubcomponents) {
         HL7Subcomponent subcomponent = new HL7Subcomponent();
@@ -150,8 +243,11 @@ public class HL7Parser {
     }
 
     /**
+     * Parses the subcomponent without delimiters.
+     * 
      * @param hl7String
-     * @return
+     *            the hl7 string
+     * @return the h l7 subcomponent
      */
     public static HL7Subcomponent parseSubcomponentWithoutDelimiters(String hl7String) {
         HL7Subcomponent subcomponent = new HL7Subcomponent();

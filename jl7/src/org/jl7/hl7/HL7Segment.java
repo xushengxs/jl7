@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 
+// TODO: Auto-generated Javadoc
 /**
- * Represents an HL7 segment
- * 
+ * Represents an HL7 segment.
+ *
  * @since 0.1
- * 
  * @author henribenoit
- * 
  */
 public class HL7Segment {
     /**
@@ -98,12 +97,11 @@ public class HL7Segment {
     }
 
     /**
-     * Returns a string containing all delimiters defined for this message
-     * 
+     * Returns a string containing all delimiters defined for this message.
+     *
      * @return a string containing all delimiters defined for this message:
-     *         fieldSeparator + componentSeparator + repetitionSeparator +
-     *         escapeCharacter + subcomponentSeparator
-     * 
+     * fieldSeparator + componentSeparator + repetitionSeparator +
+     * escapeCharacter + subcomponentSeparator
      * @since 0.1
      */
     public String getDelimiters() {
@@ -166,8 +164,10 @@ public class HL7Segment {
     }
 
     /**
-     * @param index
-     * @param fieldString
+     * Put at.
+     *
+     * @param index the index
+     * @param fieldString the field string
      */
     public void putAt(int index, String fieldString) {
         HL7Field field = HL7Parser.parseField(fieldString, getDelimiters(), true);
@@ -247,9 +247,9 @@ public class HL7Segment {
 
     /**
      * Returns the string representation of this segment.
-     * 
+     *
+     * @return the string
      * @see java.lang.Object#toString()
-     * 
      * @since 0.1
      */
     @Override

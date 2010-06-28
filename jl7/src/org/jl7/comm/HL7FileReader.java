@@ -12,16 +12,24 @@ import java.io.InputStreamReader;
 import org.jl7.hl7.HL7Message;
 import org.jl7.hl7.HL7Parser;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class HL7FileReader.
+ *
  * @author henribenoit
- * 
  */
 public class HL7FileReader implements HL7Reader {
+    
+    /** The file. */
     private File file;
+    
+    /** The reader. */
     private BufferedReader reader;
 
     /**
-     * @param file
+     * Instantiates a new h l7 file reader.
+     *
+     * @param file the file
      */
     public HL7FileReader(File file) {
         super();
@@ -29,7 +37,9 @@ public class HL7FileReader implements HL7Reader {
     }
 
     /**
-     * @param pathname
+     * Instantiates a new h l7 file reader.
+     *
+     * @param pathname the pathname
      */
     public HL7FileReader(String pathname) {
         super();

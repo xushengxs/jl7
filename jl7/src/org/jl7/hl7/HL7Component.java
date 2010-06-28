@@ -2,13 +2,12 @@ package org.jl7.hl7;
 
 import java.util.ArrayList;
 
+// TODO: Auto-generated Javadoc
 /**
- * Represents an HL7 component
- * 
+ * Represents an HL7 component.
+ *
  * @since 0.1
- * 
  * @author henribenoit
- * 
  */
 public class HL7Component {
     /**
@@ -49,6 +48,12 @@ public class HL7Component {
         }
     }
 
+    /**
+     * Gets the at.
+     *
+     * @param index the index
+     * @return the at
+     */
     public HL7Subcomponent getAt(int index) {
         return get(index - 1);
     }
@@ -75,6 +80,11 @@ public class HL7Component {
         return s;
     }
 
+    /**
+     * Sets the delimiters.
+     *
+     * @param value the new delimiters
+     */
     public void setDelimiters(String value) {
         escapeCharacter = value.charAt(3);
         subcomponentSeparator = value.charAt(4);
@@ -82,13 +92,10 @@ public class HL7Component {
 
     /**
      * Sets all delimiters defined for this component.
-     * 
-     * @param value
-     *            a string containing all delimiters defined for this component:
-     *            fieldSeparator (not used in this class) + componentSeparator
-     *            (not used in this class) + repetitionSeparator (not used in
-     *            this class) + escapeCharacter + subcomponentSeparator
-     * 
+     *
+     * @param subComponents the sub components
+     * @param delimiters the delimiters
+     * @param escapesInSubcomponents the escapes in subcomponents
      * @since 0.1
      */
     public void setSubcomponents(String[] subComponents, String delimiters, boolean escapesInSubcomponents) {
@@ -100,18 +107,8 @@ public class HL7Component {
     /**
      * Removes all subcomponents from this component and adds the given
      * subcomponents to it.
-     * 
-     * @param fields
-     *            array of string representations of subcomponents to be added.
-     * 
-     * @param delimiters
-     *            a string containing all delimiters defined for this component:
-     *            fieldSeparator + componentSeparator + repetitionSeparator +
-     *            escapeCharacter + subcomponentSeparator
-     * 
-     * @param escapesInSubcomponents
-     *            whether escape characters are used or not
-     * 
+     *
+     * @param hl7String the new subcomponents without delimiters
      * @since 0.1
      */
     public void setSubcomponentsWithoutDelimiters(String hl7String) {
@@ -120,9 +117,9 @@ public class HL7Component {
 
     /**
      * Returns the string representation of this component.
-     * 
+     *
+     * @return the string
      * @see java.lang.Object#toString()
-     * 
      * @since 0.1
      */
     @Override

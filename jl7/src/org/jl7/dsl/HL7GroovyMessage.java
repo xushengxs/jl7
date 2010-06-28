@@ -17,11 +17,23 @@ import org.jl7.hl7.HL7Segment;
 import org.jl7.hl7.HL7SegmentGroup;
 import org.jl7.hl7proc.HL7MessageSplitter;
 
+// TODO: Auto-generated Javadoc
 /**
- * @author henribenoit
+ * The Class HL7GroovyMessage.
  * 
+ * @author henribenoit
  */
 public class HL7GroovyMessage implements GroovyObject {
+
+    /**
+     * Gets the groovy segment group.
+     * 
+     * @param varArgs
+     *            the var args
+     * @param groups
+     *            the groups
+     * @return the groovy segment group
+     */
     private static HL7GroovySegmentGroup getGroovySegmentGroup(final Object[] varArgs, List<HL7SegmentGroup> groups) {
         if (varArgs[0] instanceof Integer) {
             HL7SegmentGroup group = groups.get((Integer) varArgs[0] - 1);
@@ -30,30 +42,66 @@ public class HL7GroovyMessage implements GroovyObject {
         return null;
     }
 
+    /** The msg. */
     private final HL7Message msg;
 
+    /**
+     * Instantiates a new h l7 groovy message.
+     * 
+     * @param msg
+     *            the msg
+     */
     public HL7GroovyMessage(HL7Message msg) {
         this.msg = msg;
     }
 
+    /**
+     * Instantiates a new h l7 groovy message.
+     * 
+     * @param msg
+     *            the msg
+     * @param args
+     *            the args
+     */
     public HL7GroovyMessage(HL7Message msg, Closure args) {
         this(msg);
         args.call();
     }
 
+    /**
+     * Instantiates a new h l7 groovy message.
+     * 
+     * @param msg
+     *            the msg
+     */
     public HL7GroovyMessage(String msg) {
         this.msg = HL7Parser.parseMessage(msg, true);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see groovy.lang.GroovyObject#getMetaClass()
+     */
     public MetaClass getMetaClass() {
         return GroovySystem.getMetaClassRegistry().getMetaClass(this.getClass());
         // return new DelegatingMetaClass(HL7GroovyMessage.class);
     }
 
+    /**
+     * Gets the msg.
+     * 
+     * @return the msg
+     */
     public HL7Message getMsg() {
         return msg;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see groovy.lang.GroovyObject#getProperty(java.lang.String)
+     */
     public Object getProperty(String name) {
         if (name.length() == 3) {
             // It's a segment
@@ -83,6 +131,12 @@ public class HL7GroovyMessage implements GroovyObject {
         return null;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see groovy.lang.GroovyObject#invokeMethod(java.lang.String,
+     * java.lang.Object)
+     */
     public Object invokeMethod(String name, Object args) {
         final Object[] varArgs = (Object[]) args;
         if (name.length() == 3) {
@@ -123,14 +177,35 @@ public class HL7GroovyMessage implements GroovyObject {
         return null;
     }
 
+    /**
+     * Left shift.
+     * 
+     * @param message
+     *            the message
+     * @return the h l7 groovy message
+     */
     public HL7GroovyMessage leftShift(HL7GroovyMessage message) {
         return leftShift(message.getMsg().getSegments());
     }
 
+    /**
+     * Left shift.
+     * 
+     * @param seg
+     *            the seg
+     * @return the h l7 groovy message
+     */
     public HL7GroovyMessage leftShift(HL7GroovySegment seg) {
         return leftShift(seg.getSegment());
     }
 
+    /**
+     * Left shift.
+     * 
+     * @param segments
+     *            the segments
+     * @return the h l7 groovy message
+     */
     public HL7GroovyMessage leftShift(HL7GroovySegmentGroup segments) {
         for (HL7Segment segment : segments.getSegmentGroup().getSegments()) {
             leftShift(segment);
@@ -138,15 +213,36 @@ public class HL7GroovyMessage implements GroovyObject {
         return this;
     }
 
+    /**
+     * Left shift.
+     * 
+     * @param segs
+     *            the segs
+     * @return the h l7 groovy message
+     */
     public HL7GroovyMessage leftShift(HL7GroovySegments segs) {
         return leftShift(segs.getSegments());
     }
 
+    /**
+     * Left shift.
+     * 
+     * @param segment
+     *            the segment
+     * @return the h l7 groovy message
+     */
     public HL7GroovyMessage leftShift(HL7Segment segment) {
         HL7Message.addSegment(msg, segment);
         return this;
     }
 
+    /**
+     * Left shift.
+     * 
+     * @param segments
+     *            the segments
+     * @return the h l7 groovy message
+     */
     public HL7GroovyMessage leftShift(HL7SegmentGroup segments) {
         for (HL7Segment segment : segments.getSegments()) {
             leftShift(segment);
@@ -154,6 +250,13 @@ public class HL7GroovyMessage implements GroovyObject {
         return this;
     }
 
+    /**
+     * Left shift.
+     * 
+     * @param objects
+     *            the objects
+     * @return the h l7 groovy message
+     */
     public HL7GroovyMessage leftShift(@SuppressWarnings("rawtypes") List objects) {
         for (Object o : objects) {
             if (o instanceof HL7Segment) {
@@ -166,16 +269,34 @@ public class HL7GroovyMessage implements GroovyObject {
         return this;
     }
 
+    /**
+     * Left shift.
+     * 
+     * @param segment
+     *            the segment
+     * @return the h l7 groovy message
+     */
     public HL7GroovyMessage leftShift(String segment) {
         msg.addSegment(segment, msg.getDelimiters(), true);
         return this;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see groovy.lang.GroovyObject#setMetaClass(groovy.lang.MetaClass)
+     */
     public void setMetaClass(MetaClass metaClass) {
         // TODO Auto-generated method stub
 
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see groovy.lang.GroovyObject#setProperty(java.lang.String,
+     * java.lang.Object)
+     */
     public void setProperty(String property, Object value) {
         if (value instanceof String) {
             HL7Segment seg = HL7Parser.parseSegment((String) value, msg.getDelimiters(), true);
@@ -215,6 +336,11 @@ public class HL7GroovyMessage implements GroovyObject {
         }
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         return msg.getValue();

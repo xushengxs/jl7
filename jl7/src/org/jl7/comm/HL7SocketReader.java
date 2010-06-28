@@ -9,22 +9,35 @@ import org.jl7.hl7.HL7Message;
 import org.jl7.mllp.MLLPMetaData;
 import org.jl7.mllp.MLLPTransport;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class HL7SocketReader.
+ *
  * @author henribenoit
- * 
  */
 public class HL7SocketReader implements HL7Reader {
+    
+    /** The meta data. */
     private MLLPMetaData metaData;
+    
+    /** The transport. */
     private MLLPTransport transport;
 
+    /**
+     * Instantiates a new h l7 socket reader.
+     *
+     * @param metaData the meta data
+     */
     public HL7SocketReader(MLLPMetaData metaData) {
         super();
         this.metaData = metaData;
     }
 
     /**
-     * @param host
-     * @param port
+     * Instantiates a new h l7 socket reader.
+     *
+     * @param host the host
+     * @param port the port
      */
     public HL7SocketReader(String host, int port) {
         super();

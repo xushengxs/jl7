@@ -7,7 +7,18 @@ import org.jl7.hl7.HL7Message;
 import org.jl7.hl7.HL7Segment;
 import org.jl7.hl7.HL7SegmentGroup;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class HL7MessageSplitter.
+ */
 public class HL7MessageSplitter {
+    
+    /**
+     * Gets the guarantors.
+     *
+     * @param msg the msg
+     * @return the guarantors
+     */
     public static List<HL7SegmentGroup> getGuarantors(HL7Message msg) {
         List<HL7SegmentGroup> guarantors = null;
         List<HL7SegmentGroup> visits = getVisits(msg);
@@ -35,6 +46,12 @@ public class HL7MessageSplitter {
         return guarantors;
     }
 
+    /**
+     * Gets the insurance groups.
+     *
+     * @param msg the msg
+     * @return the insurance groups
+     */
     public static List<HL7SegmentGroup> getInsuranceGroups(HL7Message msg) {
         List<HL7SegmentGroup> groups = msg.getSegmentGroups("IN1");
         List<HL7SegmentGroup> result = new ArrayList<HL7SegmentGroup>();
@@ -45,6 +62,12 @@ public class HL7MessageSplitter {
         return result;
     }
 
+    /**
+     * Gets the insurances.
+     *
+     * @param msg the msg
+     * @return the insurances
+     */
     public static List<HL7SegmentGroup> getInsurances(HL7Message msg) {
         List<HL7SegmentGroup> insurances = null;
         List<HL7SegmentGroup> visits = getVisits(msg);
@@ -70,6 +93,12 @@ public class HL7MessageSplitter {
         return insurances;
     }
 
+    /**
+     * Gets the order groups.
+     *
+     * @param msg the msg
+     * @return the order groups
+     */
     public static List<HL7SegmentGroup> getOrderGroups(HL7Message msg) {
         List<HL7SegmentGroup> groups = msg.getSegmentGroups("ORC");
         List<HL7SegmentGroup> result = new ArrayList<HL7SegmentGroup>();
@@ -80,6 +109,12 @@ public class HL7MessageSplitter {
         return result;
     }
 
+    /**
+     * Gets the orders.
+     *
+     * @param msg the msg
+     * @return the orders
+     */
     public static List<HL7SegmentGroup> getOrders(HL7Message msg) {
         List<HL7SegmentGroup> orders = null;
         List<HL7SegmentGroup> visits = getVisits(msg);
@@ -107,6 +142,12 @@ public class HL7MessageSplitter {
         return orders;
     }
 
+    /**
+     * Gets the patient groups.
+     *
+     * @param msg the msg
+     * @return the patient groups
+     */
     public static List<HL7SegmentGroup> getPatientGroups(HL7Message msg) {
         List<HL7SegmentGroup> groups = msg.getSegmentGroups("PID|MRG");
         List<HL7SegmentGroup> result = new ArrayList<HL7SegmentGroup>();
@@ -117,10 +158,22 @@ public class HL7MessageSplitter {
         return result;
     }
 
+    /**
+     * Gets the patients.
+     *
+     * @param msg the msg
+     * @return the patients
+     */
     public static List<HL7SegmentGroup> getPatients(HL7Message msg) {
         return msg.getSegmentGroups("PID|MRG");
     }
 
+    /**
+     * Gets the procedure groups.
+     *
+     * @param msg the msg
+     * @return the procedure groups
+     */
     public static List<HL7SegmentGroup> getProcedureGroups(HL7Message msg) {
         List<HL7SegmentGroup> groups = msg.getSegmentGroups("PR1");
         List<HL7SegmentGroup> result = new ArrayList<HL7SegmentGroup>();
@@ -131,6 +184,12 @@ public class HL7MessageSplitter {
         return result;
     }
 
+    /**
+     * Gets the procedures.
+     *
+     * @param msg the msg
+     * @return the procedures
+     */
     public static List<HL7SegmentGroup> getProcedures(HL7Message msg) {
         List<HL7SegmentGroup> procedures = null;
         List<HL7SegmentGroup> visits = getVisits(msg);
@@ -156,6 +215,12 @@ public class HL7MessageSplitter {
         return procedures;
     }
 
+    /**
+     * Gets the visit groups.
+     *
+     * @param msg the msg
+     * @return the visit groups
+     */
     public static List<HL7SegmentGroup> getVisitGroups(HL7Message msg) {
         List<HL7SegmentGroup> groups = msg.getSegmentGroups("PV1");
         List<HL7SegmentGroup> result = new ArrayList<HL7SegmentGroup>();
@@ -166,6 +231,12 @@ public class HL7MessageSplitter {
         return result;
     }
 
+    /**
+     * Gets the visits.
+     *
+     * @param msg the msg
+     * @return the visits
+     */
     public static List<HL7SegmentGroup> getVisits(HL7Message msg) {
         List<HL7SegmentGroup> visits = null;
         List<HL7SegmentGroup> patients = getPatients(msg);

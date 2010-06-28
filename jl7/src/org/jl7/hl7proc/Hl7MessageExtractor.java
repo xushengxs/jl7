@@ -11,37 +11,97 @@ import org.jl7.hl7.HL7SegmentGroup;
 import org.jl7.hl7.HL7Subcomponent;
 import org.jl7.textutils.EscapedStringTokenizer;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Hl7MessageExtractor.
+ */
 public class Hl7MessageExtractor {
+    
+    /**
+     * Extract string.
+     *
+     * @param msg the msg
+     * @param locator the locator
+     * @return the string
+     */
     public static String extractString(HL7Component msg, String locator) {
         String[] strings = new EscapedStringTokenizer(locator, "|~^&", '\\', true).getTokens();
         return extractString(strings, null, null, null, null, null, msg, null);
     }
 
+    /**
+     * Extract string.
+     *
+     * @param msg the msg
+     * @param locator the locator
+     * @return the string
+     */
     public static String extractString(HL7Field msg, String locator) {
         String[] strings = new EscapedStringTokenizer(locator, "|~^&", '\\', true).getTokens();
         return extractString(strings, null, null, null, msg, null, null, null);
     }
 
+    /**
+     * Extract string.
+     *
+     * @param msg the msg
+     * @param locator the locator
+     * @return the string
+     */
     public static String extractString(HL7FieldRepetition msg, String locator) {
         String[] strings = new EscapedStringTokenizer(locator, "|~^&", '\\', true).getTokens();
         return extractString(strings, null, null, null, null, msg, null, null);
     }
 
+    /**
+     * Extract string.
+     *
+     * @param msg the msg
+     * @param locator the locator
+     * @return the string
+     */
     public static String extractString(HL7Message msg, String locator) {
         String[] strings = new EscapedStringTokenizer(locator, "|~^&", '\\', true).getTokens();
         return extractString(strings, null, msg, null, null, null, null, null);
     }
 
+    /**
+     * Extract string.
+     *
+     * @param msg the msg
+     * @param locator the locator
+     * @return the string
+     */
     public static String extractString(HL7Segment msg, String locator) {
         String[] strings = new EscapedStringTokenizer(locator, "|~^&", '\\', true).getTokens();
         return extractString(strings, null, null, msg, null, null, null, null);
     }
 
+    /**
+     * Extract string.
+     *
+     * @param group the group
+     * @param locator the locator
+     * @return the string
+     */
     public static String extractString(HL7SegmentGroup group, String locator) {
         String[] strings = new EscapedStringTokenizer(locator, "|~^&", '\\', true).getTokens();
         return extractString(strings, group, null, null, null, null, null, null);
     }
 
+    /**
+     * Extract string.
+     *
+     * @param strings the strings
+     * @param group the group
+     * @param msg the msg
+     * @param segment the segment
+     * @param field the field
+     * @param repetition the repetition
+     * @param component the component
+     * @param subcomponent the subcomponent
+     * @return the string
+     */
     private static String extractString(String[] strings, HL7SegmentGroup group, HL7Message msg, HL7Segment segment,
             HL7Field field, HL7FieldRepetition repetition, HL7Component component, HL7Subcomponent subcomponent) {
         for (String s : strings) {

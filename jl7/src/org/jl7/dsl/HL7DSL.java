@@ -14,12 +14,25 @@ import java.io.IOException;
 import org.codehaus.groovy.control.CompilationFailedException;
 import org.jl7.hl7.HL7Message;
 
+// TODO: Auto-generated Javadoc
 /**
- * @author henribenoit
+ * The Class HL7DSL.
  * 
+ * @author henribenoit
  */
 public class HL7DSL {
 
+    /**
+     * Convert message.
+     * 
+     * @param file
+     *            the file
+     * @param message
+     *            the message
+     * @return the h l7 groovy message
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
     private static HL7GroovyMessage convertMessage(File file, HL7GroovyMessage message) throws IOException {
         Binding binding = new Binding();
         binding.setVariable("message_in", message);
@@ -29,12 +42,26 @@ public class HL7DSL {
         return messageOut;
     }
 
+    /**
+     * Convert message.
+     * 
+     * @param file
+     *            the file
+     * @param message
+     *            the message
+     * @return the h l7 message
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
     public static HL7Message convertMessage(File file, HL7Message message) throws IOException {
         return convertMessage(file, new HL7GroovyMessage(message)).getMsg();
     }
 
     /**
+     * The main method.
+     * 
      * @param args
+     *            the arguments
      */
     public static void main(String[] args) {
         try {
@@ -67,6 +94,17 @@ public class HL7DSL {
 
     }
 
+    /**
+     * Process dsl.
+     * 
+     * @param file
+     *            the file
+     * @param binding
+     *            the binding
+     * @return the object
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
     private static Object processDsl(File file, Binding binding) throws IOException {
         GroovyShell shell = new GroovyShell(binding);
 
@@ -82,12 +120,32 @@ public class HL7DSL {
         return dslScript.run();
     }
 
+    /**
+     * Process message.
+     * 
+     * @param file
+     *            the file
+     * @param message
+     *            the message
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
     private static void processMessage(File file, HL7GroovyMessage message) throws IOException {
         Binding binding = new Binding();
         binding.setVariable("message", message);
         processDsl(file, binding);
     }
 
+    /**
+     * Process message.
+     * 
+     * @param file
+     *            the file
+     * @param message
+     *            the message
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
     public static void processMessage(File file, HL7Message message) throws IOException {
         processMessage(file, new HL7GroovyMessage(message));
     }

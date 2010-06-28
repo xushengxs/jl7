@@ -1,12 +1,11 @@
 package org.jl7.hl7;
 
+// TODO: Auto-generated Javadoc
 /**
- * Represents an HL7 subcomponent
- * 
+ * Represents an HL7 subcomponent.
+ *
  * @since 0.1
- * 
  * @author henribenoit
- * 
  */
 public class HL7Subcomponent {
     /**
@@ -117,9 +116,9 @@ public class HL7Subcomponent {
     /**
      * Returns the string representation of this component (with escape
      * characters).
-     * 
+     *
+     * @return the string
      * @see java.lang.Object#toString()
-     * 
      * @since 0.1
      */
     @Override

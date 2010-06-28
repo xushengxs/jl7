@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
 /**
  * Represents a group of HL7 segments (typically returned by processing
  * classes).
@@ -69,16 +70,11 @@ public class HL7SegmentGroup implements Iterable<HL7Segment> {
     }
 
     /**
-     * Returns a list of all segments of the given types (pipe separated)
-     * 
-     * @param segmentType
-     *            types of segments to be returned (pipe separated).
-     * 
-     * @param segmentList
-     *            list of segments to be processed
-     * 
+     * Returns a list of all segments of the given types (pipe separated).
+     *
+     * @param segmentType types of segments to be returned (pipe separated).
+     * @param segmentList list of segments to be processed
      * @return a list of all segments of the given types
-     * 
      * @since 0.1
      */
     public static List<HL7Segment> getSegments(String segmentType, List<HL7Segment> segmentList) {
@@ -139,11 +135,9 @@ public class HL7SegmentGroup implements Iterable<HL7Segment> {
     /**
      * Adds the provided segment at the end of the segment group and returns
      * itself.
-     * 
-     * @param segment
-     * 
+     *
+     * @param segment the segment
      * @return the segment group itself
-     * 
      * @since 0.1
      */
     public HL7SegmentGroup add(HL7Segment segment) {
@@ -152,13 +146,10 @@ public class HL7SegmentGroup implements Iterable<HL7Segment> {
     }
 
     /**
-     * Returns the segment at the given position in this segment group
-     * 
-     * @param index
-     *            index of the segment to be returned
-     * 
+     * Returns the segment at the given position in this segment group.
+     *
+     * @param index index of the segment to be returned
      * @return the segment at the given position in this segment group
-     * 
      * @since 0.1
      */
     public HL7Segment get(int index) {
@@ -171,13 +162,10 @@ public class HL7SegmentGroup implements Iterable<HL7Segment> {
     }
 
     /**
-     * Returns a list of all segments of the given types (pipe separated)
-     * 
-     * @param segmentType
-     *            types of segments to be returned (pipe separated).
-     * 
+     * Returns a list of all segments of the given types (pipe separated).
+     *
+     * @param segmentType types of segments to be returned (pipe separated).
      * @return a list of all segments of the given types
-     * 
      * @since 0.1
      */
     public List<HL7Segment> get(String segmentType) {
@@ -212,10 +200,9 @@ public class HL7SegmentGroup implements Iterable<HL7Segment> {
     }
 
     /**
-     * Returns the number of segment in this segment group
-     * 
+     * Returns the number of segment in this segment group.
+     *
      * @return the number of segment in this segment group
-     * 
      * @since 0.1
      */
     public int getCount() {
@@ -246,10 +233,9 @@ public class HL7SegmentGroup implements Iterable<HL7Segment> {
     }
 
     /**
-     * Returns the list of segments in this segment group
-     * 
+     * Returns the list of segments in this segment group.
+     *
      * @return the list of segments in this segment group
-     * 
      * @since 0.1
      */
     public List<HL7Segment> getSegments() {
@@ -257,7 +243,9 @@ public class HL7SegmentGroup implements Iterable<HL7Segment> {
     }
 
     /**
-     * @return
+     * Gets the segment terminator.
+     *
+     * @return the segment terminator
      */
     public char getSegmentTerminator() {
         return segmentTerminator;
@@ -316,8 +304,10 @@ public class HL7SegmentGroup implements Iterable<HL7Segment> {
     }
 
     /**
+     * Iterator.
+     *
+     * @return the iterator
      * @see java.lang.Iterable#iterator()
-     * 
      * @since 0.1
      */
     public Iterator<HL7Segment> iterator() {
@@ -390,7 +380,9 @@ public class HL7SegmentGroup implements Iterable<HL7Segment> {
     }
 
     /**
-     * @param segmentTerminator
+     * Sets the segment terminator.
+     *
+     * @param segmentTerminator the new segment terminator
      */
     public void setSegmentTerminator(char segmentTerminator) {
         this.segmentTerminator = segmentTerminator;
@@ -399,9 +391,9 @@ public class HL7SegmentGroup implements Iterable<HL7Segment> {
     /**
      * Returns a newline separated string representing all segments in this
      * segment group.
-     * 
+     *
+     * @return the string
      * @see java.lang.Object#toString()
-     * 
      * @since 0.1
      */
     @Override

@@ -2,13 +2,12 @@ package org.jl7.hl7;
 
 import java.util.ArrayList;
 
+// TODO: Auto-generated Javadoc
 /**
- * Represents an HL7 field
- * 
+ * Represents an HL7 field.
+ *
  * @since 0.1
- * 
  * @author henribenoit
- * 
  */
 public class HL7Field {
     /**
@@ -63,10 +62,21 @@ public class HL7Field {
         }
     }
 
+    /**
+     * Gets the at.
+     *
+     * @param index the index
+     * @return the at
+     */
     public HL7FieldRepetition getAt(int index) {
         return get(index - 1);
     }
 
+    /**
+     * Gets the count.
+     *
+     * @return the count
+     */
     public int getCount() {
         return repetitions.size();
     }
@@ -113,18 +123,12 @@ public class HL7Field {
     /**
      * Removes all repetitions from this field and adds the given repetitions to
      * it.
-     * 
-     * @param fields
-     *            array of string representations of repetitions to be added.
-     * 
-     * @param delimiters
-     *            a string containing all delimiters defined for this field:
-     *            fieldSeparator + componentSeparator + repetitionSeparator +
-     *            escapeCharacter + subcomponentSeparator
-     * 
-     * @param escapesInSubcomponents
-     *            whether escape characters are used or not
-     * 
+     *
+     * @param repetitions the repetitions
+     * @param delimiters a string containing all delimiters defined for this field:
+     * fieldSeparator + componentSeparator + repetitionSeparator +
+     * escapeCharacter + subcomponentSeparator
+     * @param escapesInSubcomponents whether escape characters are used or not
      * @since 0.1
      */
     public void setRepetitions(String[] repetitions, String delimiters, boolean escapesInSubcomponents) {
@@ -148,9 +152,9 @@ public class HL7Field {
 
     /**
      * Returns the string representation of this field.
-     * 
+     *
+     * @return the string
      * @see java.lang.Object#toString()
-     * 
      * @since 0.1
      */
     @Override

@@ -5,6 +5,7 @@ import java.text.StringCharacterIterator;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
+// TODO: Auto-generated Javadoc
 /**
  * The EscapedStringTokenizer class allows an application to break a string into
  * tokens. The tokenizer creates a list of tokens as soon as the constructor is
@@ -30,31 +31,23 @@ import java.util.Enumeration;
  * 
  */
 public class EscapedStringTokenizer implements Enumeration<String> {
-    /**
-     * String to tokenize
-     */
+    
+    /** String to tokenize. */
     private String input;
-    /**
-     * String containing the list of separators (each character in the string
-     * defines a separator)
-     */
+    
+    /** String containing the list of separators (each character in the string defines a separator). */
     private String separator;
-    /**
-     * Escape character (if one of the separator characters follows this
-     * character in the input string, it will not be considered as a separator
-     */
+    
+    /** Escape character (if one of the separator characters follows this character in the input string, it will not be considered as a separator. */
     private char escape;
-    /**
-     * List of all tokens
-     */
+    
+    /** List of all tokens. */
     private ArrayList<String> array;
-    /**
-     * whether the separators found in the string should be returned
-     */
+    
+    /** whether the separators found in the string should be returned. */
     private boolean returnSeparators;
-    /**
-     * index of the next element to be returned by the enumeration
-     */
+    
+    /** index of the next element to be returned by the enumeration. */
     private int nextIndex = 0;
 
     /**
@@ -144,10 +137,9 @@ public class EscapedStringTokenizer implements Enumeration<String> {
     }
 
     /**
-     * Returns the list of tokens as an array of strings
-     * 
+     * Returns the list of tokens as an array of strings.
+     *
      * @return the list of tokens as an array of strings
-     * 
      * @since 0.1
      */
     public String[] getTokens() {
@@ -155,9 +147,10 @@ public class EscapedStringTokenizer implements Enumeration<String> {
     }
 
     /**
-     * 
+     * Checks for more elements.
+     *
+     * @return true, if successful
      * @see java.util.Enumeration#hasMoreElements()
-     * 
      * @since 0.1
      */
     public boolean hasMoreElements() {
@@ -182,9 +175,10 @@ public class EscapedStringTokenizer implements Enumeration<String> {
     }
 
     /**
-     * 
+     * Next element.
+     *
+     * @return the string
      * @see java.util.Enumeration#nextElement()
-     * 
      * @since 0.1
      */
     public String nextElement() {
@@ -195,7 +189,7 @@ public class EscapedStringTokenizer implements Enumeration<String> {
 
     /**
      * Splits the input string according to the list of separators, escape
-     * character and whether separators should be returned
+     * character and whether separators should be returned.
      */
     private void split() {
         char lastChar = ' ';
