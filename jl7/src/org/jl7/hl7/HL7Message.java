@@ -79,7 +79,7 @@ public class HL7Message {
     /**
      * List of all segments in this message.
      */
-    private List<HL7Segment> segments = new ArrayList<HL7Segment>();
+    private final List<HL7Segment> segments = new ArrayList<HL7Segment>();
 
     /**
      * Adds a segment at the end of this message.
@@ -274,14 +274,14 @@ public class HL7Message {
      * @since 0.1
      */
     public String getStructure() {
-        String s = "";
+        StringBuilder s = new StringBuilder();
         for (HL7Segment segment : segments) {
-            if (!s.equals("")) {
-                s += " ";
+            if (s.length() != 0) {
+                s.append(" ");
             }
-            s += segment.getSegmentType();
+            s.append(segment.getSegmentType());
         }
-        return s;
+        return s.toString();
     }
 
     /**

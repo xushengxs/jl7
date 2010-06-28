@@ -271,14 +271,14 @@ public class HL7SegmentGroup implements Iterable<HL7Segment> {
      * @since 0.3
      */
     public String getStructure() {
-        String s = "";
+        StringBuilder s = new StringBuilder();
         for (HL7Segment segment : segments) {
-            if (!s.equals("")) {
-                s += " ";
+            if (s.length() != 0) {
+                s.append(" ");
             }
-            s += segment.getSegmentType();
+            s.append(segment.getSegmentType());
         }
-        return s;
+        return s.toString();
     }
 
     /**
