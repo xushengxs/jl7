@@ -154,7 +154,7 @@ public class HL7GroovyMessage implements GroovyObject {
         return this;
     }
 
-    public HL7GroovyMessage leftShift(List objects) {
+    public HL7GroovyMessage leftShift(@SuppressWarnings("rawtypes") List objects) {
         for (Object o : objects) {
             if (o instanceof HL7Segment) {
                 leftShift((HL7Segment) o);
