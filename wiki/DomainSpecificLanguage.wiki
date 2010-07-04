@@ -1,4 +1,4 @@
-#summary Describes how to used the jl7 domain specific language.
+#summary Describes how to use the jl7 domain specific language.
 #labels Featured,Phase-Implementation,Phase-Support
 
 = Introduction =
