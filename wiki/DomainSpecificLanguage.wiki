@@ -102,7 +102,42 @@ The example above replaces the first PV1 segment in message_out by the new segme
 message_out.PV1 = message_in.PV1
 }}}
 
-_Note_: If there is no PV1 segment already available in message_out, the two operators `=` and `<<` have the same effect.
+_Note_: If there is no PV1 segment already available in message_out, the two operators `=` and `<<` have the same effect.<br>
+<br>
+
+== Message groups ==
+
+The jl7 DSL also supports segments groups. These are groups of segment semantically related e.g. the PD1, ARV, ROL, NK1, NTE segments following a PID segment belong together with the PID segment to a PATIENT group.<br>
+<br>
+The following groups exist:
+ * PATIENT: PID or MRG, PD1, ARV, ROL, NK1, NTE
+ * VISIT: PV1, PV2, ARV, ROL, DB1
+ * ORDER: ORC, OBR, NTE
+ * PROCEDURE: PR1, ROL
+ * INSURANCE: IN1, IN2, IN3, ROL
+
+Segment groups can be extracted from a message:
+
+{{{
+message_in.PATIENTS
+}}}
+
+This returns a list of all PATIENT segment groups. In order to get one of these group, the following can be used:
+
+{{{
+message_in.PATIENTS(1)
+}}}
+
+The first group in the list is indexed with 1.<br>
+<br>
+Segments group can be added to a message just like segments.
+
+{{{
+message_out.MSH = message_in.MSH
+message_out.EVN = message_in.EVN
+message_out << message_in.PATIENTS(1)
+message_out << message_in.VISITS(1)
+}}}
 
 == Mapping message content ==
 
