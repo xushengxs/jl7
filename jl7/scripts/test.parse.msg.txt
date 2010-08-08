@@ -1,11 +1,19 @@
-println "message:\n"+message
+/*
+import groovy.util.GroovyTestCase.*;
+
 println "message.PID:\n"+message.PID
+//assertEquals(message.PID.toString(), "PID|1||0000112234^^1&2&3^100^A||XXXXXXXXXX^^^^^^S~YYYY^^A&B&C^^^^F||10131113|1||4|^^RICHMOND^^3121||||1201||||||||1100|||||||||AAA")
 println "message.PID(5):\n"+message.PID(5)
+//assertEquals(message.PID(5),"XXXXXXXXXX^^^^^^S~YYYY^^A&B&C^^^^F")
 println "message.PID[1](5):\n"+message.PID[1](5)
+//assertEquals(message.PID[1](5),"XXXXXXXXXX^^^^^^S~YYYY^^A&B&C^^^^F")
 println "message.PID[1](5)(1):\n"+message.PID[1](5)(1)
+//assertEquals(message.PID[1](5)(1),"XXXXXXXXXX")
 println "message.PID(5)[2]:\n"+message.PID(5)[2]
-assert(message.PID(5)[2].toString().equals("YYYY^^A&B&C^^^^F"))
+//assertEquals(message.PID(5)[2].toString(),"YYYY^^A&B&C^^^^F")
 println "message.PID(5)[2](3):\n"+message.PID(5)[2](3)
-assert(message.PID(5)[2](3).toString().equals("A&B&C"))
+//assertEquals(message.PID(5)[2](3).toString(),"A&B&C")
 println "message.PID(5)[2](3)(2):\n"+message.PID(5)[2](3)(2)
-assert(message.PID(5)[2](3)(2).toString().equals("B"))
+//assertEquals(message.PID(5)[2](3)(2).toString(),"B")
+
+*/
