@@ -25,7 +25,7 @@ The receiving of a message is done using an MLLPTransport object and invoking it
 		} catch (IOException e) {
 			fail("IOException: " + e);
 		}
-		HL7Message msg = transportable.Message;
+		HL7Message msg = transportable.message;
 }}}
 
 The _receiveMessage_ method returns an MLLPTransportable object which contains a reveived message in its _Message_ member variable.
