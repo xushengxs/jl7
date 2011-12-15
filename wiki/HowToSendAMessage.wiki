@@ -20,8 +20,8 @@ Now we need to create an MLLPTransportable object. This object basically encapsu
 
 {{{
 		MLLPTransportable transportable = new MLLPTransportable();
-		transportable.Message = msg;
-		transportable.MetaData = new MLLPMetaData(host, port);
+		transportable.message = msg;
+		transportable.metaData = new MLLPMetaData(host, port);
 }}}
 
 Now we use an MLLPTransport object in order to actually send this newly created transportable object:
