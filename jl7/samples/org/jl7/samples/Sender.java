@@ -24,7 +24,8 @@ public class Sender {
         MLLPTransport transport = new MLLPTransport();
         for (int i = 0; i < 10; i++) {
             try {
-                transport.sendMessage(transportable);
+                MLLPTransportable tr = transport.sendMessage(transportable, true);
+                System.out.println(tr.message);
             }
             catch (IOException e) {
                 e.printStackTrace();
